@@ -1,0 +1,1 @@
+cat ../para.gif | ./ctable.sh > para.c
