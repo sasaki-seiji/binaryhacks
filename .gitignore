@@ -8,4 +8,6 @@
 !Makefile
 # but ignore editor's backup file
 *~
+# also ignore vim swap file
+*.swp
 
