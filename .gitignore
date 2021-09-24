@@ -10,7 +10,8 @@
 *~
 # also ignore vim swap file
 *.swp
-# also ignore object, archive file
+# also ignore object, archive, shared-object file
 *.o
 *.a
+*.so
 

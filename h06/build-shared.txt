@@ -1,0 +1,8 @@
+$ cc -fPIC -c -o foo.o foo.c
+$ cc -fPIC -c -o bar.o bar.c
+$ cc -shared -Wl,-soname,libfoo.so.0 -o libfoo.so foo.o bar.o
+$ cc -c -o baz.o baz.c
+$ cc -o baz baz.o -lfoo -L.
+$ LD_LIBRARY_PATH=. ./baz
+foo()
+bar()

@@ -1,0 +1,17 @@
+$ cc -c -o foo.o foo.c
+$ cc -c -o bar.o bar.c
+$ ar ruv libfoo.a foo.o bar.o
+ar: `u' modifier ignored since `D' is the default (see `U')
+ar: creating libfoo.a
+a - foo.o
+a - bar.o
+
+$ ar tv libfoo.a
+rw-r--r-- 0/0   1664 Jan  1 00:00 1970 foo.o
+rw-r--r-- 0/0   1664 Jan  1 00:00 1970 bar.o
+
+$ cc -c -o baz.o baz.c
+$ cc -o baz baz.o -lfoo -L.
+$ ./baz
+foo()
+bar()
