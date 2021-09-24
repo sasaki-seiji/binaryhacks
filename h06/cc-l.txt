@@ -1,0 +1,5 @@
+$ cc -c -o baz.o baz.c
+$ cc -o baz baz.o -lfoo -L.
+$ ./baz
+foo()
+bar()
