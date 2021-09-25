@@ -1,0 +1,6 @@
+$ readelf -x1 /bin/ls
+
+Hex dump of section '.interp':
+  0x00000318 2f6c6962 36342f6c 642d6c69 6e75782d /lib64/ld-linux-
+  0x00000328 7838362d 36342e73 6f2e3200          x86-64.so.2.
+
