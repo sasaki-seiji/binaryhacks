@@ -1,0 +1,37 @@
+$ objdump --disassemble=main -S hello
+
+hello:     file format elf64-x86-64
+
+
+Disassembly of section .init:
+
+Disassembly of section .plt:
+
+Disassembly of section .plt.got:
+
+Disassembly of section .plt.sec:
+
+Disassembly of section .text:
+
+0000000000001169 <main>:
+#include <stdio.h>
+#include <stdlib.h>
+
+int
+main(int argc, char *argv[])
+{
+    1169:       f3 0f 1e fa             endbr64
+    116d:       55                      push   %rbp
+    116e:       48 89 e5                mov    %rsp,%rbp
+    1171:       48 83 ec 10             sub    $0x10,%rsp
+    1175:       89 7d fc                mov    %edi,-0x4(%rbp)
+    1178:       48 89 75 f0             mov    %rsi,-0x10(%rbp)
+        printf("Hello, world\n");
+    117c:       48 8d 3d 81 0e 00 00    lea    0xe81(%rip),%rdi        # 2004 <_IO_stdin_used+0x4>
+    1183:       e8 d8 fe ff ff          callq  1060 <puts@plt>
+        exit(0);
+    1188:       bf 00 00 00 00          mov    $0x0,%edi
+    118d:       e8 de fe ff ff          callq  1070 <exit@plt>
+
+Disassembly of section .fini:
+
