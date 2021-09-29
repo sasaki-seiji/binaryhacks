@@ -1,0 +1,11 @@
+$ nm -r cabin.o
+                 U puts
+                 U printf
+000000000000005c T main
+0000000000000000 b f3.2319
+0000000000000004 C f2
+0000000000000000 D f1
+0000000000000000 T cabin
+0000000000001000 C array
+                 U _GLOBAL_OFFSET_TABLE_
+
