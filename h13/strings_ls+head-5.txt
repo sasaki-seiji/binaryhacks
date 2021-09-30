@@ -1,0 +1,7 @@
+$ strings /bin/ls | head -5
+/lib64/ld-linux-x86-64.so.2
+.j<c~
+MB#F-
+libselinux.so.1
+_ITM_deregisterTMCloneTable
+

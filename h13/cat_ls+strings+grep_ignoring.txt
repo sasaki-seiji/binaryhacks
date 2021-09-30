@@ -1,0 +1,5 @@
+$ cat /bin/ls | strings | grep ignoring
+ignoring invalid value of environment variable QUOTING_STYLE: %s
+ignoring invalid width in environment variable COLUMNS: %s
+ignoring invalid tab size in environment variable TABSIZE: %s
+
