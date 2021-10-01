@@ -1,0 +1,11 @@
+$ g++ -c foo.cpp
+
+$ nm foo.o
+0000000000000000 T _Z3fooi
+
+$ nm foo.o | c++filt
+0000000000000000 T foo(int)
+
+$ nm --demangle foo.o
+0000000000000000 T foo(int)
+
