@@ -1,0 +1,9 @@
+$ gcc -g test.c
+$ ./a.out
+0x5598c514b149
+$ addr2line -e a.out 0x5598c514b149
+??:0
+$ addr2line -f -e a.out 0x5598c514b149
+??
+??:0
+
