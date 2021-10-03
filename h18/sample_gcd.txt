@@ -1,0 +1,6 @@
+$ g++ -Wall -c gcd.cpp
+$ gcc -Wall -c sample_gcd.c
+$ g++ -o sample_gcd sample_gcd.o gcd.o
+$ ./sample_gcd
+14 と35 の最大公約数は7 です
+

@@ -1,0 +1,6 @@
+$ g++ -Wall -c catch_exception.cpp
+$ gcc -c sample_catch_exception.c
+$ g++ -o sample_catch_exception sample_catch_exception.o catch_exception.o
+$ ./sample_catch_exception
+arg: 10
+
