@@ -1,0 +1,12 @@
+$ gcc -c dbg.c
+$ nm dbg.o
+                 U _GLOBAL_OFFSET_TABLE_
+0000000000000000 T dbg
+                 U printf
+
+$ g++ -c dbg.c
+$ nm dbg.o
+                 U _GLOBAL_OFFSET_TABLE_
+0000000000000000 T _Z3dbgPKc
+                 U printf
+
