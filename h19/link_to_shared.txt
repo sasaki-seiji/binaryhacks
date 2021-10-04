@@ -1,0 +1,6 @@
+$ gcc -fPIC -c a.c
+$ gcc -fPIC -c b.c
+$ gcc -shared -o libfoo.so a.o b.o
+/usr/bin/ld: b.o: in function `func':
+b.c:(.text+0x0): multiple definition of `func'; a.o:a.c:(.text+0x0): first defined here
+collect2: error: ld returned 1 exit status

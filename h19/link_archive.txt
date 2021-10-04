@@ -1,0 +1,26 @@
+$ gcc -c a.c
+$ gcc -c b.c
+$ gcc -c main.c
+$ ar cr libfoo.a a.o b.o
+$ gcc main.o libfoo.a
+$ ./a.out
+func() in a.c
+
+
+$ rm libfoo.a
+$ ar cr libfoo.a b.o a.o
+$ gcc main.o libfoo.a
+$ ./a.out
+func() in b.c
+
+
+$ ar cr liba.a a.o
+$ ar cr libb.a b.o
+$ gcc main.o liba.a libb.a
+$ ./a.out
+func() in a.c
+
+$ gcc main.o libb.a liba.a
+$ ./a.out
+func() in b.c
+

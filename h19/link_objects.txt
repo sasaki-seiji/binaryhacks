@@ -1,0 +1,8 @@
+$ gcc -c a.c
+$ gcc -c b.c
+$ gcc -c main.c
+$ gcc -o main a.o b.o main.o
+/usr/bin/ld: b.o: in function `func':
+b.c:(.text+0x0): multiple definition of `func'; a.o:a.c:(.text+0x0): first defined here
+collect2: error: ld returned 1 exit status
+
