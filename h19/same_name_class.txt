@@ -1,0 +1,19 @@
+$ g++ -fPIC -shared -o a.so a.cpp
+$ g++ -fPIC -shared -o main.so main.cpp
+$ g++ -o main-shared ./a.so ./main.so
+/usr/bin/ld: ./main.so: undefined reference to `Tax::Tax()'
+/usr/bin/ld: ./main.so: undefined reference to `Tax::tax(int)'
+collect2: error: ld returned 1 exit status
+$ g++ -o main-shared ./main.so ./a.so
+$ ./main-shared
+apple: 105
+
+$ g++ -fPIC -shared -o b.so b.cpp
+$ g++ -o main-shared2 ./b.so ./a.so ./main.so
+/usr/bin/ld: ./main.so: undefined reference to `Tax::Tax()'
+/usr/bin/ld: ./main.so: undefined reference to `Tax::tax(int)'
+collect2: error: ld returned 1 exit status
+$ g++ -o main-shared2 ./main.so ./b.so ./a.so
+$ ./main-shared2
+apple: 10
+
