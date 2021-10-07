@@ -1,0 +1,23 @@
+$ g++ -c weak_main.cpp
+$ g++ -o weak_main weak_main.o
+$ ./weak_main
+256
+
+$ g++ -c weak_a.cpp
+$ g++ -o weak_main weak_main.o weak_a.o
+$ ./weak_main
+65536
+
+$ nm --demangle weak_main.o | grep Foo::
+0000000000000000 W Foo::func()
+0000000000000000 W Foo::Foo(int)
+0000000000000000 W Foo::Foo(int)
+0000000000000000 n Foo::Foo(int)
+$ nm --demangle weak_a.o | grep Foo::   0000000000000000 T Foo::Foo(int)
+0000000000000000 T Foo::Foo(int)
+
+$ g++ -c unnamed_namespace_main.cpp
+$ g++ -o unnamed_namespace_main unnamed_namespace_main.o weak_a.o
+$ ./unnamed_namespace_main
+256
+
