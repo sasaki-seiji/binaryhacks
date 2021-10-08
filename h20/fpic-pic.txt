@@ -1,0 +1,21 @@
+$ chmod +x *.sh
+$ ./fpic.sh
+collect2: fatal error: ld terminated with signal 9 [強制終了]
+compilation terminated.
+collect2: fatal error: ld terminated with signal 9 [強制終了]
+compilation terminated.
+
+
+$ ./fpic.sh
+$ time ./fpic-no-pic
+
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+
+$ time ./fpic-pic
+
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+
