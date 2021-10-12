@@ -1,4 +1,4 @@
-# -s is same as -t d2
+# traditional format: -s is same as -t d2
 $ od -Ax -s /etc/ld.so.cache | head -5
 000000  27751  25193  11619  25708  29486  11887  24931  26723
 000010  12645  12590    351      0  18820      0      2      0
@@ -7,13 +7,15 @@ $ od -Ax -s /etc/ld.so.cache | head -5
 000040      0      0      0      0    771      0   8520      0
 
 # -S BYTE or --strings=BYTE dumps strings
-$ od -Ax -S 3 /etc/ld.so.cache | head -5002118 libzstd.so.1
+$ od -Ax -S 3 /etc/ld.so.cache | head -5
+002118 libzstd.so.1
 002125 /lib/x86_64-linux-gnu/libzstd.so.1
 002148 libz.so.1
 002152 /lib/x86_64-linux-gnu/libz.so.1
 002172 libyaml-0.so.2
 
-$ od -An -S 3 /etc/ld.so.cache | head -5libzstd.so.1
+$ od -An -S 3 /etc/ld.so.cache | head -5
+libzstd.so.1
 /lib/x86_64-linux-gnu/libzstd.so.1
 libz.so.1
 /lib/x86_64-linux-gnu/libz.so.1

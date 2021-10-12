@@ -1,0 +1,19 @@
+8進ダンプ
+	od.txt
+	
+出力フォーマットを指定する
+	od-t-A.txt
+	
+ダンプを省略しない
+	od-v.txt
+	画像ファイルとして、../para.gifを使用
+	
+文字列
+	od-S.txt
+	書籍に記載の-sオプションは、-t d2 等価であり16ビットの10進数で表示する
+	文字列を表示するには、-S BYTE または　--strings[=BYTE] を用いる
+	
+odの利用例
+	para.txt
+	ctable.sh
+
