@@ -1,7 +1,6 @@
-
 $ readelf -s /bin/ls
 Symbol table '.dynsym' contains 139 entries:
-   Num:    Value          Size Type    Bind   Vis      Ndx Name
+   番号:      値         サイズ タイプ  Bind   Vis      索引名
      0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
      1: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND __ctype_toupper_loc@GLIBC_2.3 (2)
      2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND getenv@GLIBC_2.2.5 (3)
@@ -141,3 +140,4 @@ Symbol table '.dynsym' contains 139 entries:
    136: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND malloc@GLIBC_2.2.5 (3)
    137: 0000000000023288     8 OBJECT  GLOBAL DEFAULT   27 stdout@GLIBC_2.2.5 (3)
    138: 0000000000024400     8 OBJECT  GLOBAL DEFAULT   27 program_name
+

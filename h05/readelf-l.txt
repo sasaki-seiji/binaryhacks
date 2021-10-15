@@ -1,12 +1,12 @@
 $ readelf -l /bin/ls
 
-Elf file type is DYN (Shared object file)
-Entry point 0x67d0
+Elf ファイルタイプは DYN (共有オブジェクトファイル) です
+エントリポイント 0x67d0
 There are 13 program headers, starting at offset 64
 
-Program Headers:
-  Type           Offset             VirtAddr           PhysAddr
-                 FileSiz            MemSiz              Flags  Align
+プログラムヘッダ:
+  タイプ        オフセット          仮想Addr           物理Addr
+                 ファイルサイズ        メモリサイズ         フラグ 整列
   PHDR           0x0000000000000040 0x0000000000000040 0x0000000000000040
                  0x00000000000002d8 0x00000000000002d8  R      0x8
   INTERP         0x0000000000000318 0x0000000000000318 0x0000000000000318
@@ -35,18 +35,19 @@ Program Headers:
   GNU_RELRO      0x0000000000021010 0x0000000000022010 0x0000000000022010
                  0x0000000000000ff0 0x0000000000000ff0  R      0x1
 
- Section to Segment mapping:
-  Segment Sections...
-   00
-   01     .interp
-   02     .interp .note.gnu.property .note.gnu.build-id .note.ABI-tag .gnu.hash u.version_r .rela.dyn .rela.plt
-   03     .init .plt .plt.got .plt.sec .text .fini
-   04     .rodata .eh_frame_hdr .eh_frame
-   05     .init_array .fini_array .data.rel.ro .dynamic .got .data .bss
-   06     .dynamic
-   07     .note.gnu.property
-   08     .note.gnu.build-id .note.ABI-tag
-   09     .note.gnu.property
-   10     .eh_frame_hdr
-   11
-   12     .init_array .fini_array .data.rel.ro .dynamic .got
+ セグメントマッピングへのセクション:
+  セグメントセクション...
+   00     
+   01     .interp 
+   02     .interp .note.gnu.property .note.gnu.build-id .note.ABI-tag .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r .rela.dyn .rela.plt 
+   03     .init .plt .plt.got .plt.sec .text .fini 
+   04     .rodata .eh_frame_hdr .eh_frame 
+   05     .init_array .fini_array .data.rel.ro .dynamic .got .data .bss 
+   06     .dynamic 
+   07     .note.gnu.property 
+   08     .note.gnu.build-id .note.ABI-tag 
+   09     .note.gnu.property 
+   10     .eh_frame_hdr 
+   11     
+   12     .init_array .fini_array .data.rel.ro .dynamic .got 
+

@@ -1,0 +1,59 @@
+[ELFヘッダ]
+実行結果： readelf-h.txt
+
+・ubuntu 20.04 では/bin/lsのe_typeが、ET_EXECからET_DYNに変わっている
+
+[プログラムヘッダ]
+実行結果： readelf-l.txt
+
+・ubuntu20.04では出力フォーマットが変更されている：
+	オフセットとファイルサイズ、仮想Addrとメモリサイズ、物理アドレスとフラグ・整列が
+	同一カラムに重ねられている
+・GNU_RELROプログラムヘッダが追加されている：
+	.init_array .fini_array .data.rel.ro .dynamic .gotセクションが含まれている	
+	参考：GNU_RELRO、.init_array、...については、以下を参照
+		https://stevens.netmeister.org/631/elf.html
+
+[セクションヘッダ]
+実行結果： readelf-S.txt
+
+・レコードは、サイズフィールドの箇所で折り返されて重ねれれて表示されている
+・GNU_HASH、INIT_ARRAY、FINI_ARRAYセクションタイプが追加されている
+
+[ストリングテーブル]
+実行結果： od__shstrtab.txt
+
+・.shstrtabセクションのオフセットは0x2229c、サイズは0x11d 
+・本では、odコマンドのパラメータが、--skip-bytes 0x2229c --read-bytes 0x11d と
+しているが、manの記載は、--skip-bytes=BYTES --read-bytes=BYTES となっている
+
+[シンボルテーブル]
+実行結果： readelf-s.txt, od__dynsym.txt,  od__dynstr.txt
+
+・readelf -s /bin/ls コマンドで得られるシンボルテーブル（readelf-s.txt）では、
+st_shndxがSHN_UNDEF（コマンド表示ではUND）のシンボルは、値とサイズのフィールドが
+0となっている
+・.dynsymセクションのオフセットとサイズは、0x488と0xd08なので（readelf-S.txt）、
+od --skip-bytes=0x488 --read-bytes=0xd08 -Ax -t x1z /bin/ls　コマンドを
+実行した結果を od__dynsym.txtに示す
+・readelf-s.txtの番号2のエントリ（検索名がgetenv）を調べる
+・64ビット環境では、シンボルテーブルのエントリは、24バイトなので、od__dynsym.txt
+では、オフセット0x4b8から開始する。
+・このシンボルテーブルのレコードのst_nameフィールドは、ca 02 00 00 であり、
+これを.dynstrセクションから探してみる
+・.dynstrセクションのオフセットとサイズは、0x1190と0x64cなので（readelf-S.txt）、
+od --skip-bytes=0x1190 --read-bytes=0x64c -Ax -t x1z /bin/ls コマンドを
+実行した結果を od__dynstr.txt に記す
+・od__dynstr.txtから文字列getenvを検索すると、オフセット0x145aの位置に見つかる
+・0x145a = 0x1190 + 0x2ca なので、期待通りにシンボル名を検索することができる
+
+[再配置情報]
+実行結果： readelf--relocs.txt
+
+・/bin/ls はセクションタイプがSHT_RELAのセクションを2つ、.rela.dyn、rela.plt を
+持っている
+・再配置情報は、readelf コマンドの -r|--relocs オプションで表示することができる
+
+（）
+
+

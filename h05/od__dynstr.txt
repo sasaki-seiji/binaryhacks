@@ -1,4 +1,4 @@
-$ od --skip-bytes 0x1190 --read-bytes 0x64c -Ax -t x1z /bin/ls
+$ od --skip-bytes=0x1190 --read-bytes=0x64c -Ax -t x1z /bin/ls
 001190 00 6c 69 62 73 65 6c 69 6e 75 78 2e 73 6f 2e 31  >.libselinux.so.1<
 0011a0 00 5f 49 54 4d 5f 64 65 72 65 67 69 73 74 65 72  >._ITM_deregister<
 0011b0 54 4d 43 6c 6f 6e 65 54 61 62 6c 65 00 5f 5f 67  >TMCloneTable.__g<
