@@ -16,5 +16,10 @@
 	
 [odの利用例]
 実行結果： para.txt
-スクリプト： 	ctable.sh
+シェルスクリプト： ctable.sh
+Cプログラム：gif_header.c
+
+・シェルスクリプトctable.shは、画像ファイル（../para.gif）を読み込んで、C言語の
+テーブル（変数名はobjname）として出力する
+・Cプログラムgif_header.cは、配列objnameからGIFヘッダ情報を解析して表示する
 
