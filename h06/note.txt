@@ -1,0 +1,36 @@
+[静的ライブラリ]
+実行結果： build-archive.txt
+Cプログラム：foo.c, bar.c, baz.c
+
+・ ar ruv libfoo.a foo.o bar.o コマンドでは、以下のワーニングが出ている
+ar: `u' modifier ignored since `D' is the default (see `U')
+
+・これは、ubuntu20.04では、deterministic mode (Dモディファイア)がデフォルであり、
+UID、GID、timestampに0を設定するため、ファイルの更新時刻による制御(uモディファイア)
+が無効であることを示している
+
+・ ar tv libfoo.a コマンド出力を見ると、UID、GID、timestampが実際に0となっている
+
+・ ar rUuv libfoo.a foo.o bar.o コマンドは、Uモディファイアで非 deterministic mode
+に設定の上、uモディファイアを指定している
+
+・その後の、ar tv libfoo.a コマンド出力は、UID、GID、timestampに有効な値が設定されて
+いることを示している
+
+・作成したlibfoo.aを所定のフォルダに格納していないので、cc -o baz baz.o -lfoo -L. 
+コマンドでは、-L. オプションでカレントディレクトをライブラリサーチパスに加えている
+
+
+[共有ライブラリ]
+実行結果：build-shared.txt
+Cプログラム：foo.c, bar.c, baz.c
+
+・libfoo.aを所定のフォルダにコピーしていないので、cc -o baz baz.o -lfoo -L. コマンド
+では、カレントディレクトリをライブラリサーチパスに加えている（-L.）
+
+・baz プログラムに書き込まれた SONAME が libfoo.so.0 となっているので、
+ln -s libfoo.so libfoo.so.0 コマンドによって、シンボリックを貼っておく
+
+・LD_LIBRARY_PATH=. ./baz コマンドでは、実行時にカレントディレクトリからライブラリを
+検索させている（LD_LIBRARY_PATH=.）
+
