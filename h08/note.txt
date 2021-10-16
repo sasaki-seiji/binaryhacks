@@ -1,0 +1,11 @@
+[ELFヘッダの読み出し]
+実行結果：readelf-h__executable.txt, readelf-h__object.txt, 
+ readelf-l__executable.txt, readelf-l__object.txt, readelf-S__executable.txt,
+ readelf-S__object.txt, readelf-e__executable.txt, readelf-e__object.txt
+Cプログラム：sample.c
+
+・ELFファイルヘッダでは、実行可能ファイルの型は、DYN (共有オブジェクトファイル)で、
+オブジェクトファイルの型は、REL (再配置可能ファイル)となっている
+
+・オブジェクトファイルはプログラムヘッダを持っていない
+
