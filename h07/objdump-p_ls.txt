@@ -1,8 +1,8 @@
 $ objdump -p /bin/ls
 
-/bin/ls:     file format elf64-x86-64
+/bin/ls:     ファイル形式 elf64-x86-64
 
-Program Header:
+プログラムヘッダ:
     PHDR off    0x0000000000000040 vaddr 0x0000000000000040 paddr 0x0000000000000040 align 2**3
          filesz 0x00000000000002d8 memsz 0x00000000000002d8 flags r--
   INTERP off    0x0000000000000318 vaddr 0x0000000000000318 paddr 0x0000000000000318 align 2**0
@@ -30,7 +30,7 @@ EH_FRAME off    0x000000000001d24c vaddr 0x000000000001d24c paddr 0x000000000001
    RELRO off    0x0000000000021010 vaddr 0x0000000000022010 paddr 0x0000000000022010 align 2**0
          filesz 0x0000000000000ff0 memsz 0x0000000000000ff0 flags r--
 
-Dynamic Section:
+動的セクション:
   NEEDED               libselinux.so.1
   NEEDED               libc.so.6
   INIT                 0x0000000000004000
@@ -59,8 +59,8 @@ Dynamic Section:
   VERSYM               0x00000000000017dc
   RELACOUNT            0x00000000000000c1
 
-Version References:
-  required from libc.so.6:
+バージョン参照:
+  libc.so.6 からの要求:
     0x06969194 0x00 07 GLIBC_2.14
     0x0d696914 0x00 06 GLIBC_2.4
     0x06969197 0x00 05 GLIBC_2.17

@@ -9,7 +9,7 @@ $ LD_TRACE_LOADED_OBJECTS=1 /bin/ls
 
 
 $ LD_TRACE_LOADED_OBJECTS=1 /lib/x86_64-linux-gnu/libselinux.so.1
--bash: /lib/x86_64-linux-gnu/libselinux.so.1: Permission denied
+bash: /lib/x86_64-linux-gnu/libselinux.so.1: 許可がありません
 
 
 $ LD_TRACE_LOADED_OBJECTS=1 /lib64/ld-linux-x86-64.so.2  /lib/x86_64-linux-gnu/libselinux.so.1

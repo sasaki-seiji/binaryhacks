@@ -1,0 +1,15 @@
+[共有ライブラリの依存関係]
+実行結果：objdump-p_ls.txt, readelf-d_ls.txt, readelf-d_selinux.txt
+
+・objdump、readelf -d コマンドの実行結果から、/bin/lsのNEEDEDは、
+libselinux.so.1、libc.so.6 の2つであることがわかる
+
+・libselinux.so.1は、/lib/x86_64-linux-gnu/libselinux.so.1 に存在し、
+このsoファイルのNEEDEDは更に、libpcre2-8.so.0、libdl.so.2、libc.so.6、
+ld-linux-x86-64.so.2 となっている
+
+
+[lddを使って共有ライブラリの依存関係をチェックする]
+実行結果：ldd.txt, LD_TRACE_LOADED_OBJECTS.txt
+
+
