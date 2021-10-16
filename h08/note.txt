@@ -4,6 +4,9 @@
  readelf-S__object.txt, readelf-e__executable.txt, readelf-e__object.txt
 Cプログラム：sample.c
 
+・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
+実行可能ファイルsampleに対して、ELFヘッダの読み出しを行う
+
 ・ELFファイルヘッダでは、実行可能ファイルの型は、DYN (共有オブジェクトファイル)で、
 オブジェクトファイルの型は、REL (再配置可能ファイル)となっている
 
