@@ -1,0 +1,1 @@
+$ gcc -o sample_g -g sample.c

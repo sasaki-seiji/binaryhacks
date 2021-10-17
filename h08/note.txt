@@ -2,7 +2,7 @@
 実行結果：readelf-h__executable.txt, readelf-h__object.txt, 
  readelf-l__executable.txt, readelf-l__object.txt, readelf-S__executable.txt,
  readelf-S__object.txt, readelf-e__executable.txt, readelf-e__object.txt
-Cプログラム：sample.c
+Cプログラム：sample.c, sample.txt
 
 ・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
 実行可能ファイルsampleに対して、ELFヘッダの読み出しを行う
@@ -23,7 +23,7 @@ Cプログラム：sample.c
  readelf--all__executable.txt, readelf--all__object.txt,
  readelf--notes__executable.txt, readelf--notes__object.txt,
  readelf--unwind__executable.txt, readelf--unsind__object.txt
-Cプログラム：sample.c
+Cプログラム：sample.c, sample.txt
  
 ・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
 実行可能ファイルsampleに対して、ELF情報の読み出しを行う
