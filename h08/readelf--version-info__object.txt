@@ -1,0 +1,3 @@
+$ readelf --version-info sample.o
+
+このファイルからはバージョン情報が見つかりません。

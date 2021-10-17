@@ -1,0 +1,12 @@
+$ readelf --version-info sample
+
+Version symbols section '.gnu.version' contains 7 entries:
+ アドレス: 0x00000000000004f2  オフセット: 0x0004f2  リンク: 6 (.dynsym)
+  000:   0 (*局 所*)       0 (*局 所*)       2 (GLIBC_2.2.5)   2 (GLIBC_2.2.5)
+  004:   0 (*局 所*)       0 (*局 所*)       2 (GLIBC_2.2.5)
+
+Version needs section '.gnu.version_r' contains 1 entry:
+ アドレス: 0x0000000000000500  オフセット: 0x000500  リンク: 7 (.dynstr)
+  000000: バージョン: 1  ファイル: libc.so.6  個数: 1
+  0x0010:   名前: GLIBC_2.2.5  フラグ: なし  バージョン: 2
+

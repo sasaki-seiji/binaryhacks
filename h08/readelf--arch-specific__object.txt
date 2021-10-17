@@ -1,0 +1,1 @@
+$ readelf --arch-specific sample.o

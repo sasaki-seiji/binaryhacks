@@ -1,0 +1,3 @@
+$ readelf --dynamic sample.o
+
+このファイルには動的セクションがありません。

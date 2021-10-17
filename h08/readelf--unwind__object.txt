@@ -1,0 +1,4 @@
+$ readelf --unwind sample.o
+
+The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
+

@@ -1,0 +1,7 @@
+$ readelf --histogram sample
+
+Histogram for `.gnu.hash' bucket list length (total of 2 buckets):
+ 長さ  個数        占有率      範囲
+      0  1          ( 50.0%)
+      1  1          ( 50.0%)    100.0%
+

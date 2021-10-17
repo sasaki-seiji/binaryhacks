@@ -1,0 +1,17 @@
+$ readelf --notes sample
+
+Displaying notes found in: .note.gnu.property
+  所有者            データサイズ	Description
+  GNU                  0x00000010	NT_GNU_PROPERTY_TYPE_0
+      Properties: x86 feature: IBT, SHSTK
+
+Displaying notes found in: .note.gnu.build-id
+  所有者            データサイズ	Description
+  GNU                  0x00000014	NT_GNU_BUILD_ID (一意なビルドID ビット列)
+    ビルドID: b74662e75a1c08f584376edcfa6eacc93874a1fb
+
+Displaying notes found in: .note.ABI-tag
+  所有者            データサイズ	Description
+  GNU                  0x00000010	NT_GNU_ABI_TAG (ABI バージョンタグ)
+    OS: Linux, ABI: 3.2.0
+
