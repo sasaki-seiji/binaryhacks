@@ -1,10 +1,9 @@
-$ readelf -S /bin/ls > readelf-S.txt
-
+$ readelf -S /bin/ls
 There are 30 section headers, starting at offset 0x223c0:
 
-Section Headers:
-  [Nr] Name              Type             Address           Offset
-       Size              EntSize          Flags  Link  Info  Align
+セクションヘッダ:
+  [番] 名前              タイプ           アドレス          オフセット
+       サイズ            EntSize          フラグ Link  情報  整列
   [ 0]                   NULL             0000000000000000  00000000
        0000000000000000  0000000000000000           0     0     0
   [ 1] .interp           PROGBITS         0000000000000318  00000318
@@ -70,3 +69,4 @@ Key to Flags:
   L (link order), O (extra OS processing required), G (group), T (TLS),
   C (compressed), x (unknown), o (OS specific), E (exclude),
   l (large), p (processor specific)
+

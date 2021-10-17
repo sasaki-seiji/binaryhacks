@@ -55,6 +55,10 @@ NT_GNU_ABI_TAG (ABI バージョンタグ)ノートが含まれている
 The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
 
 
+[ELFセクションのダンプ]
+実行結果：readelf-S_ls.txt, readelf-x.txt
+
+
 （参考情報）
 [1] AMD64の再配置情報の型
 http://www.ucw.cz/~hubicka/papers/abi/node19.html
