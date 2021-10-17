@@ -50,6 +50,10 @@ AMD64の再配置情報の型の一覧は[1]を参照
 ファイルにはこれに加えて、NT_GNU_BUILD_ID (一意なビルドID ビット列)ノートと、
 NT_GNU_ABI_TAG (ABI バージョンタグ)ノートが含まれている
 
+・unwind情報の表示では、オブジェクトファイル、実行可能ファイルとも以下のメッセージが
+出力される
+The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
+
 
 （参考情報）
 [1] AMD64の再配置情報の型
