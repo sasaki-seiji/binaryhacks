@@ -1,0 +1,68 @@
+$ readelf -wl debug.o
+セクション .debug_line のデバッグ内容の生ダンプ:
+
+  オフセット:                  0x0
+  長さ:                        102
+  DWARF バージョン:            3
+  Prologue の長さ:             30
+  最小命令長:                  1
+  'is_stmt' の初期値:          1
+  Line ベース:                 -5
+  Line 範囲:                   14
+  オペコードベース:            13
+
+ オペコード:
+  オペコード 1 は 0 個の引数を持ちます
+  オペコード 2 は 1 個の引数を持ちます
+  オペコード 3 は 1 個の引数を持ちます
+  オペコード 4 は 1 個の引数を持ちます
+  オペコード 5 は 1 個の引数を持ちます
+  オペコード 6 は 0 個の引数を持ちます
+  オペコード 7 は 0 個の引数を持ちます
+  オペコード 8 は 0 個の引数を持ちます
+  オペコード 9 は 1 個の引数を持ちます
+  オペコード 10 は 0 個の引数を持ちます
+  オペコード 11 は 0 個の引数を持ちます
+  オペコード 12 は 1 個の引数を持ちます
+
+ ディレクトリー表は空です。
+
+ ファイル名表(オフセット 0x1c):
+  Entry	Dir	時刻	サイズ	名前
+  1	0	0	0	debug.c
+
+ Line Number Statements:
+  [0x00000028]  列幅を 1 に設定します
+  [0x0000002a]  拡張命令コード 2: 設定アドレス 0x0
+  [0x00000035]  Special opcode 6: advance Address by 0 to 0x0 and Line by 1 to 2
+  [0x00000036]  列幅を 6 に設定します
+  [0x00000038]  Special opcode 202: advance Address by 14 to 0xe and Line by 1 to 3
+  [0x00000039]  列幅を 9 に設定します
+  [0x0000003b]  Special opcode 105: advance Address by 7 to 0x15 and Line by 2 to 5
+  [0x0000003c]  列幅を 2 に設定します
+  [0x0000003e]  Special opcode 89: advance Address by 6 to 0x1b and Line by 0 to 5
+  [0x0000003f]  列幅を 7 に設定します
+  [0x00000041]  拡張命令コード 4: set Discriminator to 3
+  [0x00000045]  Special opcode 34: advance Address by 2 to 0x1d and Line by 1 to 6
+  [0x00000046]  列幅を 27 に設定します
+  [0x00000048]  拡張命令コード 4: set Discriminator to 3
+  [0x0000004c]  Special opcode 88: advance Address by 6 to 0x23 and Line by -1 to 5
+  [0x0000004d]  列幅を 2 に設定します
+  [0x0000004f]  拡張命令コード 4: set Discriminator to 1
+  [0x00000053]  Special opcode 61: advance Address by 4 to 0x27 and Line by 0 to 5
+  [0x00000054]  列幅を 9 に設定します
+  [0x00000056]  Special opcode 120: advance Address by 8 to 0x2f and Line by 3 to 8
+  [0x00000057]  列幅を 1 に設定します
+  [0x00000059]  Special opcode 48: advance Address by 3 to 0x32 and Line by 1 to 9
+  [0x0000005a]  Special opcode 36: advance Address by 2 to 0x34 and Line by 3 to 12
+  [0x0000005b]  列幅を 12 に設定します
+  [0x0000005d]  Special opcode 174: advance Address by 12 to 0x40 and Line by 1 to 13
+  [0x0000005e]  列幅を 9 に設定します
+  [0x00000060]  Advance PC by constant 17 to 0x51
+  [0x00000061]  Special opcode 20: advance Address by 1 to 0x52 and Line by 1 to 14
+  [0x00000062]  列幅を 1 に設定します
+  [0x00000064]  Special opcode 48: advance Address by 3 to 0x55 and Line by 1 to 15
+  [0x00000065]  Advance PC by 2 to 0x57
+  [0x00000067]  拡張命令コード 1: 列の終り
+
+

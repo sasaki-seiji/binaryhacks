@@ -1,0 +1,2 @@
+$ readelf -wp debug.o
+
