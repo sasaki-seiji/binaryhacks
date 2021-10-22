@@ -70,6 +70,17 @@ http://www.ucw.cz/~hubicka/papers/abi/node19.html
  readelf-wf.txt, readelf-wF.txt, readelf-ws.txt, readelf-wo.txt
 Cプログラム：debug.c debug.txt
 
+・Cプログラムdebug.cをコンパイルしたオブジェクトファイルdebug.oを対象にDWARFデバッグ
+セクションを調べる
+
+・まずは、チュートリアル[2]に従い、objdump -h コマンドで、DWARFデバッグセクションの
+一覧を調べる（objdump-h_debug.o.txt）
+
+・次に、readelfコマンドを使ってDWARFをプリントする
+すべてのDWARFセクションを得るには、-wオプションを利用する（readelf-w.txt）
+個々のDWARFセクションを得るには、-w[laiprmfFso] オプションを利用する(readelf-wl.txtなど)
+
+
 （参考情報）
 [1]dwarf home
 https://dwarfstd.org/
