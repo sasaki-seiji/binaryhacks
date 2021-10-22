@@ -63,3 +63,16 @@ The decoding of unwind sections for machine type Advanced Micro Devices X86-64 i
 [1] AMD64の再配置情報の型
 http://www.ucw.cz/~hubicka/papers/abi/node19.html
 
+
+[DWARF2デバッグセクション]
+実行結果：objdump-h_debug.o.txt, readelf-w.txt, readelf-wl.txt, readelf-wi.txt,
+ readelf-wa.txt, readelf-wp.txt, readelf-wr.txt, readelf-wR.txt, readelf-wm.txt,
+ readelf-wf.txt, readelf-wF.txt, readelf-ws.txt, readelf-wo.txt
+Cプログラム：debug.c debug.txt
+
+（参考情報）
+[1]dwarf home
+https://dwarfstd.org/
+
+[2]DWARF Tutorial
+https://dwarfstd.org/doc/Debugging%20using%20DWARF-2012.pdf
