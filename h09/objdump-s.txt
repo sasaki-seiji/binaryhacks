@@ -1,21 +1,21 @@
 $ objdump -s /bin/ls | head -n 30
 
-/bin/ls:     file format elf64-x86-64
+/bin/ls:     ファイル形式 elf64-x86-64
 
-Contents of section .interp:
+セクション .interp の内容:
  0318 2f6c6962 36342f6c 642d6c69 6e75782d  /lib64/ld-linux-
- 0328 7838362d 36342e73 6f2e3200           x86-64.so.2.
-Contents of section .note.gnu.property:
+ 0328 7838362d 36342e73 6f2e3200           x86-64.so.2.    
+セクション .note.gnu.property の内容:
  0338 04000000 10000000 05000000 474e5500  ............GNU.
  0348 020000c0 04000000 03000000 00000000  ................
-Contents of section .note.gnu.build-id:
+セクション .note.gnu.build-id の内容:
  0358 04000000 14000000 03000000 474e5500  ............GNU.
  0368 2f15ad83 6be3339d ec0e2e6a 3c637e08  /...k.3....j<c~.
- 0378 e48aacbd                             ....
-Contents of section .note.ABI-tag:
+ 0378 e48aacbd                             ....            
+セクション .note.ABI-tag の内容:
  037c 04000000 10000000 01000000 474e5500  ............GNU.
  038c 00000000 03000000 02000000 00000000  ................
-Contents of section .gnu.hash:
+セクション .gnu.hash の内容:
  03a0 11000000 6f000000 04000000 08000000  ....o...........
  03b0 140c1220 00290c62 40d00000 002400c0  ... .).b@....$..
  03c0 802a4921 05208514 02610100 24100000  .*I!. ...a..$...

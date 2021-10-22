@@ -1,8 +1,7 @@
 $ objdump -s -j .interp /bin/ls
 
-/bin/ls:     file format elf64-x86-64
+/bin/ls:     ファイル形式 elf64-x86-64
 
-Contents of section .interp:
+セクション .interp の内容:
  0318 2f6c6962 36342f6c 642d6c69 6e75782d  /lib64/ld-linux-
- 0328 7838362d 36342e73 6f2e3200           x86-64.so.2.
-
+ 0328 7838362d 36342e73 6f2e3200           x86-64.so.2. 

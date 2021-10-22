@@ -1,101 +1,100 @@
-$ objdump -i > objdump-i.txt
-
-BFD header file version (GNU Binutils for Ubuntu) 2.34
+$ objdump -i 
+BFD ヘッダファイルバージョン (GNU Binutils for Ubuntu) 2.34
 elf64-x86-64
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 elf32-i386
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 elf32-iamcu
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   iamcu
 elf32-x86-64
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 pei-i386
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 pei-x86-64
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 elf64-l1om
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   l1om
 elf64-k1om
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   k1om
 elf64-little
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
   l1om
   k1om
   iamcu
 elf64-big
- (header big endian, data big endian)
+ (header ビッグエンディアン, data ビッグエンディアン)
   i386
   l1om
   k1om
   iamcu
 elf32-little
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
   l1om
   k1om
   iamcu
 elf32-big
- (header big endian, data big endian)
+ (header ビッグエンディアン, data ビッグエンディアン)
   i386
   l1om
   k1om
   iamcu
 pe-x86-64
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 pe-bigobj-x86-64
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 pe-i386
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
   i386
 srec
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 symbolsrec
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 verilog
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 tekhex
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 binary
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 ihex
- (header endianness unknown, data endianness unknown)
+ (header エンディアン不明, data エンディアン不明)
   i386
   l1om
   k1om
   iamcu
 plugin
- (header little endian, data little endian)
+ (header リトルエンディアン, data リトルエンディアン)
 
          elf64-x86-64 elf32-i386 elf32-iamcu elf32-x86-64 pei-i386 pei-x86-64 
     i386 elf64-x86-64 elf32-i386 ----------- elf32-x86-64 pei-i386 pei-x86-64

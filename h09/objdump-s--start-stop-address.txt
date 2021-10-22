@@ -1,0 +1,17 @@
+$ objdump -s --start-address=0x0318 --stop-address=0x0334 /bin/ls
+
+/bin/ls:     ファイル形式 elf64-x86-64
+
+セクション .interp の内容:
+ 0318 2f6c6962 36342f6c 642d6c69 6e75782d  /lib64/ld-linux-
+ 0328 7838362d 36342e73 6f2e3200           x86-64.so.2. 
+
+$ objdump -s --start-address=0x0318 --stop-address=0x0340 /bin/ls
+
+/bin/ls:     ファイル形式 elf64-x86-64
+
+セクション .interp の内容:
+ 0318 2f6c6962 36342f6c 642d6c69 6e75782d  /lib64/ld-linux-
+ 0328 7838362d 36342e73 6f2e3200           x86-64.so.2.    
+セクション .note.gnu.property の内容:
+ 0338 04000000 10000000                    ........  
