@@ -1,0 +1,17 @@
+[objdumpでオブジェクトファイルを逆アセンブルする]
+実行結果：objdump-d.txt, objdump-d--prefix-address.txt, 
+ objdump-d-prefix-address--show-raw-inst.txt
+Cプログラム：hello.c, hello.txt
+
+
+[objdumpで特定のアクション、アドレス範囲だけ逆アセンブルする]
+実行結果：objdump-d-j.txt
+Cプログラム：hello.c, hello.txt
+
+
+[ソースファイルとの対応を表示する]
+実行結果：objdump-d-l.txt, objdump-d-S.txt, objdump--disassemble-S.txt
+Cプログラム：hello.c, hello.txt
+
+・アドレス範囲を指定して逆アセンブルリストを表示する例は、--disassemble=symbol 
+オプションのsymbolに関数名を指定するほうが簡単

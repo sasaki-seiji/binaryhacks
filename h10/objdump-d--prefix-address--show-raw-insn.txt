@@ -1,17 +1,18 @@
 $ objdump -d --prefix-address --show-raw-insn hello.o
 
-hello.o:     file format elf64-x86-64
+hello.o:     ファイル形式 elf64-x86-64
 
 
-Disassembly of section .text:
-0000000000000000 <main> f3 0f 1e fa             endbr64
-0000000000000004 <main+0x4> 55                          push   %rbp
-0000000000000005 <main+0x5> 48 89 e5                    mov    %rsp,%rbp
-0000000000000008 <main+0x8> 48 83 ec 10                 sub    $0x10,%rsp
-000000000000000c <main+0xc> 89 7d fc                    mov    %edi,-0x4(%rbp)
-000000000000000f <main+0xf> 48 89 75 f0                 mov    %rsi,-0x10(%rbp)
-0000000000000013 <main+0x13> 48 8d 3d 00 00 00 00       lea    0x0(%rip),%rdi        # 000000000000001a <main+0x1a>
-000000000000001a <main+0x1a> e8 00 00 00 00             callq  000000000000001f <main+0x1f>
-000000000000001f <main+0x1f> bf 00 00 00 00             mov    $0x0,%edi
-0000000000000024 <main+0x24> e8 00 00 00 00             callq  0000000000000029 <main+0x29>
+セクション .text の逆アセンブル:
+0000000000000000 <main> f3 0f 1e fa          	endbr64 
+0000000000000004 <main+0x4> 55                   	push   %rbp
+0000000000000005 <main+0x5> 48 89 e5             	mov    %rsp,%rbp
+0000000000000008 <main+0x8> 48 83 ec 10          	sub    $0x10,%rsp
+000000000000000c <main+0xc> 89 7d fc             	mov    %edi,-0x4(%rbp)
+000000000000000f <main+0xf> 48 89 75 f0          	mov    %rsi,-0x10(%rbp)
+0000000000000013 <main+0x13> 48 8d 3d 00 00 00 00 	lea    0x0(%rip),%rdi        # 000000000000001a <main+0x1a>
+000000000000001a <main+0x1a> e8 00 00 00 00       	callq  000000000000001f <main+0x1f>
+000000000000001f <main+0x1f> bf 00 00 00 00       	mov    $0x0,%edi
+0000000000000024 <main+0x24> e8 00 00 00 00       	callq  0000000000000029 <main+0x29>
+
 

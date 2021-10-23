@@ -1,10 +1,10 @@
 $ objdump -d --prefix-address hello.o
 
-hello.o:     file format elf64-x86-64
+hello.o:     ファイル形式 elf64-x86-64
 
 
-Disassembly of section .text:
-0000000000000000 <main> endbr64
+セクション .text の逆アセンブル:
+0000000000000000 <main> endbr64 
 0000000000000004 <main+0x4> push   %rbp
 0000000000000005 <main+0x5> mov    %rsp,%rbp
 0000000000000008 <main+0x8> sub    $0x10,%rsp
@@ -14,4 +14,5 @@ Disassembly of section .text:
 000000000000001a <main+0x1a> callq  000000000000001f <main+0x1f>
 000000000000001f <main+0x1f> mov    $0x0,%edi
 0000000000000024 <main+0x24> callq  0000000000000029 <main+0x29>
+
 
