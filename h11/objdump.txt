@@ -1,0 +1,7 @@
+$ objdump -f /bin/ls
+
+/bin/ls:     ファイル形式 elf64-x86-64
+アーキテクチャ: i386:x86-64, フラグ 0x00000150:
+HAS_SYMS, DYNAMIC, D_PAGED
+開始アドレス 0x00000000000067d0
+

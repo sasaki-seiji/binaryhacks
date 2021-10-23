@@ -1,0 +1,10 @@
+$ readelf -s para.o
+
+Symbol table '.symtab' contains 5 entries:
+   番号:      値         サイズ タイプ  Bind   Vis      索引名
+     0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+     1: 0000000000000000     0 SECTION LOCAL  DEFAULT    1 
+     2: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT    1 _binary____para_gif_start
+     3: 00000000000007d2     0 NOTYPE  GLOBAL DEFAULT    1 _binary____para_gif_end
+     4: 00000000000007d2     0 NOTYPE  GLOBAL DEFAULT  ABS _binary____para_gif_size
+

@@ -1,0 +1,8 @@
+$ gcc -o gif_header gif_header.c para.o
+$ ./gif_header
+start=0x55ef0e8b5010, end=0x55ef0e8b57e2, size=55ef0e8b17d2
+Signature=GIF
+Version=89a
+Width=110
+Height=65
+
