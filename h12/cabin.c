@@ -3,10 +3,10 @@
 int array[1024];
 float f1 = 1.2F;
 float f2;
+static float f3;
 
 void cabin(int param)
 {
-	static float f3;
 	printf("cabin : %d\n", param);
 	
 	if (param > 0)

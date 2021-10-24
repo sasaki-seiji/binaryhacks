@@ -1,0 +1,11 @@
+$ strip foo
+$ nm foo
+nm: foo: シンボルがありません
+$ nm -D foo
+                 w _ITM_deregisterTMCloneTable
+                 w _ITM_registerTMCloneTable
+                 w __cxa_finalize
+                 w __gmon_start__
+                 U __libc_start_main
+                 U printf
+

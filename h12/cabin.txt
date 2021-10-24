@@ -1,0 +1,6 @@
+$ gcc -c cabin.c
+$ gcc -o cabin cabin.o
+$ ./cabin
+cabin : 123
+positive
+

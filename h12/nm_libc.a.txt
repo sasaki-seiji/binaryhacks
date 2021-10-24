@@ -1,4 +1,4 @@
-$ nm /lib/x86_64-linux-gnu/libc.a 
+$ nm /usr/lib/x86_64-linux-gnu/libc.a
 
 init-first.o:
                  U _GLOBAL_OFFSET_TABLE_

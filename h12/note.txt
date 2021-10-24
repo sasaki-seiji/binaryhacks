@@ -1,0 +1,26 @@
+[nmの使い方]
+実行結果：nm_cabin.o.txt, nm-r.txt, nm--size-sort.txt, nm-f.txt, nm-A.txt, 
+ nm_a.out.txt, strip.txt, nm_libc.a.txt, nm_libz.so.txt
+Cプログラム：cabin.c, cabin.txt, foo.c, foo.txt
+
+・cabin.cプログラムをコンパイル後（cabin.txt）、オブジェクトファイルcabin.oに対して、
+nmコマンドを発行する（nm_cabin.o.txt）
+ここで、未初期化のグローバル変数の、array配列とf2のシンボルクラスがC（共有シンボル）
+となることに注意。これは、C言語では、他のソースファイルで同一名称の未初期化グローバル
+変数が定義されている場合、これらが全て同一のオブジェクトを参照する、という仕様を
+反映している。
+例えば、他のソースでサイズが2048のint配列として、arrayという名前の未初期化グローバル
+変数が定義されていれば、cabin.cで定義されたarray配列と同一のものとして扱われ、更に、
+これらの共有シンボルの中で最大のサイズの領域が確保されるという仕様となっている。
+
+・linux 20.04 では、libc.aは/usr/lib/x86_64-linux-gnu/libc.aに格納されている
+（nm_libc.a.txt）
+
+・共有オブジェクトに対するnmコマンドの出力例としては、本に記載のlibqdbm.soの
+代わりに、libz.soで試した（nm_libz.so.txt）
+
+
+
+(参考情報)
+nm - オブジェクトファイルのシンボル情報を表示する
+https://linuxcommand.net/nm/

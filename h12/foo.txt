@@ -1,0 +1,8 @@
+$ gcc -c foo.c
+$ gcc foo.o
+$ ./a.out
+foo s1=0, s2=123, s3=0, s4=456
+$ gcc -o foo foo.o
+$ ./foo
+foo s1=0, s2=123, s3=0, s4=456
+

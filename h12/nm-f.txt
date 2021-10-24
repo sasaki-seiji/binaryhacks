@@ -1,9 +1,8 @@
-$ gcc -c foo.c
 $ nm foo.o
                  U _GLOBAL_OFFSET_TABLE_
 0000000000000000 T foo
-0000000000000017 T main
-                 U puts
+0000000000000047 T main
+                 U printf
 0000000000000002 C s1
 0000000000000000 D s2
 0000000000000000 b s3
@@ -12,26 +11,27 @@ $ nm foo.o
 $ nm -f sysv foo.o
 
 
-Symbols from foo.o:
+foo.o からのシンボル:
 
-Name                  Value           Class        Type         Size             Line  Section
+名前            値             クラス       型         サイズ             行 セクション
 
 _GLOBAL_OFFSET_TABLE_|                |   U  |            NOTYPE|                |     |*UND*
-foo                 |0000000000000000|   T  |              FUNC|0000000000000017|     |.text
-main                |0000000000000017|   T  |              FUNC|0000000000000019|     |.text
-puts                |                |   U  |            NOTYPE|                |     |*UND*
+foo                 |0000000000000000|   T  |              FUNC|0000000000000047|     |.text
+main                |0000000000000047|   T  |              FUNC|0000000000000019|     |.text
+printf              |                |   U  |            NOTYPE|                |     |*UND*
 s1                  |0000000000000002|   C  |            OBJECT|0000000000000002|     |*COM*
 s2                  |0000000000000000|   D  |            OBJECT|0000000000000002|     |.data
 s3                  |0000000000000000|   b  |            OBJECT|0000000000000002|     |.bss
 s4                  |0000000000000002|   d  |            OBJECT|0000000000000002|     |.data
 
 $ nm -f posix foo.o
-_GLOBAL_OFFSET_TABLE_ U
-foo T 0 17
-main T 17 19
-puts U
+_GLOBAL_OFFSET_TABLE_ U         
+foo T 0 47
+main T 47 19
+printf U         
 s1 C 2 2
 s2 D 0 2
 s3 b 0 2
 s4 d 2 2
+
 

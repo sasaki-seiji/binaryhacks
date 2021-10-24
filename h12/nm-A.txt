@@ -1,4 +1,4 @@
-$ nm *o
+$ nm *.o
 
 cabin.o:
                  U _GLOBAL_OFFSET_TABLE_
@@ -6,42 +6,42 @@ cabin.o:
 0000000000000000 T cabin
 0000000000000000 D f1
 0000000000000004 C f2
-0000000000000000 b f3.2319
+0000000000000000 b f3
 000000000000005c T main
                  U printf
                  U puts
 
 foo.o:
                  U _GLOBAL_OFFSET_TABLE_
-0000000000000000 T foo
-0000000000000017 T main
-                 U puts
+0000000000000000 t foo
+0000000000000047 T main
+                 U printf
 0000000000000002 C s1
 0000000000000000 D s2
 0000000000000000 b s3
 0000000000000002 d s4
 
 
-$ nm -A *o
+$ nm -A *.o
 cabin.o:                 U _GLOBAL_OFFSET_TABLE_
 cabin.o:0000000000001000 C array
 cabin.o:0000000000000000 T cabin
 cabin.o:0000000000000000 D f1
 cabin.o:0000000000000004 C f2
-cabin.o:0000000000000000 b f3.2319
+cabin.o:0000000000000000 b f3
 cabin.o:000000000000005c T main
 cabin.o:                 U printf
 cabin.o:                 U puts
 foo.o:                 U _GLOBAL_OFFSET_TABLE_
-foo.o:0000000000000000 T foo
-foo.o:0000000000000017 T main
-foo.o:                 U puts
+foo.o:0000000000000000 t foo
+foo.o:0000000000000047 T main
+foo.o:                 U printf
 foo.o:0000000000000002 C s1
 foo.o:0000000000000000 D s2
 foo.o:0000000000000000 b s3
 foo.o:0000000000000002 d s4
 
 
-$ nm -A *o | grep s2
+$ nm -A *.o | grep s2
 foo.o:0000000000000000 D s2
 
