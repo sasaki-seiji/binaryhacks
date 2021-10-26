@@ -1,0 +1,3 @@
+[nmの使い方]
+実行結果：demangle.txt
+Cプログラム：foo.cpp, foo.txt
