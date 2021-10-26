@@ -1,0 +1,11 @@
+$ strings -eS -n 10 test.o
+日本語のメッセージです
+hello, world
+GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+_GLOBAL_OFFSET_TABLE_
+.rela.text
+.rela.data.rel.local
+.note.GNU-stack
+.note.gnu.property
+.rela.eh_frame
+

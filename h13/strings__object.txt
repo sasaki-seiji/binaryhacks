@@ -1,0 +1,20 @@
+sasaki@ubuntu:~/books/binaryhacks/h13$ strings test.o
+hello, world
+GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0
+test.c
+main
+_GLOBAL_OFFSET_TABLE_
+puts
+.symtab
+.strtab
+.shstrtab
+.rela.text
+.data
+.bss
+.rodata
+.rela.data.rel.local
+.comment
+.note.GNU-stack
+.note.gnu.property
+.rela.eh_frame
+

@@ -1,0 +1,11 @@
+[stringsの使い方]
+実行結果：strings_ls.txt, strings+grep.txt, strings-tx_ls.txt
+
+[文字列の判定]
+実行結果：strings-eS-n10.txt
+Cプログラム：test.c, test.txt
+
+[オブジェクトファイルの処理]
+実行結果：strings__object.txt
+Cプログラム：test.c, test.txt
+

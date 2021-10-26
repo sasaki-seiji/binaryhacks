@@ -1,0 +1,6 @@
+$ gcc -c test.c
+$ gcc -o test test.o
+$ ./test
+日本語のメッセージです
+hello, world
+
