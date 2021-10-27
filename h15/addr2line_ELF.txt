@@ -1,0 +1,8 @@
+$ readelf -s a.out | grep func
+    62: 0000000000001149    11 FUNC    GLOBAL DEFAULT   16 func
+$ addr2line -e a.out 0x1149
+/home/sasaki/books/binaryhacks/h15/test.c:3
+$ addr2line -f -e a.out 0x1149
+func
+/home/sasaki/books/binaryhacks/h15/test.c:3
+

@@ -1,5 +1,5 @@
 [addr2lineの使い方]
-実行結果：addr2line.txt, addr2line_convertVMA.txt
+実行結果：addr2line.txt, addr2line_ELF.txt, addr2line_convertVMA.txt
 Cプログラム：test.c, test.txt, test_convertVMA.c, test_convertVMA.txt
 
 
@@ -10,9 +10,13 @@ Cプログラム：test.c, test.txt, test_convertVMA.c, test_convertVMA.txt
 ・参考情報[1]によると、addr2lineはELFファイル上のVMAアドレスをデバッグシンボルに
 変換するものであり、実行時のメモリアドレスはゲタを履かされているために正しい出力が
 得られないとのこと。
-[1]のコード例に従い、実行時のメモリ上のアドレス（&func）を、VMAアドレスに変換して
-（test_convertVMA.c）、addr2lineコマンドを実行すると期待した結果が得られる
-（addr2line_convertVMA.txt）
+
+・readelfコマンドでシンボルfuncの値を確認して、その値をaddr2llineに引き渡すと
+期待した結果が得られる（add2line_ELF.txt）
+
+・あるいは、[1]のコード例に従い、実行時のメモリ上のアドレス（&func）を、
+VMAアドレスに変換して（test_convertVMA.c）、addr2lineコマンドを実行すると
+期待した結果が得られる（addr2line_convertVMA.txt）
 
 ・コード例で使用しているdladdr1関数については、man dladdr1 で詳細を確認できる
 
