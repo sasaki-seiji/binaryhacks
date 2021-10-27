@@ -1,0 +1,5 @@
+$ gcc -o test_convertVMA -g test_convertVMA.c -ldl
+$ ./test_convertVMA
+0x560242e611e8
+0x11e8
+

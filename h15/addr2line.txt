@@ -1,11 +1,13 @@
-$ gcc -g test.c -ldl
-$ ./a.out
-0x55601ce931e8
-0x11e8
+$ addr2line e a.out 0x55f8a979f149
+??:0
+??:0
+??:0
 
-$ addr2line -e a.out 0x11e8
-/home/ubuntu/binaryhacks/h15/test.c:18
+$ addr2line -f e a.out 0x55f8a979f149
+??
+??:0
+??
+??:0
+??
+??:0
 
-$ addr2line -f -e a.out 0x11e8
-func
-/home/ubuntu/binaryhacks/h15/test.c:18
