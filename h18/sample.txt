@@ -4,8 +4,3 @@ $ g++ -o sample dbg.o sample.o
 $ ./sample
 Log: foo
 
-$ nm sample.o
-                 U _GLOBAL_OFFSET_TABLE_
-                 U dbg
-0000000000000000 T main
-

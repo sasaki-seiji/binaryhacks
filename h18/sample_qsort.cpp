@@ -2,6 +2,7 @@
 // sample_qsort.cpp
 //
 #include <cstdlib>
+#include <iostream>
 using namespace std;
 
 // qsortの比較関数
@@ -14,6 +15,7 @@ int main(){
 	try {
 		qsort(array, 3, sizeof(int), compar);
 	} catch(...) {
+		cout << "caught exception from qsort()" << endl;
 		return 1;
 	}
 	return 0;

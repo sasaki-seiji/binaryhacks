@@ -4,8 +4,3 @@ $ g++ -o sample_no_extern_c dbg.o sample_no_extern_c.o
 sample_no_extern_c.cpp:(.text+0x10): undefined reference to `dbg(char const*)'
 collect2: error: ld returned 1 exit status
 
-$ nm sample_no_extern_c.o
-                 U _GLOBAL_OFFSET_TABLE_
-                 U _Z3dbgPKc
-0000000000000000 T main
-

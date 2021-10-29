@@ -1,0 +1,72 @@
+[C/C++とシンボル名]
+実行結果：dbg.txt
+C/C++プログラム：dbg.c
+
+・プログラムdbg.cをC及びC++でコンパイルし、関数dbgのシンボル情報を確認する（dgb.txt）
+
+[C++からCの関数を呼び出す]
+実行結果：nm_sample.o.txt, nm_sample_no_extern_c.o.txt
+C/C++プログラム：dbg.c, sample.cpp, sample.txt, sample_no_extern_c.cpp, 
+ sample_no_extern_c.txt
+ 
+・Cプログラム（dbg.c）が定義した関数のプロトタイプ宣言にextern "C"をつけると
+C++プログラム（sample。cpp）からC関数を呼び出すことができる（sample.txt）
+
+・これに対して、C++プログラムから呼び出すC関数のプロトタイプ宣言にextern "C"を
+つけないと、リンク時にundefined referenceエラーとなる（sample_no_extern_c.cpp,
+sample_no_extern_c.txt）
+
+・extern "C"あり・なしのオブジェクトファイルのシンボル情報を確認すると、呼び出す
+C関数(dbg)のシンボルがマングルされていない（extern "C"あり）・されている
+（extern "C"なし）と違いが生じている（nm_sample.o.txt, nm_sample_no_exter_c.o.txt）
+
+
+[注意：extern "C"すると引数の型の一致が検査できない]
+実行結果：
+C/C++プログラム：dbg.c, sample_wrong_prototype.cpp, sample_wrong_prototype.txt
+ dbg.h, dbg_include_header.c, sample_include_header.cpp, sample_include_header.txt
+ 
+・Cの関数を呼び出すC++ソースコード(sample_wrong_prototype.cpp)で、C関数のプロトタイプ
+宣言に間違いがあってもリンクできててしまうが、実行時にエラーとなる。これはリンク時には
+関数の引数型情報がなくっているためである（sample_wront_prototype.txt）
+
+・この問題を避けるためには、Cプログラム側で、CでもC++でもインクルード可能はヘッダ
+ファイルを用意する（dbg.h）。C++ソースでC関数のプロトタイプ宣言を誤った場合、
+コンパイル時にエラーが出る（sample_include_header.txt）
+
+
+[CからC++の関数を呼び出す]
+実行結果：
+C/C++プログラム：gcd.h, gcd.cpp, sample_gcd.c, sample_gcd.txt
+
+・boostがインストールされていないときは、以下のコマンドでインストールする
+	$ sudo apt install libboost-all-dev
+バージョン1.71のboostがインストールされた
+
+・最大公約数を求めるプログラムをビルドする（sample_gcd.txt）。deprecatedのワーニング
+が出るので、ヘッダのパスと、gcd呼び出しの名前空間指定を変更した（gcd.cpp）
+
+
+[C++の関数は例外をCの関数側に漏らしてはならない]
+実行結果：
+C/C++プログラム：
+ catch_exception.cpp, sample_catch_exception.c, sample_catch_exception.txt
+ throw_exception.cpp, sample_throw_exception.c, sample_throw_exception.txt
+ 
+・C++ソースcatch_exception.cppは、本に記載のように、C++関数内で例外を補足して、
+呼び出し側のC関数に例外を漏らさないようにしている。これをビルドして実行すると
+正常終了する（sample_catch_exception.txt）
+
+・これに対して、C++ソースthrow_exception.cppは、C++関数から例外を呼び出し元に
+スローしている。これをC関数から呼び出すと、プログラムは異常終了する
+（sample_throw_exception.txt）
+
+
+[注意：関数ポインタを扱うCの関数に注意]
+実行結果：
+C/C++プログラム：sample_qsort.cpp, sample_qsort.txt
+
+・Cの関数qsortのコールバック関数（これはC++の関数）から例外をスローする例題。
+ビルドして実行すると、qsort内を例外が通過しているが、正常終了している
+(sample_qsort.txt)
+

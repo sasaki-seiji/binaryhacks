@@ -1,0 +1,5 @@
+$ nm sample.o
+                 U _GLOBAL_OFFSET_TABLE_
+                 U dbg
+0000000000000000 T main
+

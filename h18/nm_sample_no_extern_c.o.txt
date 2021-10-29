@@ -1,0 +1,5 @@
+$ nm sample_no_extern_c.o
+                 U _GLOBAL_OFFSET_TABLE_
+                 U _Z3dbgPKc
+0000000000000000 T main
+
