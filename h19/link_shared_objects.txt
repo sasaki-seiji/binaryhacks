@@ -1,14 +1,23 @@
 $ gcc -fPIC -shared -o a.so a.c
 $ gcc -fPIC -shared -o b.so b.c
 $ gcc -fPIC -shared -o main.so main.c
+
+$ gcc -o main-shared ./a.so ./b.so ./main.so
+/usr/bin/ld: ./main.so: undefined reference to `func'
+collect2: error: ld returned 1 exit status
+
+$ gcc -o main-shared ./main.so ./a.so ./b.so
+$ ./main-shared
+func() in a.c
+
+$ gcc -o main-shared ./main.so ./b.so ./a.so
+$ ./main-shared
+func() in b.c
+
 $ gcc -o main-shared main.so a.so b.so
 $ ./main-shared
 ./main-shared: error while loading shared libraries: main.so: cannot open shared object file: No such file or directory
+
 $ LD_LIBRARY_PATH=. ./main-shared
 func() in a.c
-
-
-$ gcc -o main-shared main.so b.so a.so
-$ LD_LIBRARY_PATH=. ./main-shared
-func() in b.c
 
