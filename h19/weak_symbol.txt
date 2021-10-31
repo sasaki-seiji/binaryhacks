@@ -13,7 +13,8 @@ $ nm --demangle weak_main.o | grep Foo::
 0000000000000000 W Foo::Foo(int)
 0000000000000000 W Foo::Foo(int)
 0000000000000000 n Foo::Foo(int)
-$ nm --demangle weak_a.o | grep Foo::   0000000000000000 T Foo::Foo(int)
+$ nm --demangle weak_a.o | grep Foo::
+0000000000000000 T Foo::Foo(int)
 0000000000000000 T Foo::Foo(int)
 
 $ g++ -c unnamed_namespace_main.cpp

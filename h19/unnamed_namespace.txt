@@ -1,0 +1,6 @@
+$ g++ -c unnamed_namespace_main.cpp
+$ g++ -c weak_a.cpp
+$ g++ -o unnamed_namespace_main unnamed_namespace_main.o weak_a.o
+$ ./unnamed_namespace_main
+256
+

@@ -63,6 +63,32 @@ b.cppのTax::Tax()は、データメンバdeduction_rate_に値0.1を設定す�
 このため、a.cppのTax::tac(int)はconsumption_tax_データメンバを読み出すと0.1となる。
 その結果、りんごの値段は10となる
 
+[weakシンボル]
+実行結果：nm_demangle__weak.txt
+C++プログラム：
+　weak_main.cpp, a.cpp, weak_main.txt
+　unnamed_namespace_main.cpp, weak_a.cpp, unnamed_namespace.txt
+　
+・Fooクラスを含むC++プログラムweak_main.cppをビルドし実行する。これは正しく動作する
+次に、同名のクラスFooを含む別のC++プログラムweak_a.cppをコンパイルして、weak_main.o
+と一緒にリンクして実行すると、期待した出力結果とならない（weak_main.txt）
+
+・weak_main.cppのFoo::Foo(int)はクラス内に定義されているので、inline関数となる。
+一方、weak_a.cppのFoo::Foo(int)はクラス定義の外部で定義されているので、inlineではない、
+通常の関数となる。inline関数はweakシンボルとなるので、非weakなweak_a.cppの関数が
+リンク時に選択されるので、意図しない結果となった
+
+・nmコマンドでシンボルクラスを確認すると、weak_main.oのFoo::Foo(int)はweakで、
+weak_a.oのFoo::Foo(int)は非weakであることがわかる（nm_demange__weak.txt）
+
+・mainプログラムが利用しているFooクラスの定義を無名名前空間に収め、Fooクラスが定義した
+名前がソースファイルのスコープとなる（つまりシンボルをリンカに出さない）ように変更すれば
+（unnamed_namespae_main.cpp）、この問題は解消する（unnamed_namespace.txt）
+
+
+
+
+
 
 
 
