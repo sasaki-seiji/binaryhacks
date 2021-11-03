@@ -1,0 +1,3 @@
+$ gcc -shared -o call-no-pic.so call.c
+$ gcc -shared -fPIC -o call-pic.so call.c
+

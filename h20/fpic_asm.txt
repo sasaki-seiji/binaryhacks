@@ -1,0 +1,11 @@
+$ gcc -o fpic-no-pic.s -S fpic.c
+$ gcc -fPIC -o fpic-pic.s -S fpic.c
+$ grep printf fpic-no-pic.s
+	call	printf@PLT
+	call	printf@PLT
+	call	printf@PLT
+$ grep printf fpic-pic.s
+	call	printf@PLT
+	call	printf@PLT
+	call	printf@PLT
+

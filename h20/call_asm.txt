@@ -1,0 +1,26 @@
+$ gcc -o call-no-pic.s -S call.c
+$ grep foo call-no-pic.s
+	.globl	foo
+	.type	foo, @function
+foo:
+	.size	foo, .-foo
+	.type	sfoo, @function
+sfoo:
+	.size	sfoo, .-sfoo
+	call	foo
+	call	efoo@PLT
+	call	sfoo
+
+$ gcc -fPIC -o call-pic.s -S call.c	
+$ grep foo call-pic.s
+	.globl	foo
+	.type	foo, @function
+foo:
+	.size	foo, .-foo
+	.type	sfoo, @function
+sfoo:
+	.size	sfoo, .-sfoo
+	call	foo@PLT
+	call	efoo@PLT
+	call	sfoo
+

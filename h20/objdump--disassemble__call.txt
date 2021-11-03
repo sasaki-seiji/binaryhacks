@@ -1,0 +1,62 @@
+$ objdump --disassemble=func call-no-pic.so
+ 
+call-no-pic.so:     ファイル形式 elf64-x86-64
+
+
+セクション .init の逆アセンブル:
+
+セクション .plt の逆アセンブル:
+
+セクション .plt.got の逆アセンブル:
+
+セクション .plt.sec の逆アセンブル:
+
+セクション .text の逆アセンブル:
+
+0000000000001191 <func>:
+    1191:	f3 0f 1e fa          	endbr64 
+    1195:	55                   	push   %rbp
+    1196:	48 89 e5             	mov    %rsp,%rbp
+    1199:	b8 00 00 00 00       	mov    $0x0,%eax
+    119e:	e8 ed fe ff ff       	callq  1090 <foo@plt>
+    11a3:	b8 00 00 00 00       	mov    $0x0,%eax
+    11a8:	e8 c3 fe ff ff       	callq  1070 <efoo@plt>
+    11ad:	b8 00 00 00 00       	mov    $0x0,%eax
+    11b2:	e8 be ff ff ff       	callq  1175 <sfoo>
+    11b7:	90                   	nop
+    11b8:	5d                   	pop    %rbp
+    11b9:	c3                   	retq   
+
+$ objdump --disassemble=func call-pic.so
+
+call-pic.so:     ファイル形式 elf64-x86-64
+
+
+セクション .init の逆アセンブル:
+
+セクション .plt の逆アセンブル:
+
+セクション .plt.got の逆アセンブル:
+
+セクション .plt.sec の逆アセンブル:
+
+セクション .text の逆アセンブル:
+
+0000000000001191 <func>:
+    1191:	f3 0f 1e fa          	endbr64 
+    1195:	55                   	push   %rbp
+    1196:	48 89 e5             	mov    %rsp,%rbp
+    1199:	b8 00 00 00 00       	mov    $0x0,%eax
+    119e:	e8 ed fe ff ff       	callq  1090 <foo@plt>
+    11a3:	b8 00 00 00 00       	mov    $0x0,%eax
+    11a8:	e8 c3 fe ff ff       	callq  1070 <efoo@plt>
+    11ad:	b8 00 00 00 00       	mov    $0x0,%eax
+    11b2:	e8 be ff ff ff       	callq  1175 <sfoo>
+    11b7:	90                   	nop
+    11b8:	5d                   	pop    %rbp
+    11b9:	c3                   	retq   
+
+セクション .fini の逆アセンブル:
+
+セクション .fini の逆アセンブル:
+

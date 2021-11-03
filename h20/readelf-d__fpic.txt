@@ -1,0 +1,61 @@
+$ readelf -d fpic-no-pic.so | egrep 'TEXTREL|RELCOUNT'
+$ readelf -d fpic-pic.so | egrep 'TEXTREL|RELCOUNT'
+
+$ readelf -d fpic-no-pic.so
+
+Dynamic section at offset 0x2e20 contains 24 entries:
+  タグ        タイプ                       名前/値
+ 0x0000000000000001 (NEEDED)             共有ライブラリ: [libc.so.6]
+ 0x000000000000000c (INIT)               0x1000
+ 0x000000000000000d (FINI)               0x1158
+ 0x0000000000000019 (INIT_ARRAY)         0x3e10
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (バイト)
+ 0x000000000000001a (FINI_ARRAY)         0x3e18
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (バイト)
+ 0x000000006ffffef5 (GNU_HASH)           0x2f0
+ 0x0000000000000005 (STRTAB)             0x3c0
+ 0x0000000000000006 (SYMTAB)             0x318
+ 0x000000000000000a (STRSZ)              119 (バイト)
+ 0x000000000000000b (SYMENT)             24 (バイト)
+ 0x0000000000000003 (PLTGOT)             0x4000
+ 0x0000000000000002 (PLTRELSZ)           24 (バイト)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x510
+ 0x0000000000000007 (RELA)               0x468
+ 0x0000000000000008 (RELASZ)             168 (バイト)
+ 0x0000000000000009 (RELAENT)            24 (バイト)
+ 0x000000006ffffffe (VERNEED)            0x448
+ 0x000000006fffffff (VERNEEDNUM)         1
+ 0x000000006ffffff0 (VERSYM)             0x438
+ 0x000000006ffffff9 (RELACOUNT)          3
+ 0x0000000000000000 (NULL)               0x0
+
+$ readelf -d fpic-pic.so
+
+Dynamic section at offset 0x2e20 contains 24 entries:
+  タグ        タイプ                       名前/値
+ 0x0000000000000001 (NEEDED)             共有ライブラリ: [libc.so.6]
+ 0x000000000000000c (INIT)               0x1000
+ 0x000000000000000d (FINI)               0x1158
+ 0x0000000000000019 (INIT_ARRAY)         0x3e10
+ 0x000000000000001b (INIT_ARRAYSZ)       8 (バイト)
+ 0x000000000000001a (FINI_ARRAY)         0x3e18
+ 0x000000000000001c (FINI_ARRAYSZ)       8 (バイト)
+ 0x000000006ffffef5 (GNU_HASH)           0x2f0
+ 0x0000000000000005 (STRTAB)             0x3c0
+ 0x0000000000000006 (SYMTAB)             0x318
+ 0x000000000000000a (STRSZ)              119 (バイト)
+ 0x000000000000000b (SYMENT)             24 (バイト)
+ 0x0000000000000003 (PLTGOT)             0x4000
+ 0x0000000000000002 (PLTRELSZ)           24 (バイト)
+ 0x0000000000000014 (PLTREL)             RELA
+ 0x0000000000000017 (JMPREL)             0x510
+ 0x0000000000000007 (RELA)               0x468
+ 0x0000000000000008 (RELASZ)             168 (バイト)
+ 0x0000000000000009 (RELAENT)            24 (バイト)
+ 0x000000006ffffffe (VERNEED)            0x448
+ 0x000000006fffffff (VERNEEDNUM)         1
+ 0x000000006ffffff0 (VERSYM)             0x438
+ 0x000000006ffffff9 (RELACOUNT)          3
+ 0x0000000000000000 (NULL)               0x0
+
