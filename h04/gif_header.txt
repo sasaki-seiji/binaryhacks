@@ -1,0 +1,7 @@
+$ gcc -o gif_header gif_header.c para.c
+$ ./gif_header
+signature: GIF
+version: 89a
+width: 110
+height: 65
+

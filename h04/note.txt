@@ -7,19 +7,29 @@
 [ダンプを省略しない]
 実行結果： od-v.txt
 入力画像ファイル： ../para.gif
+
+・対象のデータファイルは../para.gifとした
 	
 [文字列]
 実行結果： od-S.txt
 
 ・書籍に記載の-sオプションは、-t d2 等価であり16ビットの10進数で表示する
 文字列を表示するには、-S BYTE または　--strings[=BYTE] を用いる
+
+・process substitutionは=(command)ではなく、<(command)
+
+・stringsの出力には、glibc-ld.so.cache1.1_が含まれているが、この文字列は
+0x01で終了している
+
 	
 [odの利用例]
 実行結果： para.txt
 シェルスクリプト： ctable.sh
-Cプログラム：gif_header.c
+Cプログラム：gif_header.c, gif_header.txt
+入力画像ファイル：../para.gif
 
-・シェルスクリプトctable.shは、画像ファイル（../para.gif）を読み込んで、C言語の
-テーブル（変数名はobjname）として出力する
-・Cプログラムgif_header.cは、配列objnameからGIFヘッダ情報を解析して表示する
+・シェルスクリプトctable.shは、画像ファイル（../para.gif）を読み込んで、
+C言語のテーブル（変数名はobjname）として出力する
+・Cプログラムgif_header.cは、配列objnameからGIFヘッダ情報を解析して
+表示する(gif_header.txt)
 
