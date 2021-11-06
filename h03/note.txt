@@ -1,0 +1,8 @@
+[]
+実行結果：file.txt
+
+・/usr/bin/fileに対してfileコマンドを実行すると(fil.txt)、
+executableではなくshared objectと報告される
+
+・man magic に記載のmagicファイルの場所/usr/share/misc/magic
+ディレクトリは空となっていた
