@@ -23,6 +23,7 @@ rw-rw-r-- 1000/1000   1664 Oct 16 10:06 2021 bar.o
 
 
 $ cc -c -o baz.o baz.c
+$ rm libfoo.so # cc -lfoo -L. find libfoo.so before libfoo.a
 $ cc -o baz baz.o -lfoo -L.
 $ ./baz
 foo()

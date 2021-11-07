@@ -2,35 +2,52 @@
 実行結果： build-archive.txt
 Cプログラム：foo.c, bar.c, baz.c
 
-・ ar ruv libfoo.a foo.o bar.o コマンドでは、以下のワーニングが出ている
+・build-archive.txtに記載された手順で静的ライブラリを作成し、bazプログラム
+にリンクする
+
+・ar ruv libfoo.a foo.o bar.o コマンドでは、以下のワーニングが出ている
 ar: `u' modifier ignored since `D' is the default (see `U')
 
-・これは、ubuntu20.04では、deterministic mode (Dモディファイア)がデフォルであり、
-UID、GID、timestampに0を設定するため、ファイルの更新時刻による制御(uモディファイア)
-が無効であることを示している
+・これは、ubuntu20.04では、deterministic mode (Dモディファイア)が
+デフォルであり、UID、GID、timestampに0を設定するため、ファイルの更新時刻
+による制御(uモディファイア)が無効であることを示している
 
-・ ar tv libfoo.a コマンド出力を見ると、UID、GID、timestampが実際に0となっている
+・ar tv libfoo.a コマンド出力を見ると、UID、GID、timestampが実際に0と
+なっている
 
-・ ar rUuv libfoo.a foo.o bar.o コマンドは、Uモディファイアで非 deterministic mode
-に設定の上、uモディファイアを指定している
+・ar rUuv libfoo.a foo.o bar.o コマンドは、Uモディファイアで非
+deterministic modeに設定の上、uモディファイアを指定している
 
-・その後の、ar tv libfoo.a コマンド出力は、UID、GID、timestampに有効な値が設定されて
-いることを示している
+・その後の、ar tv libfoo.a コマンド出力は、UID、GID、timestampに有効な
+値が設定されていることを示している
 
-・作成したlibfoo.aを所定のフォルダに格納していないので、cc -o baz baz.o -lfoo -L. 
-コマンドでは、-L. オプションでカレントディレクトをライブラリサーチパスに加えている
+・作成したlibfoo.aを所定のディレクトリフォルダに格納していないので、
+cc -o baz baz.o -lfoo -L.  コマンドでは、-L. オプションでカレント
+ディレクトをライブラリサーチパスに加えている
+
+・cc -o baz baz.o -lfoo -L.　コマンドの実行前にlibfoo.soファイルを削除
+しているのは、libfoo.soがlibfoo.aよりも先に探されるので、.soファイルが
+存在しては都合が悪いためである
 
 
 [共有ライブラリ]
 実行結果：build-shared.txt
 Cプログラム：foo.c, bar.c, baz.c
 
-・libfoo.aを所定のフォルダにコピーしていないので、cc -o baz baz.o -lfoo -L. コマンド
-では、カレントディレクトリをライブラリサーチパスに加えている（-L.）
+・build-shared.txtに記述の手順に従って共有ライブラリを作成し、bazプログラム
+にリンクする
 
-・baz プログラムに書き込まれた SONAME が libfoo.so.0 となっているので、
-ln -s libfoo.so libfoo.so.0 コマンドによって、シンボリックを貼っておく
+・cc -shared ... コマンドでは、共有オブジェクトlibfoo.soを作成し、
+そのSONAMEをlibfoo.so.0に設定している
 
-・LD_LIBRARY_PATH=. ./baz コマンドでは、実行時にカレントディレクトリからライブラリを
-検索させている（LD_LIBRARY_PATH=.）
+・bazプログラムのリンクでは、libfoo.soを所定のライブラリフォルダに
+格納していないので、-L.オプションでカレントディレクトをライブラリパス
+に加えている
+
+・baz プログラムに書き込まれたNEEDED(元のSONAME)がlibfoo.so.0となって
+いるので、ln -s libfoo.so libfoo.so.0 コマンドによって、シンボリックを
+貼っておく
+
+・LD_LIBRARY_PATH=. ./baz コマンドでは、実行時にカレントディレクトリから
+ライブラリを検索させている（LD_LIBRARY_PATH=.）
 
