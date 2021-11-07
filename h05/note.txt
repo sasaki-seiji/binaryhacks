@@ -7,12 +7,15 @@
 実行結果： readelf-l.txt
 
 ・ubuntu20.04では出力フォーマットが変更されている：
-	オフセットとファイルサイズ、仮想Addrとメモリサイズ、物理アドレスとフラグ・整列が
-	同一カラムに重ねられている
-・GNU_RELROプログラムヘッダが追加されている：
-	.init_array .fini_array .data.rel.ro .dynamic .gotセクションが含まれている	
-	参考：GNU_RELRO、.init_array、...については、以下を参照
-		https://stevens.netmeister.org/631/elf.html
+	オフセットとファイルサイズ、仮想Addrとメモリサイズ、物理アドレスと
+	フラグ・整列が同一カラムに重ねられている
+
+・GNU_PROPERTY, GNU_RELROプログラムヘッダが追加されている：
+	GNE_RELROセグメントには、.init_array .fini_array .data.rel.ro 
+	.dynamic .gotセクションが含まれている	
+	GNU_RELROセグメント、.init_array、セクションについては、[3]を参照
+
+・タイプ(p_type)については、[1]を参照
 
 [セクションヘッダ]
 実行結果： readelf-S.txt
@@ -20,40 +23,62 @@
 ・レコードは、サイズフィールドの箇所で折り返されて重ねれれて表示されている
 ・GNU_HASH、INIT_ARRAY、FINI_ARRAYセクションタイプが追加されている
 
+・セクションタイプ(sh_type)については、[1]を参照
+
 [ストリングテーブル]
 実行結果： od__shstrtab.txt
 
 ・.shstrtabセクションのオフセットは0x2229c、サイズは0x11d 
-・本では、odコマンドのパラメータが、--skip-bytes 0x2229c --read-bytes 0x11d と
+・書籍ではodコマンドパラメータを--skip-bytes 0x2229c --read-bytes 0x11d と
 しているが、manの記載は、--skip-bytes=BYTES --read-bytes=BYTES となっている
 
 [シンボルテーブル]
 実行結果： readelf-s.txt, od__dynsym.txt,  od__dynstr.txt
 
-・readelf -s /bin/ls コマンドで得られるシンボルテーブル（readelf-s.txt）では、
-st_shndxがSHN_UNDEF（コマンド表示ではUND）のシンボルは、値とサイズのフィールドが
-0となっている
-・.dynsymセクションのオフセットとサイズは、0x488と0xd08なので（readelf-S.txt）、
+・readelf -s /bin/ls コマンドで得られるシンボルテーブル(readelf-s.txt)
+では、st_shndxがSHN_UNDEF(コマンド表示ではUND)のシンボルは、値とサイズの
+フィールドが0となっている(/bin/lsが共有オブジェクトのファイルであるためか？)
+
+・.dynsymセクションのオフセットとサイズは、0x488と0xd08なので
+(readelf-S.txt）、
 od --skip-bytes=0x488 --read-bytes=0xd08 -Ax -t x1z /bin/ls　コマンドを
 実行した結果を od__dynsym.txtに示す
-・readelf-s.txtの番号2のエントリ（検索名がgetenv）を調べる
-・64ビット環境では、シンボルテーブルのエントリは、24バイトなので、od__dynsym.txt
-では、オフセット0x4b8から開始する。
-・このシンボルテーブルのレコードのst_nameフィールドは、ca 02 00 00 であり、
-これを.dynstrセクションから探してみる
-・.dynstrセクションのオフセットとサイズは、0x1190と0x64cなので（readelf-S.txt）、
+
+・readelf-s.txtの番号2のエントリ（検索名がgetenv）を以下に調べてみる
+・64ビット環境では、シンボルテーブルのエントリサイズは、24バイトなので、
+od__dynsym.txtでは、オフセット0x4b8から開始する。
+・このシンボルテーブルのエントリは、
+	st_name = ca 02 00 02 → 0x2ca
+	st_info = 12 → STT_FUNC|STV_WEAK
+	st_other = 00
+	st_shndx = 00 00 → SHN_UNDEF
+	st_value = 00 00 00 00 00 00 00 00 → 0x0000000000000000
+	st_size = 00 00 00 00 00 00 00 00 → 0x0000000000000000
+	となっている。
+・st_nameフィールド(0x2ca)を.dynstrセクションから探してみる
+・.dynstrセクションのオフセットとサイズは、0x1190と0x64cなので
+（readelf-S.txt）、
 od --skip-bytes=0x1190 --read-bytes=0x64c -Ax -t x1z /bin/ls コマンドを
 実行した結果を od__dynstr.txt に記す
-・od__dynstr.txtから文字列getenvを検索すると、オフセット0x145aの位置に見つかる
-・0x145a = 0x1190 + 0x2ca なので、期待通りにシンボル名を検索することができる
+・od__dynstr.txtから文字列getenvを検索するとオフセット0x145aの位置に見つかる
+・0x145a = 0x1190 + 0x2ca なので、期待通りにシンボル名を検索することができた
 
 [再配置情報]
 実行結果： readelf--relocs.txt
 
-・/bin/ls はセクションタイプがSHT_RELAのセクションを2つ、.rela.dyn、rela.plt を
+・/bin/ls はセクションタイプがSHT_RELAのセクションを2つ.rela.dyn、rela.plt
 持っている
-・再配置情報は、readelf コマンドの -r|--relocs オプションで表示することができる
+・再配置情報は、readelf コマンドの -r|--relocs オプションで表示することが
+できる(readelf--relocs.txt)
 
-（）
 
+（参考情報）
+[1]Manpage of ELF
+http://surf.ml.seikei.ac.jp/~nakano/JMwww/html/LDP_man-pages/man5/elf.5.html
 
+[2]Oracle Documentation 第 7 章 オブジェクトファイル形式
+https://docs.oracle.com/cd/E19683-01/817-4912/6mkdg542u/index.html
+
+[3]Acronyms relevant to Executable and Linkable Format (ELF)
+https://stevens.netmeister.org/631/elf.html
+ 
