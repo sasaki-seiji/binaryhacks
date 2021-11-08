@@ -1,3 +1,9 @@
 $ gcc -c sample.c
 $ gcc -o sample sample.o
+$ ./sample
+hello, wolrd
+hello, wolrd
+hello, wolrd
+hello, wolrd
+hello, wolrd
 

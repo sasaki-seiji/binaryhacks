@@ -1,14 +1,15 @@
 [ELFヘッダの読み出し]
-実行結果：readelf-h__executable.txt, readelf-h__object.txt, 
- readelf-l__executable.txt, readelf-l__object.txt, readelf-S__executable.txt,
- readelf-S__object.txt, readelf-e__executable.txt, readelf-e__object.txt
+実行結果：readelf-h__exe.txt, readelf-h__obj.txt, readelf-l__exe.txt, 
+readelf-l__obj.txt, readelf-S__exe.txt, readelf-S__obj.txt, 
+readelf-e__exe.txt, readelf-e__object.txt
 Cプログラム：sample.c, sample.txt
 
 ・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
 実行可能ファイルsampleに対して、ELFヘッダの読み出しを行う
 
-・ELFファイルヘッダでは、実行可能ファイルの型は、DYN (共有オブジェクトファイル)で、
-オブジェクトファイルの型は、REL (再配置可能ファイル)となっている
+・ELFファイルヘッダでは、実行可能ファイルの型は、DYN (共有オブジェクト
+ファイル)で、オブジェクトファイルの型は、REL (再配置可能ファイル)と
+なっている
 
 ・オブジェクトファイルはプログラムヘッダを持っていない
 
@@ -28,30 +29,30 @@ Cプログラム：sample.c, sample.txt
 ・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
 実行可能ファイルsampleに対して、ELF情報の読み出しを行う
 
-・この例では、オブジェクトファイルsample.oに含まれているシンボルはすべて実行可能
-ファイルsampleにも含まれている。ただし、標準ライブラリ呼び出しputsは、sampleでは、
-puts@@GLIBC_2.2.5 と、ライブラリ指定が加えられている
+・この例では、オブジェクトファイルsample.oに含まれているシンボルはすべて
+実行可能ファイルsampleにも含まれている。ただし、標準ライブラリ呼び出し
+putsは、sampleでは、puts@@GLIBC_2.2.5 と、ライブラリ指定が加えられている
  
-・この例では、オブジェクトファイルに含まれている再配置情報の型は、R_X86_64_PLT32 
-と R_X86_64_PC32 であり、実行可能ファイルに含まれている型は、R_X86_64_RELATIVE、
-R_X86_64_GLOB_DAT、R_X86_64_JUMP_SLO となっている。
+・この例では、オブジェクトファイルに含まれている再配置情報の型は、
+R_X86_64_PLT32 とR_X86_64_PC32 であり、実行可能ファイルに含まれている型は、
+R_X86_64_RELATIVE、R_X86_64_GLOB_DAT、R_X86_64_JUMP_SLO となっている。
 AMD64の再配置情報の型の一覧は[1]を参照
 
-・この例のオブジェクトファイルにはダイナミックセグメントとバージョンセクションは
-含まれてない
+・この例のオブジェクトファイルにはダイナミックセグメントとバージョン
+セクションは含まれてない
 
-・この例では、オブジェクトファイル、実行可能ファイルともアーキテクチャ依存情報は
-含まれない（含まれない旨のメッセージも出力されない）
+・この例では、オブジェクトファイル、実行可能ファイルともアーキテクチャ
+依存情報は含まれない（含まれない旨のメッセージも出力されない）
 
-・実行可能ファイルにはバケットリスト長のヒストグラムが含まれるが、オブジェクト
-ファイルには含まれていない
+・実行可能ファイルにはバケットリスト長のヒストグラムが含まれるが、
+オブジェクトファイルには含まれていない
 
-・オブジェクトファイルには、NT_GNU_PROPERTY_TYPE_0ノートが含まれている。実行可能
-ファイルにはこれに加えて、NT_GNU_BUILD_ID (一意なビルドID ビット列)ノートと、
-NT_GNU_ABI_TAG (ABI バージョンタグ)ノートが含まれている
+・オブジェクトファイルには、NT_GNU_PROPERTY_TYPE_0ノートが含まれている。
+実行可能ファイルにはこれに加えて、NT_GNU_BUILD_ID (一意なビルドID ビット列)
+ノートと、NT_GNU_ABI_TAG (ABI バージョンタグ)ノートが含まれている
 
-・unwind情報の表示では、オブジェクトファイル、実行可能ファイルとも以下のメッセージが
-出力される
+・unwind情報の表示では、オブジェクトファイル、実行可能ファイルとも以下の
+メッセージが出力される
 The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
 
 
