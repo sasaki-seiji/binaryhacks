@@ -69,6 +69,10 @@ The decoding of unwind sections for machine type Advanced Micro Devices X86-64 i
 [ELFセクションのダンプ]
 実行結果：readelf-S_ls.txt, readelf-x.txt
 
+・/bin/lsのセクションヘッダを調べ（readelf-S_ls.txt）、.interpセクション
+をダンプする（readelf-x.txt）
+64ビットのlinux 20.04では/lib64/ld-linux-x86-64.so.2となっている
+
 
 [DWARF2デバッグセクション]
 実行結果：objdump-h_debug.o.txt, readelf-w.txt, readelf-wl.txt, readelf-wi.txt,
