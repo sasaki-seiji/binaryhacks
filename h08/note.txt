@@ -12,57 +12,62 @@ Cプログラム：sample.c, sample.txt
 なっている
 
 ・オブジェクトファイルはプログラムヘッダを持っていない
+プログラムヘッダ（セグメントヘッダ）がプログラムのメモリのロードする
+際に利用する情報であるため、当然である
 
 
 [ELF情報の読み出し]
-実行結果：readelf--syms__executable.txt, readelf--syms__object.txt,
- readelf--relocs__executable.txt, readelf--relocs_object.txt,
- readelf--dynamic__executable.txt, readelf--dynamic__object.txt,
- readelf--version-info__executable.txt, readelf--version-info__object.txt,
- readelf--arch-specific__executable.txt, readelf--arch-specific__object.txt,
- readelf--histogram__executable.txt, readelf--histogram__object.txt,
- readelf--all__executable.txt, readelf--all__object.txt,
- readelf--notes__executable.txt, readelf--notes__object.txt,
- readelf--unwind__executable.txt, readelf--unsind__object.txt
+実行結果：readelf--syms__exe.txt, readelf--syms__obj.txt,
+ readelf--relocs__exe.txt, readelf--relocs_obj.txt,
+ readelf--dynamic__exe.txt, readelf--dynamic__obj.txt,
+ readelf--version-info__exe.txt, readelf--version-info__obj.txt,
+ readelf--arch-specific__exe.txt, readelf--arch-specific__obj.txt,
+ readelf--histogram__exe.txt, readelf--histogram__obj.txt,
+ readelf--all__exe.txt, readelf--all__obj.txt,
+ readelf--notes__exe.txt, readelf--notes__obj.txt,
+ readelf--unwind__executable.txt, readelf--unsind__obj.txt
 Cプログラム：sample.c, sample.txt
  
 ・サンプルプログラムsample.cから作成されたオブジェクトファイルsample.oと
 実行可能ファイルsampleに対して、ELF情報の読み出しを行う
 
 ・この例では、オブジェクトファイルsample.oに含まれているシンボルはすべて
-実行可能ファイルsampleにも含まれている。ただし、標準ライブラリ呼び出し
-putsは、sampleでは、puts@@GLIBC_2.2.5 と、ライブラリ指定が加えられている
+実行可能ファイルsampleにも含まれている(readelf--syms_exe.txt, 
+readelf--syms.obj.txt)。ただし、標準ライブラリ呼び出しputsは、sampleでは、
+puts@@GLIBC_2.2.5 と、ライブラリ指定が加えられている
  
 ・この例では、オブジェクトファイルに含まれている再配置情報の型は、
 R_X86_64_PLT32 とR_X86_64_PC32 であり、実行可能ファイルに含まれている型は、
-R_X86_64_RELATIVE、R_X86_64_GLOB_DAT、R_X86_64_JUMP_SLO となっている。
+R_X86_64_RELATIVE、R_X86_64_GLOB_DAT、R_X86_64_JUMP_SLO となっている
+(readelf--relocs_exe.txt, readelf--relocs_obj.txt)。
 AMD64の再配置情報の型の一覧は[1]を参照
 
-・この例のオブジェクトファイルにはダイナミックセグメントとバージョン
-セクションは含まれてない
+・この例のオブジェクトファイルにはダイナミックセクションとバージョン
+セクションは含まれてない(readelf--dynamic__exe.txt, 
+readelf--dynamic__obj.txt)
+ダイナミックセクションはプログラムのロード時にダイナミックシンボルを
+解決するために使われる情報であるため、前半の記述は当然である
 
 ・この例では、オブジェクトファイル、実行可能ファイルともアーキテクチャ
 依存情報は含まれない（含まれない旨のメッセージも出力されない）
+(readelf--arch-specific__exe.txt, readelf--arch-specific__obj.txt)
 
 ・実行可能ファイルにはバケットリスト長のヒストグラムが含まれるが、
-オブジェクトファイルには含まれていない
+オブジェクトファイルには含まれていない(readelf--histogram__exe.txt,
+readelf--histogram__obj.txt)
 
 ・オブジェクトファイルには、NT_GNU_PROPERTY_TYPE_0ノートが含まれている。
 実行可能ファイルにはこれに加えて、NT_GNU_BUILD_ID (一意なビルドID ビット列)
 ノートと、NT_GNU_ABI_TAG (ABI バージョンタグ)ノートが含まれている
+(readelf--notes__exe.txt, readelf--notes__obj.txt)
 
 ・unwind情報の表示では、オブジェクトファイル、実行可能ファイルとも以下の
-メッセージが出力される
+メッセージが出力される(readelf--unwind__exe.txt, readelf--unwind__obj.txt)
 The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
 
 
 [ELFセクションのダンプ]
 実行結果：readelf-S_ls.txt, readelf-x.txt
-
-
-（参考情報）
-[1] AMD64の再配置情報の型
-http://www.ucw.cz/~hubicka/papers/abi/node19.html
 
 
 [DWARF2デバッグセクション]
@@ -83,8 +88,11 @@ Cプログラム：debug.c debug.txt
 
 
 （参考情報）
-[1]dwarf home
+[1] AMD64の再配置情報の型
+http://www.ucw.cz/~hubicka/papers/abi/node19.html
+
+[2]dwarf home
 https://dwarfstd.org/
 
-[2]DWARF Tutorial
+[3]DWARF Tutorial
 https://dwarfstd.org/doc/Debugging%20using%20DWARF-2012.pdf
