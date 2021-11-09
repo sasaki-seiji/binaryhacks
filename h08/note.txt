@@ -75,20 +75,22 @@ The decoding of unwind sections for machine type Advanced Micro Devices X86-64 i
 
 
 [DWARF2デバッグセクション]
-実行結果：objdump-h_debug.o.txt, readelf-w.txt, readelf-wl.txt, readelf-wi.txt,
- readelf-wa.txt, readelf-wp.txt, readelf-wr.txt, readelf-wR.txt, readelf-wm.txt,
- readelf-wf.txt, readelf-wF.txt, readelf-ws.txt, readelf-wo.txt
+実行結果：objdump-h_debug.o.txt, readelf-w.txt, readelf-wl.txt, 
+readelf-wi.txt, readelf-wa.txt, readelf-wp.txt, readelf-wr.txt, 
+readelf-wR.txt, readelf-wm.txt, readelf-wf.txt, readelf-wF.txt, 
+readelf-ws.txt, readelf-wo.txt
 Cプログラム：debug.c debug.txt
 
-・Cプログラムdebug.cをコンパイルしたオブジェクトファイルdebug.oを対象にDWARFデバッグ
-セクションを調べる
+・Cプログラムdebug.cをコンパイルしたオブジェクトファイルdebug.oを対象に
+DWARFデバッグセクションを調べる
 
-・まずは、チュートリアル[2]に従い、objdump -h コマンドで、DWARFデバッグセクションの
-一覧を調べる（objdump-h_debug.o.txt）
+・まずは、チュートリアル[3]に従い、objdump -h コマンドで、DWARFデバッグ
+セクションの一覧を調べる（objdump-h_debug.o.txt）
 
 ・次に、readelfコマンドを使ってDWARFをプリントする
 すべてのDWARFセクションを得るには、-wオプションを利用する（readelf-w.txt）
-個々のDWARFセクションを得るには、-w[laiprmfFso] オプションを利用する(readelf-wl.txtなど)
+個々のDWARFセクションを得るには、-w[laiprmfFso] オプションを利用する
+(readelf-wl.txtなど)
 
 
 （参考情報）
