@@ -1,12 +1,39 @@
 [objdumpでELFバイナリをダンプする]
 実行結果：objdump-s.txt, objdump-i.txt
 
+・objdump -s コマンドですべてのセクションを表示する。ただしここでは、
+最初の30行だけを表示している(objdump-s.txt)
+
+・objdump -iコマンドで適用可能なアーキテクチャをオブジェクトフォーマット
+の一覧を表示する(objdump-i.txt)
+
+
 [objdumpでELFバイナリの特定のセクションだけをダンプする]
 実行結果：objdump-s-j.txt, objdump-h.txt
+
+・objdump -s -j コマンドで特定のセクションだけをダンプする(objdump-s-j.txt)
+この時、-sオプションを省略するとエラーとなる。-j section オプションは
+絞り込みを指定するようである
+
+・セクションの一覧を表示するには、objdump -hコマンドを使用する
+(objdump-h.txt)
+
 
 [objdumpでアドレス範囲を指定してダンプする]
 実行結果：objdump-s--start-stop-address.txt
 
+・セクションの一覧では、.interpセクションの範囲が、開始：0x318, サイズ：
+0x1cなので、--start-address, --stop-addressでその範囲に限定して出力する。
+また、この範囲を超える指定をした場合は、その範囲に含まれるセクションが
+表示される
+書籍に書かれているにように、指定範囲と交差しないセクションはセクション名
+のヘッダ情報は出力されない(objdump-s--start-stop-address.txt)
+
+
 [objdumpで単純なバイナリをダンプする]
 実行結果：objdump-s-b-binary.txt
+
+・-b binaryオプションを指定すれば、ELFファイルやその他のファイルを
+バイナリファイルとしてダンプできる(objdump-s-b-binary.txt)
+
 
