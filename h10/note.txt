@@ -3,15 +3,46 @@
  objdump-d-prefix-address--show-raw-inst.txt
 Cプログラム：hello.c, hello.txt
 
+・サンプルプログラムhello.cをビルドして(hello.txt)、オブジェクトファイル
+hello.oを逆アセンブルする(objdump-d.txt)
+書籍に記載の32ビットアーキテクチャ(x86)とはずいぶん違ったアセンブリ展開形
+となる。64ビット(x86_64)では、まず、mainの引数int argc, char *argv[]が
+edi, rsiレジスタに入れらているようである。
+main関数の頭でこの2つの引数をスタックに保存している。
+また、64ビットを操作する命令のニーモニックの末尾にqが付加されている。
+(例えば、callq)
+
+・--prefix-addressオプションをつけると、関数からのオフセットアドレスが
+付加される(objdump-d--prefix-address.txt)。この時、バイナリーコードは
+出力されなくなのでこれをつけたいときは、--show_raw_instオプションもつける
+(objdump-d--prefiex-address--show_raw_inst.txt)
+
 
 [objdumpで特定のアクション、アドレス範囲だけ逆アセンブルする]
 実行結果：objdump-d-j.txt
 Cプログラム：hello.c, hello.txt
 
+・特定のセクションを逆アセンブルしたいときは、-jオプションをつける。
+objdump-d-j.txtでは、実行可能ファイルhelloの.initセクションだけを
+逆アセンブルしている。
+
 
 [ソースファイルとの対応を表示する]
 実行結果：objdump-d-l.txt, objdump-d-S.txt, objdump--disassemble-S.txt
 Cプログラム：hello.c, hello.txt
+
+・hello.o, helloはでバックをオプションをつけてコンパイル＆リンクされて
+いるので(hello.txt)、ソースファイルとの対応をつけることができる
+
+・ソースファイルのファイル名と行番号を付加するには、-lオプションを
+つける(objdump-d-l.txt)。ソースコード行を付加するには、-Sオプションを
+つける(objdump-d-S.txt)
+
+・バイナリファイルの逆アセンブルコードを関数単位に見るには、
+--disassemble=symbolオプションが便利(objdump--disassemble-S.txt)
+hello.oでは、文字列"hello, world"のアドレスが設定されていないが
+(main+0x13番地のlea命令）、helloでは、文字列のアドレスが設定されている
+(0x117c番地のlea命令）
 
 ・アドレス範囲を指定して逆アセンブルリストを表示する例は、--disassemble=symbol 
 オプションのsymbolに関数名を指定するほうが簡単
