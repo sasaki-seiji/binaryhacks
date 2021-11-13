@@ -1,24 +1,25 @@
 [objcopy]
-実行結果：objdump-f.txt, objcopy.txt, readelf-s_para.o.txt, readelf-s_gif_header.txt
- readelf-h_gif_header.txt
+実行結果：objdump-f.txt, objcopy.txt, readelf-s_para.o.txt, 
+readelf-s_gif_header.txt, readelf-h_gif_header.txt
 Cプログラム：gif_header.c, gif_header.txt
 
-・オブジェクトファイルの形式とアーキテクチャを知るには、objdump -f コマンドを
-発行すれば良い(objdump-f.txt)
+・オブジェクトファイルの形式とアーキテクチャを知るには、objdump -f コマンド
+を発行すれば良い(objdump-f.txt)
 	ファイル形式 elf64-x86-64
 	アーキテクチャ: i386:x86-64
 
 ・得られたファイル形式とアーキテクチャを指定してobjcopyコマンドを実行する
 （objcopy.txt）
-これにより、git画像ファイル ../para.git をデータとして含んだオブジェクトファイル
-para.o を得る
+これにより、git画像ファイル ../para.git をデータとして含んだオブジェクト
+ファイルpara.o を得る
+-Bオプションは、--binary-architectureの意味
 
-・readelf -s コマンドでpara.oが含むシンボルを調べると（readelf-s_para.o.txt）
+・readelf -s コマンドでpara.oが含むシンボルを調べると(readelf-s_para.o.txt)
      2: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT    1 _binary____para_gif_start
      3: 00000000000007d2     0 NOTYPE  GLOBAL DEFAULT    1 _binary____para_gif_end
      4: 00000000000007d2     0 NOTYPE  GLOBAL DEFAULT  ABS _binary____para_gif_size
-となり、取り込んだデータの先頭、末尾、サイズがシンボルとして含まれている。特にサイズは
-ABSのため再配置されない
+となり、取り込んだデータの先頭、末尾、サイズがシンボルとして含まれている。
+特にサイズはABSのため再配置されない
 
 ・テストプログラムgif_header.cは上記3つのシンボルの値とGIFヘッダを表示する
 (gif_header.txt)[1]。実行結果は
@@ -30,20 +31,22 @@ ABSのため再配置されない
 となり、GIFヘッダが正しく解析できている（少なくともstartは正しいアドレス）
 ただし、sizeは期待した値7d2となっていない。
 
-・実行可能ファイルgif_headerが含むをシンボルを調べると（readelf-s_gif_header.txt）
+・実行可能ファイルgif_headerが含むをシンボルを調べると
+（readelf-s_gif_header.txt）
     45: 0000000000004010     0 NOTYPE  GLOBAL DEFAULT   23 _binary____para_gif_start
     53: 00000000000007d2     0 NOTYPE  GLOBAL DEFAULT  ABS _binary____para_gif_size
     65: 00000000000047e2     0 NOTYPE  GLOBAL DEFAULT   23 _binary____para_gif_end
-となり、3つのシンボルがリンク時に再配置されている（サイズはABSなので値が変更されない）
-ただし、これらシンボルの値は、プログラムgif_headerの実行結果
+となり、3つのシンボルがリンク時に再配置されている（サイズはABSなので値が変更
+されない）。ただし、これらシンボルの値は、プログラムgif_headerの実行結果
 	start=0x55ef0e8b5010, end=0x55ef0e8b57e2, size=55ef0e8b17d2
 と一致していない
 
-・実行可能ファイルgif_headerのファイル形式を調べると（readelf-h_gif_header.txt）
+・実行可能ファイルgif_headerのファイル形式を調べると
+(readelf-h_gif_header.txt)
  型:                                DYN (共有オブジェクトファイル)
-となっていて、gif_headerは通常の実行可能オブジェクトではなく、共有オブジェクトファイル
-となっている。したがって、実行時にプロセスのアドレスに割り当てられ、
-ゲタ0x55ef0e8b1000が履かされたものと思われる
+となっていて、gif_headerは通常の実行可能オブジェクトではなく、共有
+オブジェクトファイルとなっている。したがって、実行時にプロセスのアドレスに
+割り当てられ、ゲタ0x55ef0e8b1000が履かされたものと思われる
 	start = 0x55ef0e8b5010 = 0x55ef0e8b1000 + 0x4010
 	end   = 0x55ef0e8b57e2 = 0x55ef0e8b1000 + 0x47e2
 	size  =   55ef0e8b17d2 = 0x55ef0e8b1000 +  0x7d2
