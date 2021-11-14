@@ -1,11 +1,31 @@
 [stringsの使い方]
 実行結果：strings_ls.txt, strings+grep.txt, strings-tx_ls.txt
 
+・stringsはバイナリファイルに含まれる文字列を抽出する(strings_ls.txt)
+
+・grepと組み合わせて目的の文字列を抽出することができる(strings+grep.txt)
+
+・-t(--radix)オプションをつけると、ファイル内のオフセットを指定の基数で
+表示させることができる(strings-tx_ls.txt)
+
 [文字列の判定]
 実行結果：strings-eS-n10.txt
 Cプログラム：test.c, test.txt
 
+・日本語のメッセージを含むプログラム(test.c)をビルドして(test.txt)、
+-eS(--endian=S, Sは単一の8ビットバイト)オプションを指定して、日本語
+メッセージを表示する(strings-eS-n10.txt)
+
+
 [オブジェクトファイルの処理]
 実行結果：strings__object.txt
 Cプログラム：test.c, test.txt
+
+・-a(--all)オプションは、バイナリファイル全体を文字列検索対象とする。
+これがデフォルトの動作であるので、オブジェクトファイル(test.o)を対象に
+stringsを発行した場合でも、初期化済みデータセクション以外の文字列も
+出力される。-d(--data)オプションは、オブジェクトファイルの初期化済み
+データセクションを検索対象とする。そのため、出力される文字列は、
+hello, world のみとなる(strings__object.txt)
+
 
