@@ -1,3 +1,6 @@
 [nmの使い方]
 実行結果：demangle.txt
-Cプログラム：foo.cpp, foo.txt
+C++プログラム：foo.cpp, foo.txt
+
+・C++ソースのオブジェクトをdemangleする方法として、c++filtコマンドまたは、
+nm コマンドの--demangleオプションがある(demangle.txt)
