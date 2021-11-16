@@ -1,0 +1,2 @@
+$ gcc -g -o test_g test.c
+$ nm test_g | grep test

@@ -1,9 +1,11 @@
 [stripの使い方]
-実行結果：strip.txt
-Cプログラム：test.c, test.txt
+実行結果：strip.txt, strip-d.txt
+Cプログラム：test.c, test.txt, test_g.txt
 
-・プログラムをビルド後（test.txt）、stripコマンド発行前後のシンボルの状態とファイル
-のサイズを比較する（strip.txt）
+・プログラムをビルド後（test.txt）、stripコマンド発行前後のシンボルの
+状態とファイルのサイズを比較する（strip.txt）
 本に記載されているほどのファイルサイズの減少はない（16496→14328）
+
+・strip -dコマンドでは、デバッグ用のシンボルだけを削除する(strip-d.txt)
 
 

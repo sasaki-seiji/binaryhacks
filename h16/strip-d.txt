@@ -1,0 +1,2 @@
+$ strip -d test_g
+$ nm test_g
