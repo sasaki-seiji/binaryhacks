@@ -1,0 +1,6 @@
+$ gcc -Wall -c dbg.c
+$ g++ -Wall -c sample_proto_error.cpp
+$ g++ -o sample_proto_error dbg.o sample_proto_error.o
+$ ./sample_proto_error
+Segmentation fault (コアダンプ)
+

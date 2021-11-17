@@ -1,6 +1,0 @@
-$ gcc -Wall -c dbg.c
-$ g++ -Wall -c sample_wrong_prototype.cpp
-$ g++ -o sample_wrong_prototype dbg.o sample_wrong_prototype.o
-$ ./sample_wrong_prototype
-Segmentation fault (コアダンプ)
-

@@ -1,5 +1,5 @@
 //
-// sample_catch_exception.c
+// sample_throw.c
 //
 int cpp_func(int i);
 int main(){

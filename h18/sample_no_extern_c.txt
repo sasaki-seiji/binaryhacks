@@ -1,3 +1,4 @@
+$ gcc -Wall -c dbg.c
 $ g++ -Wall -c sample_no_extern_c.cpp
 $ g++ -o sample_no_extern_c dbg.o sample_no_extern_c.o
 /usr/bin/ld: sample_no_extern_c.o: in function `main':

@@ -1,0 +1,8 @@
+$ g++ -Wall -c throw.cpp
+$ gcc -c sample_throw.c
+$ g++ -o sample_throw sample_throw.o throw.o
+$ ./sample_throw
+arg: 10
+terminate called after throwing an instance of 'int'
+中止 (コアダンプ)
+

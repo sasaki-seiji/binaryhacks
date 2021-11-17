@@ -1,8 +1,0 @@
-$ g++ -Wall -c throw_exception.cpp
-$ gcc -c sample_throw_exception.c
-$ g++ -o sample_throw_exception sample_throw_exception.o throw_exception.o
-$ ./sample_throw_exception
-arg: 10
-terminate called after throwing an instance of 'int'
-中止 (コアダンプ)
-

@@ -1,0 +1,6 @@
+$ g++ -Wall -c catch.cpp
+$ gcc -c sample_catch.c
+$ g++ -o sample_catch sample_catch.o catch.o
+$ ./sample_catch
+arg: 10
+

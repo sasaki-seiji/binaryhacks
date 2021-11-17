@@ -1,7 +1,7 @@
-$ gcc -Wall -c dbg_include_header.c
-$ g++ -Wall -c sample_include_header.cpp
-sample_include_header.cpp: In function ‘int main()’:
-sample_include_header.cpp:6:6: error: invalid conversion from ‘int’ to ‘const char*’ [-fpermissive]
+$ gcc -Wall -c dbg_header.c
+$ g++ -Wall -c sample_header.cpp
+sample_header.cpp: In function ‘int main()’:
+sample_header.cpp:6:6: error: invalid conversion from ‘int’ to ‘const char*’ [-fpermissive]
     6 |  dbg(1);
       |      ^
       |      |
