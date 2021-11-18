@@ -1,6 +1,7 @@
 $ gcc -c a.c
 $ gcc -c b.c
 $ gcc -c main.c
+$ rm libfoo.a
 $ ar cr libfoo.a a.o b.o
 $ gcc main.o libfoo.a
 $ ./a.out

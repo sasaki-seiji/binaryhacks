@@ -1,4 +1,11 @@
-#include "b.h"
+class Tax {
+public:
+	int deduct(int income);
+	Tax();
+private:
+	double deduction_rate_;
+};
+
 Tax::Tax() : deduction_rate_(0.1){}
 
 int Tax::deduct(int income){
