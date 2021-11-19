@@ -1,0 +1,3 @@
+[ラベルの参照]
+ソースファイル： label_ref.c, label_ref.txt
+

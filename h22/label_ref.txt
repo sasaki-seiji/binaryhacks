@@ -1,0 +1,4 @@
+$ gcc -o label_ref -Wall label_ref.c
+$ ./label_ref
+enter label2
+
