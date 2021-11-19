@@ -8,4 +8,6 @@ $ grep printf fpic-pic.s
 	call	printf@PLT
 	call	printf@PLT
 	call	printf@PLT
+$ diff fpic-no-pic.s fpic-pic.s
+$
 

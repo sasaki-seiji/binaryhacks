@@ -6,38 +6,41 @@ Cプログラム：
  fpic_asm.txt, readelf-d__fpic.txt
  call_asm.txt, readelf-d__call.txt, objdump--disassemble__call.txt
 
-・printf関数を3回呼び出すだけの単純なプログラム（fpic.c）を-fPICオプション有り無しで
-コンパイルし、アセンブリ展開系を比較する（fpic_asm.txt）
+・printf関数を3回呼び出すだけの単純なプログラム（fpic.c）を-fPICオプション
+有り無しでコンパイルし、アセンブリ展開系を比較する（fpic_asm.txt）
  gccバージョン9.3.0では、-fPICを付けても付けなくともprintf関数の呼び出しは、
  PLT経由となり差異が生じない
  
-・続いて、fpic.cを-fPICオプション有り無しで共有オブジェクトを作成し（fpic.txt）、
-ダイナミックシンボルを調べる（readelf-d__fpic.txt）。
- 本の記述では、TEXTRELタイプとRELCOUNTタイプが含まれるとしているが、linux20.04では
- このタイプな含まれておらず、readelf -dコマンドの出力は、-fPICオプション有り無しで
- 差異が生じない
+・続いて、fpic.cを-fPICオプション有り無しで共有オブジェクトを作成し
+（fpic.txt）、ダイナミックシンボルを調べる（readelf-d__fpic.txt）。
+ 本の記述では、TEXTRELタイプとRELCOUNTタイプが含まれるとしているが、
+ linux20.04ではこのタイプな含まれておらず、readelf -dコマンドの出力は、
+ -fPICオプション有り無しで差異が生じない
 
-・そこで、更に詳しく調べるため、関数funcからファイル内で定義した別の大域関数(foo)、
-ファイル外の大域関数(efoo)、ファイル内のstatic関数(sfoo)を呼び出すプログラム(call.c)
-を作成し、-fPICオプション有り無しでコンパイルし、アセンブリ展開系を比較した
-(call_asm.txt)
+・更に詳しく調べるため、関数funcからファイル内で定義した別の大域関数(foo)、
+ファイル外の大域関数(efoo)、ファイル内のstatic関数(sfoo)を呼び出すプログラム
+(call.c)を作成し、-fPICオプション有り無しでコンパイルし、アセンブリ展開系を
+比較した(call_asm.txt)。foo関数の呼び出しに、@PLTが付く・付かないの差が
+生じている
 
-・次に、call.cを-fPICオプション有り無しで共有オブジェクトを作成し(call.txt)、
-ダイナミックシンボルを調べると、両者に差異はない（readelf-d__call.txt)
+・次に、call.cを-fPICオプション有り無しで共有オブジェクトを作成し(call.txt)
+、ダイナミックシンボルを調べると、両者に差異はない（readelf-d__call.txt)
 
-・機械語コードを詳しく調べるため、上記2つの共有オブジェクトのバイナリコードと
-逆アセンブリリストをobjdumpコマンド表示してみたが、func関数はの内容は全く同一と
-なっていた（objdump--disassemble__call.txt）
+・機械語コードを詳しく調べるため、上記2つの共有オブジェクトのバイナリコード
+と逆アセンブリリストをobjdumpコマンド表示してみたが、func関数はの内容は
+全く同一となっていた（objdump--disassemble__call.txt）
 
 以上のことから、このハックのテーマは、gcc 9.3.0 ではうまく再現できない
 
 
 [PICと非PICの共有ライブラリの性能比較]
+実行結果：fpic-time.txt
 シェルスクリプト：
  fpic.sh
 
-・printf関数を10000回呼び出すソースプログラムを100個作成して、-fPICオプション
-有り無しでコンパイル＆リンクするスクリプト（fpic.sh）を実行。
+・printf関数を10000回呼び出すソースプログラムを100個作成して、-fPIC
+オプション有り無しでコンパイル＆リンクするスクリプト（fpic.sh）を実行。
 ビルドされた２つのプログラムの実行時間に目立った差異は生じない
+(fpic-time.txt)
 
 

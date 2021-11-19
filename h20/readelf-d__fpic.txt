@@ -1,5 +1,6 @@
 $ readelf -d fpic-no-pic.so | egrep 'TEXTREL|RELCOUNT'
 $ readelf -d fpic-pic.so | egrep 'TEXTREL|RELCOUNT'
+$ diff <(readelf -d fpic-no-pic.so) <(readelf -d fpic-pic.so)
 
 $ readelf -d fpic-no-pic.so
 

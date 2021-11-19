@@ -1,0 +1,31 @@
+$ time ./fpic-no-pic
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+
+$ time ./fpic-no-pic
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+
+$ time ./fpic-no-pic
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+
+$ time ./fpic-pic
+
+real    0m0.001s
+user    0m0.000s
+sys     0m0.001s
+$ time ./fpic-pic
+
+real    0m0.001s
+user    0m0.001s
+sys     0m0.000s
+$ time ./fpic-pic
+
+real    0m0.001s
+user    0m0.000s
+sys     0m0.001s
+
