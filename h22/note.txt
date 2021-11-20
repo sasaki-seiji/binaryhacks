@@ -1,7 +1,8 @@
 [アトリビュート(__attribute__)]
 ソースファイル：
  weak_main.c, weak_sub.h, weak_sub.c, weak_sub2.c, weak.txt, weak_sym.txt
- ctordtor_main.c, ctordtor.c, ctordtor.txt
+ cctordto.c, ctordtor_main.c, ctordtor_shared.h, ctordtor_share.c,
+   ctordtor_shared_main.c ctordtor.txt
 
 [ラベルの参照]
 ソースファイル： label_ref.c, label_ref.txt

@@ -6,3 +6,11 @@ begin
 main
 end
 
+$ gcc -shared -o ctordtor_shared.so -fPIC ctordtor_shared.c
+$ gcc -o ctordtor_shared -Wall ctordtor_shared_main.c ./ctordtor_shared.so
+$ ./ctordtor_shared
+begin
+main
+f
+Segmentation fault (コアダンプ)
+
