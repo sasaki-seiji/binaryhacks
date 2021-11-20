@@ -1,0 +1,8 @@
+$ gcc -c -Wall ctordtor.c
+
+$ gcc -o ctordtor -Wall ctordtor_main.c ctordtor.o
+$ ./ctordtor
+begin
+main
+end
+

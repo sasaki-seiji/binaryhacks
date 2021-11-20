@@ -1,0 +1,9 @@
+$ gcc -c -Wall weak_main.c weak_sub.c weak_sub2.c
+$ gcc -o weak weak_main.o weak_sub.o
+$ ./weak
+weak_sub.c
+
+$ gcc -o weak2 weak_main.o weak_sub.o weak_sub2.o
+$ ./weak2
+weak_sub2.c
+
