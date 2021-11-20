@@ -1,8 +1,20 @@
 [アトリビュート(__attribute__)]
 ソースファイル：
- weak_main.c, weak_sub.h, weak_sub.c, weak_sub2.c, weak.txt, weak_sym.txt
  cctordto.c, ctordtor_main.c, ctordtor_shared.h, ctordtor_share.c,
    ctordtor_shared_main.c ctordtor.txt
+ weak_main.c, weak_sub.h, weak_sub.c, weak_sub2.c, weak.txt, weak_sym.txt
+
+・実行可能ファイルにおいて、constructor属性の関数はmain関数の前に実行され、
+destructor属性の関数はmainの後に実行される(ctordtor.txt)
+
+・共有オブジェクトにおいて、constructor属性の関数は共有オブジェクトが
+ロードされる時に実行され、destructor属性の関数は共有オブジェクトが
+アンロードされた時に実行される。この例ではconstructor属性の関数の実行時に
+Segment Faultが発生した（ctordtor.txt)
+
+・weak属性の関数はweakシンボルとなる。同名の他の関数がなければweak属性の
+関数定義が有効となるが、同名の他の関数が存在すればこちらが有効となる
+(weak.txt)
 
 [ラベルの参照]
 ソースファイル： label_ref.c, label_ref.txt
