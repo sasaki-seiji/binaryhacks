@@ -1,3 +1,11 @@
+[ビルドイン関数]
+ソースファイル：
+ printf.c, printf.txt
+
+・関数呼び出しprintf("hello, world\n")をコンパイルし、アセンブリ展開形を
+見ると、puts("hello, world")に置き換えられている(printf.txt)
+
+
 [アトリビュート(__attribute__)]
 ソースファイル：
  ctordtor.c, ctordtor_main.c, ctordtor_shared.h, ctordtor_share.c,

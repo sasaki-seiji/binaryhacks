@@ -1,0 +1,4 @@
+$ gcc -o printf -Wall printf.c
+$ ./printf
+hello, world
+
