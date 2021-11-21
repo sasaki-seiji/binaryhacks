@@ -1,0 +1,5 @@
+$ gcc -O2 -fverbose-asm -S builtin_clz.c
+$ gcc -o builtin_clz -O2 -Wall builtin_clz.c
+$ ./builtin_clz
+4
+

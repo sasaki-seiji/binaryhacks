@@ -1,0 +1,32 @@
+[GCCによる最適化の例]
+ソースファイル： 
+ user_agent.c, user_agent.h, user_agent_main.c, user_agent.txt
+
+・マクロとして定義した文字列をstrlen関数に渡すとコンパイラが文字列長を
+即値として返す(user_agent.txt, user_agent.s)
+
+
+[ソースコード内でビルトイン関数を直接使う]
+ソースファイル：builtin_clz.c, builtin_clz.txt
+
+
+[文字列リテラルへのポインタに注意]
+ソースファイル：
+ user_agent2.c, user_agent.h, user_agent_main.c, user_agent2.txt
+ user_agent3.c, user_agent.h, user_agent_main.c, user_agent3.txt
+
+・static const char *USER_AGENT_HDR_NAME = "User-Agent: ";
+と文字列を定義したばあい、ポインタ自体が定数と宣言されていないため
+strlen関数はビルトイン関数に置き換えらない(user_agent2.txt,user_agent2.s)。
+
+・これに対して、文字列を
+static const char *const USER_AGENT_HDR_NAME = "User-Agent: ";
+と定義した場合、ポインタも定数化されているので、strlen関数呼び出しは、
+ビルトイン関数に置き換えられる(user_agent3.txt,user_agent3.s)
+
+
+(参考情報)
+6.59 Other Built-in Functions Provided by GCC
+https://gcc.gnu.org/onlinedocs/gcc/Other-Builtins.html
+
+

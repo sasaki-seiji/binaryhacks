@@ -1,0 +1,5 @@
+$ gcc -fverbose-asm -S user_agent.c
+$ gcc -o user_agent -Wall user_agent_main.c user_agent.c
+$ ./user_agent
+User-Agent: sample
+
