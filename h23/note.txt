@@ -1,0 +1,22 @@
+[インラインアセンブラ]
+ソースファイル：
+ my_string.c, my_string.txt
+ my_string2.c, my_string2.txt
+ my_string3.c, my_string3.txt
+
+・本に記載の<string.h>にインラインアセンブラが記述されているという点は、
+/usr/include/string.hを参照したが、該当する記述は見つからなかった
+
+・本に記載のソースコード(my_string.c)を64ビット環境でビルド＆実行する
+ことができた(my_string.txt)
+
+・ローカル変数d0、d1、d2は使われていないので、インラインアセンブラにおいて、
+出力オペランドの設定を削除し(my_string2.c)、ビルド＆実行してみた
+(my_string2.txt)
+
+・アセンブリ展開形(my_string2.s)を見ると、関数パラメータのdest, srcは元々
+rdi、rsiレジスタに設定されているので、入力オペランドの設定も削除し
+(my_string3.c)、ビルド＆実行してみた(my_string3.txt)
+
+
+

@@ -1,0 +1,5 @@
+$ gcc -S -fverbose-asm -Wall my_strcpy.c
+$ gcc -o my_strcpy -Wall my_strcpy.c
+$ ./my_strcpy
+copied sring by my_strcpy
+
