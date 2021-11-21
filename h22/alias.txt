@@ -1,0 +1,5 @@
+$ gcc -o alias -Wall alias.c
+$ ./alias
+foo
+foo
+

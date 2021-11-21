@@ -1,8 +1,9 @@
 [アトリビュート(__attribute__)]
 ソースファイル：
- cctordto.c, ctordtor_main.c, ctordtor_shared.h, ctordtor_share.c,
+ ctordtor.c, ctordtor_main.c, ctordtor_shared.h, ctordtor_share.c,
    ctordtor_shared_main.c ctordtor.txt
  weak_main.c, weak_sub.h, weak_sub.c, weak_sub2.c, weak.txt, weak_sym.txt
+ alias.c alias.txt
 
 ・実行可能ファイルにおいて、constructor属性の関数はmain関数の前に実行され、
 destructor属性の関数はmainの後に実行される(ctordtor.txt)
@@ -15,6 +16,14 @@ Segment Faultが発生した（ctordtor.txt)
 ・weak属性の関数はweakシンボルとなる。同名の他の関数がなければweak属性の
 関数定義が有効となるが、同名の他の関数が存在すればこちらが有効となる
 (weak.txt)
+
+・readelf -sコマンドでオブジェクトファイルのシンボルを調べると、weak属性
+の関数は、BindがWEAKとなり、非weak属性の関数はBindがDEFAULTとなる
+(weak_sym.txt)
+
+・alias属性によって別の（定義済みの）関数の別名となる関数を宣言できる
+(alias.txt)
+
 
 [ラベルの参照]
 ソースファイル： label_ref.c, label_ref.txt
