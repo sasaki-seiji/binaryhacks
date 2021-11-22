@@ -1,0 +1,24 @@
+[5KBの内訳]
+ソースファイル：hello_printf.c, hello_printf.txt
+コマンド：gcc_hello_printf.txt
+
+・helloプログラム(hello_printf.c)を単純にビルドすると、実行ファイルは
+16704バイトとなった(hello_printf.txt)。本の記述よりもさらに増えている
+
+・コンパイルオプションに-vを加えて詳細を見ると(gcc-v_hello_printf.txt)
+幾つかのオブジェクトファイルがリンクされている
+
+
+[小さなHello Worldを書く]
+ソースファイル：hello_syscall.c, hello_syscall.txt
+コマンド：hello_diet.txt
+
+・glibc.soを使わずにシステムコールを直接呼び出して、crt*.oを削除し、
+コンパイラオプションを調整すると、ファイルサイズは、9224バイトまで減少する
+(hello_syscall.txt)
+
+・さらにstrip -s コマンドでシンボルを削除すると、ファイルサイズは8732
+バイトまで減少する。
+ただし、本に記載のように、サイズ0のセクションはなく、これ以上ファイル
+サイズを削減するのは困難(hello_diet.txt)。
+

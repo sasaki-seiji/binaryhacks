@@ -1,0 +1,7 @@
+$ gcc -Os -fno-builtin -fomit-frame-pointer -fno-ident -Wall -c hello_syscall.c
+$ ld --entry=hello -o hello_syscall hello_syscall.o
+$ ./hello_syscall
+Hello World!
+$ wc -c hello_syscall
+9224 hello_syscall
+
