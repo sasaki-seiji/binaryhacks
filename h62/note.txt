@@ -1,0 +1,10 @@
+[dlopen(3)を使ったプログラムの例]
+ソースファイル：dlsay.c hello.c dlsay.txt
+
+・dlsayと対象となる共有オブジェクトhello.soを作成し、実行する(dlsay.txt)
+なお、dlsay.cではdlsym関数のエラー判定をリターン値がNULLであるか否かで
+行っている
+
+
+[dlopen(3), dlsym(3), dlclose(3)]
+コマンド：dlopen_dlsym.txt

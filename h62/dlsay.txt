@@ -1,0 +1,5 @@
+$ cc -o dlsay dlsay.c -ldl
+$ cc -shared -fPIC -o hello.so hello.c
+$ ./dlsay ./hello.so hello world
+hello, world
+
