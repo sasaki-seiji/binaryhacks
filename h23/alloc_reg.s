@@ -1,9 +1,9 @@
-	.file	"my_strcpy.c"
+	.file	"alloc_reg.c"
 # GNU C17 (Ubuntu 9.3.0-17ubuntu1~20.04) version 9.3.0 (x86_64-linux-gnu)
 #	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
 
 # GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-# options passed:  -imultiarch x86_64-linux-gnu my_strcpy.c -mtune=generic
+# options passed:  -imultiarch x86_64-linux-gnu alloc_reg.c -mtune=generic
 # -march=x86-64 -Wall -fverbose-asm -fasynchronous-unwind-tables
 # -fstack-protector-strong -Wformat-security -fstack-clash-protection
 # -fcf-protection
@@ -34,52 +34,14 @@
 # -msse -msse2 -mstv -mtls-direct-seg-refs -mvzeroupper
 
 	.text
-	.type	strcpy, @function
-strcpy:
-.LFB0:
-	.cfi_startproc
-	pushq	%rbp	#
-	.cfi_def_cfa_offset 16
-	.cfi_offset 6, -16
-	movq	%rsp, %rbp	#,
-	.cfi_def_cfa_register 6
-	movq	%rdi, -24(%rbp)	# dest, dest
-	movq	%rsi, -32(%rbp)	# src, src
-# my_strcpy.c:7: 	__asm__ __volatile__(
-	movq	-32(%rbp), %rax	# src, tmp87
-	movq	-24(%rbp), %rdx	# dest, tmp88
-	movq	%rax, %rsi	# tmp87, tmp87
-	movq	%rdx, %rdi	# tmp88, tmp88
-#APP
-# 7 "my_strcpy.c" 1
-	1:	lodsb
-	stosb
-	testb %al,%al
-	jne 1b
-# 0 "" 2
-#NO_APP
-	movl	%edi, %edx	# tmp88, d1
-	movl	%esi, %ecx	# tmp87, d0
-	movl	%ecx, -12(%rbp)	# d0, d0
-	movl	%edx, -8(%rbp)	# d1, d1
-	movl	%eax, -4(%rbp)	# d2, d2
-# my_strcpy.c:14: 	return dest ;
-	movq	-24(%rbp), %rax	# dest, _8
-# my_strcpy.c:15: }
-	popq	%rbp	#
-	.cfi_def_cfa 7, 8
-	ret	
-	.cfi_endproc
-.LFE0:
-	.size	strcpy, .-strcpy
 	.section	.rodata
 .LC0:
-	.string	"copied sring by my_strcpy"
+	.string	"rsp:%p, rbp:%p, &local:%p\n"
 	.text
 	.globl	main
 	.type	main, @function
 main:
-.LFB1:
+.LFB0:
 	.cfi_startproc
 	endbr64	
 	pushq	%rbp	#
@@ -87,33 +49,33 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp	#,
 	.cfi_def_cfa_register 6
-	subq	$112, %rsp	#,
-# my_strcpy.c:18: {
-	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp87
-	movq	%rax, -8(%rbp)	# tmp87, D.2334
-	xorl	%eax, %eax	# tmp87
-# my_strcpy.c:20: 	strcpy( buf, "copied sring by my_strcpy" ) ;
-	leaq	-112(%rbp), %rax	#, tmp84
-	leaq	.LC0(%rip), %rsi	#,
-	movq	%rax, %rdi	# tmp84,
-	call	strcpy	#
-# my_strcpy.c:21: 	printf( "%s\n", buf ) ; 
-	leaq	-112(%rbp), %rax	#, tmp85
-	movq	%rax, %rdi	# tmp85,
-	call	puts@PLT	#
-# my_strcpy.c:22: 	return 0 ;
-	movl	$0, %eax	#, _4
-# my_strcpy.c:23: }
-	movq	-8(%rbp), %rdx	# D.2334, tmp88
-	xorq	%fs:40, %rdx	# MEM[(<address-space-1> long unsigned int *)40B], tmp88
-	je	.L5	#,
+	subq	$16, %rsp	#,
+# alloc_reg.c:4: {
+	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp88
+	movq	%rax, -8(%rbp)	# tmp88, D.2322
+	xorl	%eax, %eax	# tmp88
+# alloc_reg.c:5: 	int local = 0;
+	movl	$0, -12(%rbp)	#, local
+# alloc_reg.c:9: 	printf("rsp:%p, rbp:%p, &local:%p\n", 
+	movq	%rbp, %rdx	# frame_pointer, frame_pointer.0_1
+	movq	%rsp, %rsi	# stack_pointer, stack_pointer.1_2
+	leaq	-12(%rbp), %rax	#, tmp86
+	movq	%rax, %rcx	# tmp86,
+	leaq	.LC0(%rip), %rdi	#,
+	movl	$0, %eax	#,
+	call	printf@PLT	#
+	movl	$0, %eax	#, _7
+# alloc_reg.c:11: }
+	movq	-8(%rbp), %rcx	# D.2322, tmp89
+	xorq	%fs:40, %rcx	# MEM[(<address-space-1> long unsigned int *)40B], tmp89
+	je	.L3	#,
 	call	__stack_chk_fail@PLT	#
-.L5:
+.L3:
 	leave	
 	.cfi_def_cfa 7, 8
 	ret	
 	.cfi_endproc
-.LFE1:
+.LFE0:
 	.size	main, .-main
 	.ident	"GCC: (Ubuntu 9.3.0-17ubuntu1~20.04) 9.3.0"
 	.section	.note.GNU-stack,"",@progbits

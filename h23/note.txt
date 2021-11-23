@@ -1,8 +1,15 @@
+[変数をレジスタに割り当てる]
+ソースファイル： alloc_reg.c alloc_reg.txt
+
+・本に記載の方法で、rsp, rbpレジスタをCの変数に割当て、その値を表示
+(alloc_reg.txt)
+
+
 [インラインアセンブラ]
 ソースファイル：
- my_string.c, my_string.txt
- my_string2.c, my_string2.txt
- my_string3.c, my_string3.txt
+ my_string.c my_string.txt
+ my_string2.c my_string2.txt
+ my_string3.c my_string3.txt
 
 ・本に記載の<string.h>にインラインアセンブラが記述されているという点は、
 /usr/include/string.hを参照したが、該当する記述は見つからなかった
