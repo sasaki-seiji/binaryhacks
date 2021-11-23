@@ -2,3 +2,4 @@ $ gcc -o printf -Wall printf.c
 $ ./printf
 hello, world
 
+$ gcc -Wall -fverbose-asm -S printf.c
