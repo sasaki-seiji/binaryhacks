@@ -1,0 +1,9 @@
+
+コマンド：lookup_so.txt LD_SHOW_AUXV.txt
+
+・dlopen関数を発行すると、AWSのLightsailではhaswellマイクロアーキテクチャ
+に対応したディレクトリを検索している(lookup_so.txt)
+
+・LD_SHOW_AUXV環境変数を設定してプログラムを実行するとHWCAPを見ることが
+できるが、Lightsailでは、説明的な記述ではなく、単なる値178bfbffが表示された
+

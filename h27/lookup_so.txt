@@ -1,0 +1,119 @@
+$ ln -s ../h62/dlsay .
+
+$ strace -f ./dlsay non-existed symbol
+
+execve("./dlsay", ["./dlsay", "non-existed", "symbol"], 0x7ffc5ecdce58 /* 32 vars */) = 0
+brk(NULL)                               = 0x55a23c80e000
+arch_prctl(0x3001 /* ARCH_??? */, 0x7ffffe1ab4b0) = -1 EINVAL (無効な引数です)
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=27557, ...}) = 0
+mmap(NULL, 27557, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f8efcda3000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libdl.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \22\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=18816, ...}) = 0
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f8efcda1000
+mmap(NULL, 20752, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f8efcd9b000
+mmap(0x7f8efcd9c000, 8192, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1000) = 0x7f8efcd9c000
+mmap(0x7f8efcd9e000, 4096, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7f8efcd9e000
+mmap(0x7f8efcd9f000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x3000) = 0x7f8efcd9f000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\360q\2\0\0\0\0\0"..., 832) = 832
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
+pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+fstat(3, {st_mode=S_IFREG|0755, st_size=2029224, ...}) = 0
+pread64(3, "\6\0\0\0\4\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0@\0\0\0\0\0\0\0"..., 784, 64) = 784
+pread64(3, "\4\0\0\0\20\0\0\0\5\0\0\0GNU\0\2\0\0\300\4\0\0\0\3\0\0\0\0\0\0\0", 32, 848) = 32
+pread64(3, "\4\0\0\0\24\0\0\0\3\0\0\0GNU\0\t\233\222%\274\260\320\31\331\326\10\204\276X>\263"..., 68, 880) = 68
+mmap(NULL, 2036952, PROT_READ, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f8efcba9000
+mprotect(0x7f8efcbce000, 1847296, PROT_NONE) = 0
+mmap(0x7f8efcbce000, 1540096, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x25000) = 0x7f8efcbce000
+mmap(0x7f8efcd46000, 303104, PROT_READ, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19d000) = 0x7f8efcd46000
+mmap(0x7f8efcd91000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1e7000) = 0x7f8efcd91000
+mmap(0x7f8efcd97000, 13528, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f8efcd97000
+close(3)                                = 0
+mmap(NULL, 12288, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f8efcba6000
+arch_prctl(ARCH_SET_FS, 0x7f8efcba6740) = 0
+mprotect(0x7f8efcd91000, 12288, PROT_READ) = 0
+mprotect(0x7f8efcd9f000, 4096, PROT_READ) = 0
+mprotect(0x55a23c2b6000, 4096, PROT_READ) = 0
+mprotect(0x7f8efcdd7000, 4096, PROT_READ) = 0
+munmap(0x7f8efcda3000, 27557)           = 0
+openat(AT_FDCWD, "/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=27557, ...}) = 0
+mmap(NULL, 27557, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f8efcda3000
+close(3)                                = 0
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/tls/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/tls/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/tls", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64-linux-gnu/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=32768, ...}) = 0
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/tls/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/tls/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/tls/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/tls/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/tls", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64-linux-gnu/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64-linux-gnu", {st_mode=S_IFDIR|0755, st_size=32768, ...}) = 0
+openat(AT_FDCWD, "/lib/tls/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/tls/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/tls/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/tls/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/tls/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/tls/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/tls/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/tls", 0x7ffffe1aab40)        = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/haswell", 0x7ffffe1aab40)    = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib/x86_64", 0x7ffffe1aab40)     = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/lib/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+openat(AT_FDCWD, "/usr/lib/tls/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/tls/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/tls/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/tls/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/tls/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/tls/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/tls/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/tls", 0x7ffffe1aab40)    = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/haswell/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/haswell/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/haswell/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/haswell", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/x86_64/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib/x86_64", 0x7ffffe1aab40) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+openat(AT_FDCWD, "/usr/lib/non-existed", O_RDONLY|O_CLOEXEC) = -1 ENOENT (そのようなファイルやディレクトリはありません)
+stat("/usr/lib", {st_mode=S_IFDIR|0755, st_size=4096, ...}) = 0
+brk(NULL)                               = 0x55a23c80e000
+brk(0x55a23c82f000)                     = 0x55a23c82f000
+munmap(0x7f8efcda3000, 27557)           = 0
+write(2, "load error non-existed: non-exis"..., 95load error non-existed: non-existed: cannot open shared object file: No such file or directory
+) = 95
+exit_group(1)                           = ?
++++ exited with 1 +++

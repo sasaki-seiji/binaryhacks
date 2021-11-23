@@ -1,0 +1,22 @@
+$ LD_SHOW_AUXV=1 /bin/echo
+
+AT_SYSINFO_EHDR:      0x7ffdcf5fa000
+AT_HWCAP:             178bfbff
+AT_PAGESZ:            4096
+AT_CLKTCK:            100
+AT_PHDR:              0x563c879a8040
+AT_PHENT:             56
+AT_PHNUM:             13
+AT_BASE:              0x7f1567267000
+AT_FLAGS:             0x0
+AT_ENTRY:             0x563c879aabe0
+AT_UID:               1000
+AT_EUID:              1000
+AT_GID:               1000
+AT_EGID:              1000
+AT_SECURE:            0
+AT_RANDOM:            0x7ffdcf5ea6e9
+AT_HWCAP2:            0x0
+AT_EXECFN:            /bin/echo
+AT_PLATFORM:          x86_64
+
