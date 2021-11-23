@@ -1,0 +1,4 @@
+ソースファイル：weak.c weak-main.c weak.txt
+
+・本に記載の方法でweakシンボルを使用した場合、libmをリンクした時にも
+sqrtがNULLとなり、sqrt isn't available のメッセージが出力される
