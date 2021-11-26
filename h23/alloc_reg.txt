@@ -1,0 +1,4 @@
+$ gcc -Wall -fverbose-asm -S alloc_reg.c   
+$ gcc -Wall -o alloc_reg alloc_reg.c       
+$ ./alloc_reg                              
+rsp:0x7ffe1613c6f0, rbp:0x7ffe1613c700, &local:0x7ffe1613c6f4  

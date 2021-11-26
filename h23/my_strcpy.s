@@ -2,7 +2,7 @@
 # GNU C17 (Ubuntu 9.3.0-17ubuntu1~20.04) version 9.3.0 (x86_64-linux-gnu)
 #	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
 
-# GGC heuristics: --param ggc-min-expand=62 --param ggc-min-heapsize=60847
+# GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
 # options passed:  -imultiarch x86_64-linux-gnu my_strcpy.c -mtune=generic
 # -march=x86-64 -Wall -fverbose-asm -fasynchronous-unwind-tables
 # -fstack-protector-strong -Wformat-security -fstack-clash-protection

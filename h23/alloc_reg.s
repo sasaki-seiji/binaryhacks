@@ -1,9 +1,9 @@
-	.file	"printf.c"
+	.file	"alloc_reg.c"
 # GNU C17 (Ubuntu 9.3.0-17ubuntu1~20.04) version 9.3.0 (x86_64-linux-gnu)
 #	compiled by GNU C version 9.3.0, GMP version 6.2.0, MPFR version 4.0.2, MPC version 1.1.0, isl version isl-0.22.1-GMP
 
 # GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
-# options passed:  -imultiarch x86_64-linux-gnu printf.c -mtune=generic
+# options passed:  -imultiarch x86_64-linux-gnu alloc_reg.c -mtune=generic
 # -march=x86-64 -Wall -fverbose-asm -fasynchronous-unwind-tables
 # -fstack-protector-strong -Wformat-security -fstack-clash-protection
 # -fcf-protection
@@ -36,7 +36,7 @@
 	.text
 	.section	.rodata
 .LC0:
-	.string	"hello, world"
+	.string	"rsp:%p, rbp:%p, &local:%p\n"
 	.text
 	.globl	main
 	.type	main, @function
@@ -49,13 +49,29 @@ main:
 	.cfi_offset 6, -16
 	movq	%rsp, %rbp	#,
 	.cfi_def_cfa_register 6
-# printf.c:4: 	printf("hello, world\n");
+	subq	$16, %rsp	#,
+# alloc_reg.c:4: {
+	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp88
+	movq	%rax, -8(%rbp)	# tmp88, D.2322
+	xorl	%eax, %eax	# tmp88
+# alloc_reg.c:5: 	int local = 0;
+	movl	$0, -12(%rbp)	#, local
+# alloc_reg.c:9: 	printf("rsp:%p, rbp:%p, &local:%p\n", 
+	movq	%rbp, %rdx	# frame_pointer, frame_pointer.0_1
+	movq	%rsp, %rsi	# stack_pointer, stack_pointer.1_2
+	leaq	-12(%rbp), %rax	#, tmp86
+	movq	%rax, %rcx	# tmp86,
 	leaq	.LC0(%rip), %rdi	#,
-	call	puts@PLT	#
-# printf.c:5: 	return 0;
-	movl	$0, %eax	#, _3
-# printf.c:6: }
-	popq	%rbp	#
+	movl	$0, %eax	#,
+	call	printf@PLT	#
+	movl	$0, %eax	#, _7
+# alloc_reg.c:11: }
+	movq	-8(%rbp), %rcx	# D.2322, tmp89
+	xorq	%fs:40, %rcx	# MEM[(<address-space-1> long unsigned int *)40B], tmp89
+	je	.L3	#,
+	call	__stack_chk_fail@PLT	#
+.L3:
+	leave	
 	.cfi_def_cfa 7, 8
 	ret	
 	.cfi_endproc

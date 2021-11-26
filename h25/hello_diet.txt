@@ -5,6 +5,11 @@ Hello World!
 $ wc -c hello_diet
 8736 hello_diet
 
+$ file hello_diet
+hello_diet: ELF 64-bit LSB executable, x86-64, version 1 (SYSV), statically linked, stripped
+$ ldd hello_diet
+        動的実行ファイルではありません
+
 $ readelf -S hello_diet
 
 There are 6 section headers, starting at offset 0x20a0:

@@ -5,12 +5,12 @@ void f(void)
 	printf("f\n");
 }
 
-__attribute((constructor)) void begin(void)
+__attribute__((constructor)) void begin(void)
 {
 	printf("begin\n");
 }
 
-__attribute((destructor)) void end(void)
+__attribute__((destructor)) void end(void)
 {
 	printf("end\n");
 }

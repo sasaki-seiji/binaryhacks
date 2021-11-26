@@ -1,0 +1,36 @@
+$ objdump -d hello_syscall
+
+hello_syscall:     ファイル形式 elf64-x86-64
+
+
+セクション .text の逆アセンブル:
+
+0000000000401000 <write>:
+  401000:	f3 0f 1e fa          	endbr64 
+  401004:	48 63 ff             	movslq %edi,%rdi
+  401007:	b8 01 00 00 00       	mov    $0x1,%eax
+  40100c:	0f 05                	syscall 
+  40100e:	ba ff ff ff ff       	mov    $0xffffffff,%edx
+  401013:	83 f8 80             	cmp    $0xffffff80,%eax
+  401016:	0f 47 c2             	cmova  %edx,%eax
+  401019:	c3                   	retq   
+
+000000000040101a <exit>:
+  40101a:	f3 0f 1e fa          	endbr64 
+  40101e:	48 63 ff             	movslq %edi,%rdi
+  401021:	b8 3c 00 00 00       	mov    $0x3c,%eax
+  401026:	0f 05                	syscall 
+  401028:	ba ff ff ff ff       	mov    $0xffffffff,%edx
+  40102d:	83 f8 80             	cmp    $0xffffff80,%eax
+  401030:	0f 47 c2             	cmova  %edx,%eax
+  401033:	c3                   	retq   
+
+0000000000401034 <hello>:
+  401034:	f3 0f 1e fa          	endbr64 
+  401038:	bf 01 00 00 00       	mov    $0x1,%edi
+  40103d:	ba 0d 00 00 00       	mov    $0xd,%edx
+  401042:	48 8d 35 b7 0f 00 00 	lea    0xfb7(%rip),%rsi        # 402000 <hello+0xfcc>
+  401049:	e8 b2 ff ff ff       	callq  401000 <write>
+  40104e:	31 ff                	xor    %edi,%edi
+  401050:	eb c8                	jmp    40101a <exit>
+

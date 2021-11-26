@@ -1,5 +1,4 @@
-$ gcc -o hello_printf -v -Wall hello_printf.c
-$ wc -c hello_printf
+$ gcc -o hello_printf -Wall hello_printf.c
 $ ./hello_printf
 hello, world
 

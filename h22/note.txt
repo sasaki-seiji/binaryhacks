@@ -3,7 +3,7 @@
  printf.c, printf.txt
 
 ・関数呼び出しprintf("hello, world\n")をコンパイルし、アセンブリ展開形を
-見ると、puts("hello, world")に置き換えられている(printf.txt)
+見ると、puts("hello, world")に置き換えられている(printf.txt,printf.s)
 
 
 [アトリビュート(__attribute__)]
@@ -26,7 +26,7 @@ Segment Faultが発生した（ctordtor.txt)
 (weak.txt)
 
 ・readelf -sコマンドでオブジェクトファイルのシンボルを調べると、weak属性
-の関数は、BindがWEAKとなり、非weak属性の関数はBindがDEFAULTとなる
+の関数は、BindがWEAKとなり、非weak属性の関数はBindがGLOBALとなる
 (weak_sym.txt)
 
 ・alias属性によって別の（定義済みの）関数の別名となる関数を宣言できる
@@ -35,4 +35,10 @@ Segment Faultが発生した（ctordtor.txt)
 
 [ラベルの参照]
 ソースファイル： label_ref.c, label_ref.txt
+
+・GNU拡張として、ラベルに&&演算子を適用すると、ラベル位置がvoid*として
+取得できる。このサンプルは、これを使って動的にジャンプ先を決定している
+(label_ref.txt)
+ただし、2つのvoid*の引き算や、void*とintの加算はC言語では未定義とされて
+いるので、char*にキャストして演算したほうが良いと思う
 

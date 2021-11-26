@@ -4,3 +4,5 @@ Thread=2 tls=2 global=0
 Thread=1 tls=1 global=0
 Thread=0 tls=0 global=0
 
+$ gcc -Wall -fverbose-asm -S threadlocal.c
+
