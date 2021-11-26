@@ -6,4 +6,5 @@
 
 ・LD_SHOW_AUXV環境変数を設定してプログラムを実行するとHWCAPを見ることが
 できるが、Lightsailでは、説明的な記述ではなく、単なる値178bfbffが表示された
+AT_PLATFORMはx86_64となった
 

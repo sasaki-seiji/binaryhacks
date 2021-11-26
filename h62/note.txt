@@ -3,7 +3,7 @@
 
 ・dlsayと対象となる共有オブジェクトhello.soを作成し、実行する(dlsay.txt)
 なお、dlsay.cではdlsym関数のエラー判定をリターン値がNULLであるか否かで
-行っている
+行った
 
 
 [dlopen(3), dlsym(3), dlclose(3)]
