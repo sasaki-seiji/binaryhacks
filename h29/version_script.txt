@@ -1,0 +1,10 @@
+$ gcc -Wall -fPIC -c foo.c                 
+$ gcc -Wall -fPIC -c bar.c                 
+$ gcc -shared -o libfoo_vs.so foo.o bar.o -Wl,--version-script,libfoo.map
+$ gcc -Wall -o main_vs main.c ./libfoo_vs.so  
+$ ./main_vs                                
+foo()
+bar()
+$ nm -D libfoo_vs.so | grep -v '_'         
+0000000000001119 T foo
+                 U puts 

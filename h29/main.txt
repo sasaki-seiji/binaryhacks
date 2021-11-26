@@ -1,0 +1,11 @@
+sasaki@ubuntu:~/books/binaryhacks/h29$ gcc -Wall -fPIC -c foo.c                 
+sasaki@ubuntu:~/books/binaryhacks/h29$ gcc -Wall -fPIC -c bar.c                 
+$ gcc -shared -o libfoo.so foo.o bar.o     
+$ gcc -Wall -o main main.c ./libfoo.so     
+$ ./main
+foo()
+bar()  
+$ nm -D libfoo.so | grep -v '_'
+000000000000115a T bar
+0000000000001139 T foo
+                 U puts

@@ -1,0 +1,8 @@
+[バージョンスクリプトの場合]
+ソースファイル：
+ foo.c bar.c main.c main.txt
+ foo.c bar.c main.c libfoo.map version_script.txt
+
+[GCC拡張の場合]
+ソースファイル：
+ visibility.cc visibility.txt visibility_hidden.txt
