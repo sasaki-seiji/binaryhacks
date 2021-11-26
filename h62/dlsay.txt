@@ -3,3 +3,5 @@ $ cc -shared -fPIC -o hello.so hello.c
 $ ./dlsay ./hello.so hello world
 hello, world
 
+$ ./dlsay libc.so.6 tmpnam
+/tmp/fileuCOJHr
