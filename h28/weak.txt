@@ -2,7 +2,10 @@ $ gcc -Wall -fPIC -shared -o weak.so weak.c
 $ gcc -Wall -o weak-defined weak-main.c ./weak.so -lm
 $ ./weak-defined
 sqrt isn't available
+
 $ gcc -Wall -o weak-undefined weak-main.c ./weak.so
 $ ./weak-undefined
 sqrt isn't available
 
+$ nm weak.so | grep sqrt
+                 w sqrt

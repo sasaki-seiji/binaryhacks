@@ -1,7 +1,6 @@
 // weak.c
 
 #include <stdio.h>
-
 extern double sqrt( double ) __attribute__((weak)) ;
 
 void func(  )
