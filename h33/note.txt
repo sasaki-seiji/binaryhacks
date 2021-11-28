@@ -1,0 +1,3 @@
+[スタック実行フラグの変更]
+コマンド：
+ readelf-S_trampoline.o.txt modify_x_flag.txt

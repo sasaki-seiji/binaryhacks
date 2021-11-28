@@ -1,0 +1,4 @@
+$ objcopy --set-section-flags .note.GNU-stack= trampoline.o trampoline_modified.o                                          
+$ gcc -o trampoline_modified trampoline_modified.o
+$ ./trampoline_modified
+Segmentation fault (コアダンプ)
