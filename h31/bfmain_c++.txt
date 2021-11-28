@@ -1,0 +1,4 @@
+$ g++ -Wall -o bfmain_c++ bfmain_c++.cpp
+$ ./bfmain_c++
+hello, before main
+hello, world

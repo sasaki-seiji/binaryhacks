@@ -1,0 +1,4 @@
+$ g++ -Wall -o afmain_c++ afmain_c++.cpp
+$ ./afmain_c++
+hello, world
+hello, after main

@@ -1,0 +1,6 @@
+$ g++ -Wall -fPIC -c foo.cpp
+$ g++ -shared -o libfoo.so foo.o
+$ g++ -Wall -c main.cpp
+$ g++ -o bfmain_so main.o ./libfoo.so
+$ ./bfmain_so
+hello, world

@@ -1,0 +1,19 @@
+[やり方]
+ソースファイル：
+ bfmain_gcc.c bfmain_gcc.txt
+ bfmain_c++.cpp bfmain_c++.txt
+
+[ライブラリの場合]
+ソースファイル：
+ foo.cpp main.cpp bfmain_ar.txt
+ foo.cpp main.cpp bfmain_o.txt
+ foo.cpp main.cpp bfmain_so.txt
+ foo.cpp main.cpp bfmain_whole_ar.txt
+
+・共有ライブラリを使う場合は本の記載と異なり、main関数の前でfoo関数が
+実行されない(bfmain_so.txt)
+
+[main()の後で関数を呼ぶ]
+ソースファイル：
+ afmain_c++.cpp afmain_c++.txt
+

@@ -1,0 +1,6 @@
+$ g++ -Wall -c foo.cpp
+$ g++ -Wall -c main.cpp
+$ g++ -o bfmain_o main.o foo.o
+$ ./bfmain_o
+hello, before main
+hello, world

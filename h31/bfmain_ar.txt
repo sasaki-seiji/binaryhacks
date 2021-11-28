@@ -1,0 +1,6 @@
+$ g++ -Wall -c foo.cpp
+$ g++ -Wall -c main.cpp
+$ ar r libfoo.a foo.o
+$ g++ -o bfmain_ar main.o libfoo.a
+$ ./bfmain_ar
+hello, world

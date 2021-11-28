@@ -1,0 +1,4 @@
+$ gcc -Wall -o bfmain_gcc bfmain_gcc.c
+$ ./bfmain_gcc
+hello, before main
+hello, world

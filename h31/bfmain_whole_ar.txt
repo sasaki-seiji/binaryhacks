@@ -1,0 +1,7 @@
+$ g++ -Wall -c foo.cpp
+$ g++ -Wall -c main.cpp
+$ ar r libfoo.a foo.o
+$ g++ -o bfmain_whole_ar main.o -Wl,--whole-archive libfoo.a -Wl,--no-whole-archive
+$ ./bfmain_ar
+hello, before main
+hello, world
