@@ -1,0 +1,46 @@
+[サンプルの導入]
+ソースコード：
+ libmax1.c libmax1.h vertest1.c libmax1.txt
+生成されるバイナリ：
+ libmax.so.1 vertest1
+
+・libmaxの最初のバージョンを作成し、実行する(libmax1.txt)
+ただし、実行可能ファイルにリンクするときは、ライブラリの指定はそれを利用
+するオブジェクトファイルよりも後に記述しなければ、ライブラリの関数は
+拾われないことに注意（本の記載には間違いがある）
+
+・また、-lmaxで共有オブジェクトをリンクするので、ファイル名はlibmax.so
+でなければならない。libmax.so.1をlibmax.soにシンボリックリンクする
+
+[バージョンドシンボル]
+ソースファイル：
+ libmax2.c libmax2.h vertest2.c libmax2.def libmax2.txt
+生成されるバイナリ：
+ libmax.so.2 vertest2
+コマンド：
+ readelf-a__max.txt readelf-s_libmax.so.2.txt readelf-V_libmax.so.2.txt
+
+・libmax2バージョンはバージョンドシンボルを使って、バージョンを管理する
+(libmax2.txt)
+
+・新しい共有オブジェクト(libmax.so.2)をインストールした後で、新しい
+プログラム(testver2)を実行すると、3引数のmaxがコールされるが、古い
+プログラム(testver1)を実行すると、2引数のmaxがコールされる
+
+・vertest2が要求しているシンボルはmax@@LIBMAX_2.0となっている
+(readelf-a__max.txt)
+
+・新しい共有オブジェクト(libmax.so.2)のシンボルを見ると, max@LIBMAX_1.0
+とmax@@LIBMAX_2.0が公開されている(readelf-s_libmax.so.2.txt)
+また、バージョン情報にLIBMAX_1.0とLIBMAX_2.0の記述がある
+(readelf-V_libmax.so.2.txt)
+
+
+[3種あるバージョンの表現方法]
+ソースファイル：
+ libmax3.c libmax3.def libmax3.txt
+生成されるバイナリ：
+ libmax.so.3
+コマンド：
+ readelf-s_libmax.so.3.txt readelf-V_libmax.so.3.txt
+

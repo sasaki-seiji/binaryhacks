@@ -1,0 +1,10 @@
+$ gcc -Wall -fPIC -c -o libmax3.o libmax3.c
+$ gcc -shared -Wl,--version-script,libmax3.def -o libmax.so.3 libmax3.o
+$ rm libmax.so
+$ ln -s libmax.so.3 libmax.so
+$ LD_LIBRARY_PATH=. ./vertest2
+max__2
+max(1, 2, 3)=3
+$ LD_LIBRARY_PATH=. ./vertest1
+max__0
+max(1, 2)=2

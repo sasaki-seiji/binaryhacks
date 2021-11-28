@@ -1,0 +1,11 @@
+$ readelf -a vertest1 | grep max           
+ 0x0000000000000001 (NEEDED)             共有ライブラリ: [libmax.so]
+000000003fd0  000300000007 R_X86_64_JUMP_SLO 0000000000000000 max + 0
+     3: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND max
+    52: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND max
+$ readelf -a vertest2 | grep max
+ 0x0000000000000001 (NEEDED)             共有ライブラリ: [libmax.so]
+000000003fc8  000200000007 R_X86_64_JUMP_SLO 0000000000000000 max@LIBMAX_2.0 + 0
+     2: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND max@LIBMAX_2.0 (2)
+    50: 0000000000000000     0 FUNC    GLOBAL DEFAULT  UND max@@LIBMAX_2.0
+  0x0020: バージョン: 1  ファイル: libmax.so  個数: 1

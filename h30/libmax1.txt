@@ -1,0 +1,8 @@
+$  gcc -Wall -fPIC -c -o libmax1.o libmax1.c
+$  gcc -shared -o libmax.so.1 libmax1.o
+$  rm libmax.so
+$  ln -s libmax.so.1 libmax.so
+$  gcc -o vertest1 -Wall vertest1.c -L. -lmax
+$  LD_LIBRARY_PATH=. ./vertest1  
+max__1
+max(1, 2)=2
