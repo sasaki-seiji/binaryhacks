@@ -1,0 +1,3 @@
+$ gcc -o trampoline -Wall trampoline.c
+$ ./trampoline
+outer's a is 10
