@@ -1,0 +1,21 @@
+[mprotectシステムコール]
+ソースファイル：
+ heapexec.c heapexec.sh heapexec.txt
+ heapexec2.c heapexec2.sh heapexec2.txt
+ mmapexec.c mmapexec.sh mmapexec.txt
+ 
+・mprotectedシステムコールを呼び出して、mallocで獲得したヒープ領域を
+実行可能として、func関数のコピーを呼び出すと実行はできたが、期待に反して
+結果は0となった(heapexec2.sh, heapexec2.txt)
+アセンブリ展開形を見ると、浮動小数点定数3.14の参照がPC(rip)相対となっており
+コードをコピーするだけでは参照がうまくアドレスできないことがわかる
+
+・今度は、func関数を浮動小数点3.14をリターンするのではなく、整数値3を返す
+ように変更すると、実行結果は期待通り３となる。アセンブリ展開形で見ると
+整数値３が命名コードの中に埋め込まれており(movl $3, $eax)、命令をコピー
+してアドレスが変更されてもうまく行く。
+
+・mallocの代わりにmmapシステムコールを使ったバージョンを使っても整数値を
+返す関数に対してももちろんうまく行く(mmapexec.txt)
+
+

@@ -1,0 +1,3 @@
+$ gcc -Wall -o heapexec heapexec.c
+$ ./heapexec
+Segmentation fault (コアダンプ)

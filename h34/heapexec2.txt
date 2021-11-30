@@ -1,0 +1,4 @@
+$ gcc -o heapexec2 -Wall heapexec2.c
+$ ./heapexec2
+PI equals to 0
+$ gcc -S -Wall -fverbose-asm heapexec2.c
