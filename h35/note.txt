@@ -16,9 +16,13 @@ OSのアップデートのためか、非PIEを作成するように変化した
 
 ・foo.cをPIEでビルドし、call-foo.cにダイナミックロードする(call-foo.txt)
 /foo-rdynamic: cannot dynamically load position-independent executable
-のメッセージが出力されて、うまく行かない
+のメッセージが出力されて、うまく行かない[1]
 
 ・factorial.cも(おそらく同じ理由で)うまく行かない(factorial.txt)
 factorial: factorial.c:13: factorial: Assertion `handle != NULL' failed.
 Aborted (core dumped)
+
+(参考情報)
+[1]EXECUTABLE FILE CAN'T BE LOADED IN UBUNTU 19.10
+https://www.xyb.name/2020/02/22/executable-file-cant-be-loaded-in-ubuntu-1910/
 
