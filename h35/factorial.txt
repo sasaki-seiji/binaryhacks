@@ -1,0 +1,6 @@
+$ gcc -c -fPIE factorial.c
+$ gcc -rdynamic -o factorial -pie factorial.o -ldl
+$ ./factorial
+factorial: factorial.c:13: factorial: Assertion `handle != NULL' failed.
+中止 (コアダンプ)
+

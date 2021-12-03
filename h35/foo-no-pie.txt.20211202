@@ -1,0 +1,30 @@
+$ gcc -o foo-no-pie.o -c -fno-PIE foo.c
+$ gcc -o foo-no-pie -no-pie foo-no-pie.o
+$ ./foo-no-pie
+hello
+
+$ objdump --disassemble=main foo-no-pie
+
+foo-no-pie:     ファイル形式 elf64-x86-64
+
+
+セクション .init の逆アセンブル:
+
+セクション .plt の逆アセンブル:
+
+セクション .plt.sec の逆アセンブル:
+
+セクション .text の逆アセンブル:
+
+000000000040114b <main>:
+  40114b:	f3 0f 1e fa          	endbr64
+  40114f:	55                   	push   %rbp
+  401150:	48 89 e5             	mov    %rsp,%rbp
+  401153:	b8 00 00 00 00       	mov    $0x0,%eax
+  401158:	e8 d9 ff ff ff       	callq  401136 <foo>
+  40115d:	b8 00 00 00 00       	mov    $0x0,%eax
+  401162:	5d                   	pop    %rbp
+  401163:	c3                   	retq
+
+セクション .fini の逆アセンブル:
+

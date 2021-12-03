@@ -1,0 +1,31 @@
+$ gcc foo.c
+$ ./foo
+hello
+
+$ objdump --disassemble=main foo
+
+foo:     ファイル形式 elf64-x86-64
+
+
+セクション .init の逆アセンブル:
+
+セクション .plt の逆アセンブル:
+
+セクション .plt.got の逆アセンブル:
+
+セクション .plt.sec の逆アセンブル:
+
+セクション .text の逆アセンブル:
+
+0000000000001160 <main>:
+    1160:	f3 0f 1e fa          	endbr64
+    1164:	55                   	push   %rbp
+    1165:	48 89 e5             	mov    %rsp,%rbp
+    1168:	b8 00 00 00 00       	mov    $0x0,%eax
+    116d:	e8 d7 ff ff ff       	callq  1149 <foo>
+    1172:	b8 00 00 00 00       	mov    $0x0,%eax
+    1177:	5d                   	pop    %rbp
+    1178:	c3                   	retq
+
+セクション .fini の逆アセンブル:
+

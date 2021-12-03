@@ -1,0 +1,24 @@
+[PIEの基本]
+ソースファイル：
+ foo.c foo.sh foo.txt foo-pie.sh foo-pie.txt foo-no-pie.sh foo-no-pie.txt
+
+・PIEオプションの指定なし(foo.txt)、PIEオプションの指定有り(foo-pie.txt)、
+PIEを使用しないオプションの指定有り(foo-no-pie.txt)でfoo.cファイルを
+ビルド
+最初は、PIEオプションの指定なしがPIEを作成していたが(foo.txt.20211202)、
+OSのアップデートのためか、非PIEを作成するように変化した(foo.txt)
+
+
+[実行も動的リンクもできるバイナリ]
+ソースファイル：
+ foo.c call-foo.c call-foo.sh call-foo.txt
+ factorial.c factorial.sh factorial.txt
+
+・foo.cをPIEでビルドし、call-foo.cにダイナミックロードする(call-foo.txt)
+/foo-rdynamic: cannot dynamically load position-independent executable
+のメッセージが出力されて、うまく行かない
+
+・factorial.cも(おそらく同じ理由で)うまく行かない(factorial.txt)
+factorial: factorial.c:13: factorial: Assertion `handle != NULL' failed.
+Aborted (core dumped)
+

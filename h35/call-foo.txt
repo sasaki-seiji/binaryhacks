@@ -1,0 +1,8 @@
+$ gcc -o foo-pie.o -c -fPIE foo.c
+$ gcc -rdynamic -o foo-rdynamic -pie foo-pie.o
+$ ./foo-rdynamic
+hello
+$ gcc -o call-foo call-foo.c ./foo-rdynamic
+$ ./call-foo
+./call-foo: error while loading shared libraries: ./foo-rdynamic: cannot dynamically load position-independent executable
+
