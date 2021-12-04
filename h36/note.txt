@@ -1,0 +1,28 @@
+[Cの場合]
+ソースファイル：
+ main-c.c c-good.c c-good.sh c-good.txt
+
+[C++の場合]
+ソースファイル：
+ main-c++.cpp c++-bad1.cpp c++-bad1.sh c++-bad1.txt
+ main-c++.cpp c++-bad2.cpp other.cpp c++-bad2.sh c++-bad2.txt
+ main-c++.cpp c++-good.cpp other.cpp c++-good.sh c++-good.txt
+ c++-bad1.cpp c++-bad1-safe.sh c++-bad1-safe.txt
+
+[remarks]
+ 
+1) PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP is GNU extenstion
+so need the following directive before inlcude <pthread.h>
+	#define _GNU_SOURECE
+
+
+2) to see compiled code (*.o) 
+use objdump -Sr command such as
+	$ objdump -Sr needtosync-c.o
+where -r option shows symbol references to be relocated
+
+3) to se compiled code (*.o) from c++
+use objdump -CSr command such as
+	$ objdup -CSr needosync-c++-bat1.o
+where -C option makes mangled symbol demangle
+ 

@@ -17,3 +17,5 @@
 *.so.*
 # also ignore a.out
 a.out
+# also ignore assemblee source
+*.s
