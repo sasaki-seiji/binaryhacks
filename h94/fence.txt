@@ -1,0 +1,26 @@
++ gcc -c -Wall -Wextra -O2 fence.c
++ gcc -c -Wall -Wextra -O2 main.c
++ gcc -o fence fence.o main.o -lpthread
++ gcc -S -fverbose-asm -O2 fence.c
++ ./fence
+(0)th#0
+(0)th#1
+(1000000)th#0
+(1000000)th#1
+(2000000)th#0
+(2000000)th#1
+(3000000)th#0
+(3000000)th#1
+(4000000)th#0
+(4000000)th#1
+(5000000)th#0
+(5000000)th#1
+(6000000)th#0
+(6000000)th#1
+(7000000)th#0
+(7000000)th#1
+(8000000)th#0
+(8000000)th#1
+(9000000)th#0
+(9000000)th#1
+counter: 20000000
