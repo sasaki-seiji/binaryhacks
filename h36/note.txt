@@ -1,10 +1,55 @@
 [Cの場合]
 ソースファイル：
- main-c.c c-good.c c-good.sh c-good.txt
+ c-header.h main-c.c c-good.c c-good.sh c-good.txt
+ c-header.h main-c.c c-bad-dly.c c-bad-dly.sh c-bad-dly.txt
+ c-header.h main-c-pri.c c-bad-pri.c c-bad-pri.sh c-bad-pri.txt
+シェルスクリプト：
+ loopn.sh
 
-・pthread_mutext_t型の関数内のstatic変数mを構造体として初期化し、
-pthread_mutex_lockで排他制御を行う(c-good.txt)。問題なく動作する
+・c-good.cプログラムのneed_to_sync()関数は、pthread_mutext_t構想体型の
+変数mはプログラムのロード時に初期化されるので、初期化の競合問題は発生しない
+(c-good.txt)。
+またテストとして、1000個の競合するスレッドが同時期にneed_to_sync()関数を
+呼び出すプログラムを100回繰り返し実行したが、もちろん問題なく動作する
+これは、loopnn.shスクリプトを ./loopn 100 ./c-good のように使う
 
+・c-bad-dly.cプログラムのneed_to_sync()関数では、以降のC++での問題点を
+明らかにするために、この関数が初めて呼び出されたときにpthread_mutex_t
+構造体変数mを初期化する方法で実装する。この場合は初期化の競合問題が発生する
+
+void need_to_sync()
+{
+	static pthread_mutex_t m;
+	static int initialized = 0;
+	pthread_mutexattr_t mattr;
+
+	if (initialized == 0) {
+		delay(NDELAY);
+		initialized = 1;
+		
+		/* initialize mutex at first call of need_to_sync() */
+		pthread_mutexattr_init(&mattr);
+		pthread_mutexattr_settype(&mattr, PTHREAD_MUTEX_RECURSIVE_NP);
+		pthread_mutex_init(&m, &mattr);
+	}
+
+	pthread_mutex_lock(&m) ;
+		do_something() ;
+	pthread_mutex_unlock(&m) ;
+}
+
+静的変数initializedによってneed_to_sync()が初めて呼ばれたか否かを判定する
+そして、初めて呼ばれたときはinitialedをセットして、mを初期化する。
+ここでは問題の再現性を高くするため、initializedの0判定と1をセットする間に
+delay(NDELAY)呼び出しを挿入している。delayは、引数の個数だけ空ループを
+回すだけの関数である
+1000個のスレッドから同時期にneed_to_sync関数を呼び出すと、2つ以上のスレッド
+が do_something()関数を呼び出してしまう、つまり、排他制御がうまく働いて
+いないことがわかる（c-bad-dly.sh）。この実験は、x86_64プロセッサ上の
+vmware（8ハードスレッドを割り当てている）で行った
+
+・ディレイを挿入すれば問題を再現できるのであれば、ディレイを外しても
+問題が発生する可能性は0ではない。
 
 [C++の場合]
 ソースファイル：
