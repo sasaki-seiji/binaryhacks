@@ -7,10 +7,8 @@
 #include <sys/resource.h>
 #include "c-header.h"
 
-#define NUM_THREADS 100
 #define NUM_DISTURBING_THREADS 100
 #define RUNNING_USEC (10*1000) /* 10ms */
-#define JOIN_WAIT_SEC 10
 
 pthread_barrier_t barrier;
 

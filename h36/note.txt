@@ -3,25 +3,35 @@
  c-header.h main-c.c c-good.c c-good.sh c-good.txt
  c-header.h main-c.c c-bad-dly.c c-bad-dly.sh c-bad-dly.txt
  c-header.h main-c-pri.c c-bad-pri.c c-bad-pri.sh c-bad-pri.txt
+ c-header.h main-c-pri.c c-good.c c-good-pri.sh c-good-pri.txt
 シェルスクリプト：
  loopn.sh
 
-・c-good.cプログラムのneed_to_sync()関数は、pthread_mutext_t構想体型の
+・c-good.cプログラムのneed_to_sync(int)関では、pthread_mutext_t構想体型の
 変数mはプログラムのロード時に初期化されるので、初期化の競合問題は発生しない
-(c-good.txt)。
-またテストとして、1000個の競合するスレッドが同時期にneed_to_sync()関数を
-呼び出すプログラムを100回繰り返し実行したが、もちろん問題なく動作する
-これは、loopnn.shスクリプトを ./loopn 100 ./c-good のように使う
+(c-good.sh)。ここでは、100個のスレッドが同時期にneed_to_sync(int)を呼び出し
+ている
 
-・c-bad-dly.cプログラムのneed_to_sync()関数では、以降のC++での問題点を
+問題の検出は、
+1)排他制御の失敗
+2)pthread_mutex_lockの失敗
+3)pthread_mutex_unlockの失敗
+4)排他制御に従うスレッドに対するjoinの失敗
+としている。ただしjoinは、pthread_timedjoinを使って、最大10秒間待つように
+このプログラムの実行を100回繰り返しても、エラーは検出されない
+
+	./loopn.sh 100 ./c-good
+
+・c-bad-dly.cプログラムのneed_to_sync(int)関数では、以降のC++での問題点を
 明らかにするために、この関数が初めて呼び出されたときにpthread_mutex_t
 構造体変数mを初期化する方法で実装する。この場合は初期化の競合問題が発生する
 
-void need_to_sync()
+void need_to_sync(int no)
 {
 	static pthread_mutex_t m;
-	static int initialized = 0;
+	static volatile int initialized = 0;
 	pthread_mutexattr_t mattr;
+	int err;
 
 	if (initialized == 0) {
 		delay(NDELAY);
@@ -33,23 +43,48 @@ void need_to_sync()
 		pthread_mutex_init(&m, &mattr);
 	}
 
-	pthread_mutex_lock(&m) ;
-		do_something() ;
-	pthread_mutex_unlock(&m) ;
+	err = pthread_mutex_lock(&m) ;
+	if (err != 0) {
+		printf("[%d] pthread_mutex_lock: %s\n", no, strerror(err));
+		lock_errors[no]++;
+	}
+
+		do_something(no) ;
+
+	err = pthread_mutex_unlock(&m) ;
+	if (err != 0) {
+		printf("[%d] pthread_mutex_unlock: %s\n", no, strerror(err));
+		unlock_errors[no]++;
+	}
 }
 
-静的変数initializedによってneed_to_sync()が初めて呼ばれたか否かを判定する
+静的変数initializedによってneed_to_sync(int)が初めて呼ばれたか否かを判定する
 そして、初めて呼ばれたときはinitialedをセットして、mを初期化する。
 ここでは問題の再現性を高くするため、initializedの0判定と1をセットする間に
-delay(NDELAY)呼び出しを挿入している。delayは、引数の個数だけ空ループを
+delay(NDELAY)呼び出しを挿入している。delayは、引数の値だけ空ループを
 回すだけの関数である
-1000個のスレッドから同時期にneed_to_sync関数を呼び出すと、2つ以上のスレッド
-が do_something()関数を呼び出してしまう、つまり、排他制御がうまく働いて
-いないことがわかる（c-bad-dly.sh）。この実験は、x86_64プロセッサ上の
-vmware（8ハードスレッドを割り当てている）で行った
+100個のスレッドから同時期にneed_to_sync(int)関数を呼び出すと、2つ以上の
+スレッドが do_something(int)関数を呼び出してしまう。つまり、排他制御が
+うまく働いていないことがわかる（c-bad-dly.sh）。この実験は、x86_64プロセッサ
+上のvmware（8ハードスレッドを割り当てている）で行った(c-bad-dly.sh)
+その他、pthread_mutex_unlock呼び出しで、Operation not permitted エラーも
+発生する
 
 ・ディレイを挿入すれば問題を再現できるのであれば、ディレイを外しても
 問題が発生する可能性は0ではない。
+そこで、delay関数呼び出しを挟まなくとも問題が再現するよう、main-c-pri.c
+では、100個の妨害スレッド(disturbing_thread)を挿入している。
+排他制御に従うスレッド(100個)の優先度をsetpriorityで下げ、妨害スレッドの
+優先度をそれよりも高くしている。
+このプログラムを200回繰り返し実行し、問題が発生するか確認すると
+
+	$ ./loopn.sh 200 ./c-bad-pri
+
+0から6回程度、問題が観測できた
+
+・問題を再現したmain-c-pri.cを最初の(問題のなかった)プログラムc-good.c
+とリンクし(c-good-pri.sh)、1000回繰り返し実行したが、問題は発生しなかった
+
 
 [C++の場合]
 ソースファイル：

@@ -5,5 +5,4 @@
 [1] exclusive error
 [2] exclusive error
 [0] pthread_mutex_unlock: Operation not permitted
-[1] pthread_mutex_unlock: Operation not permitted
-lock=0, unlock=2, exclusive=2, join=0
+lock=0, unlock=1, exclusive=2, join=0

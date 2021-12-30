@@ -6,13 +6,8 @@
 #include <string.h>
 #include "c-header.h"
 
-#define NUM_THREADS 100
-#define RUNNING_SEC 1
-#define JOIN_WAIT_SEC 5
 
 pthread_barrier_t barrier;
-
-extern void need_to_sync() ;
 
 volatile int entered = 0;
 
