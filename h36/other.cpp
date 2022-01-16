@@ -1,8 +1,8 @@
-extern void need_to_sync();
+#include "c++-header.h"
 
 struct X 
 {
-	X() { ::need_to_sync(); }
+	X() { ::need_to_sync(0); }
 };
 
 X x;

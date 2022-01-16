@@ -1,9 +1,9 @@
 [Cの場合]
 ソースファイル：
- c-header.h main-c.c c-good.c c-good.sh c-good.txt
- c-header.h main-c.c c-bad-dly.c c-bad-dly.sh c-bad-dly.txt
- c-header.h main-c-pri.c c-bad-pri.c c-bad-pri.sh c-bad-pri.txt
- c-header.h main-c-pri.c c-good.c c-good-pri.sh c-good-pri.txt
+ c-header.h main-c.c c-good.c c-good.sh 
+ c-header.h main-c.c c-bad-dly.c c-bad-dly.sh 
+ c-header.h main-c-pri.c c-bad-pri.c c-bad-pri.sh 
+ c-header.h main-c-pri.c c-good.c c-good-pri.sh 
 シェルスクリプト：
  loopn.sh
 
@@ -88,36 +88,45 @@ delay(NDELAY)呼び出しを挿入している。delayは、引数の値だけ�
 
 [C++の場合]
 ソースファイル：
- main-c++.cpp c++-bad1.cpp c++-bad1.sh c++-bad1.txt
- main-c++.cpp c++-bad2.cpp other.cpp c++-bad2.sh c++-bad2.txt
  main-c++.cpp static_mutex.hpp c++-good.cpp other.cpp c++-good.sh 
    c++-good.txt
- c++-bad1.cpp c++-bad1-safe.sh c++-bad1-safe.txt
+
+<良くない方法（１）>
+ソースファイル：
+ c++-header.h main-c++-pri.cpp c++-bad1.cpp c++-bad1-pri.sh
 
 ・良くない方法（１）として、boost::recursive_mutex型の関数内静的変数
 mを使用する。mの初期化は最初にneed_to_sync()関数が呼ばれたときに行われるが、
 初回判定のためにフラグを用いる。このフラグアクセスが競合状態となる。
 g++ 9.3.0ではフラグの競合解決のための-fthreadsafe-staticsオプションを
 デフォルトで使用するので、ここでは-fno-threadsafe-staticsオプションを
-指定し、動作確認を行う(c++-bad1.txt)
-アセンブリ展開形(c++-bad1.s)を調べると、フラグを調べて、セットされて
-いなければboost::recursive_mutexのコンストラクタを呼び出し、フラグを
-セットしている
+指定し、動作確認を行う(c++-bad1-pri.sh)
 
-# c++-bad1.cpp:8: 	static boost::recursive_mutex m ;
-	leaq	_ZGVZ12need_to_syncvE1m(%rip), %rax	#, _ZGVZ12need_to_syncvE1m.0_1
-	movzbl	(%rax), %eax	# MEM[(char *)_ZGVZ12need_to_syncvE1m.0_1], _2
-	testb	%al, %al	# _2
-	jne	.L256	#,
-# c++-bad1.cpp:8: 	static boost::recursive_mutex m ;
-	leaq	_ZZ12need_to_syncvE1m(%rip), %rdi	#,
-.LEHB20:
-	call	_ZN5boost15recursive_mutexC1Ev	#
-	leaq	_ZGVZ12need_to_syncvE1m(%rip), %rax	#, _ZGVZ12need_to_syncvE1m.1_3
-	movb	$1, (%rax)	#, MEM[(char *)_ZGVZ12need_to_syncvE1m.1_3]
+・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
+ロングランテストを行うと
+
+	./loopn.sh 500 ./c++-bad1-pri
+
+500回のプログラム実行に対して、0回〜6回程度のエラーが発生した
+
+<良くない方法（２）>
+ソースファイル：
+ c++-header.h main-c++-pri.cpp c++-bad2.cpp c++-bad2-pri.sh
+ c++-header.h main-c++-pri.cpp c++-bad2.cpp other.cpp c++-bad2-fiasco.sh 
+
 
 ・良くない方法（２）では、変数mを関数内の静的変数の代わりにファイル
 グローバル（無名namespace内の変数）とする(c++-bad2.txt)
+この場合、mの初期化はmain関数の呼び出し前に終了するので、main関数内で
+マルチスレッドプログラムを開始しても問題は発生しない。
+
+・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
+ロングランテストを行うと（c++-bad2-pri.sh）
+
+	./loopn.sh 1000 ./c++-bad2-pri
+
+1000回のプログラム実行に対して問題が発生しない
+
 この場合も、他の大域変数が属するクラスのコンストラクタがneed_to_sync()
 関数を呼び出すとmの初期化とmの使用(other.cpp)の順番が制御できずに問題
 となる
@@ -151,25 +160,17 @@ _ZN12_GLOBAL__N_11mE:
 # __next:
 	.quad	0
 
+
+<裏技：-fthreadsafe-static>
+ソースファイル：
+ c++-header.h main-c++-pri.cpp c++-bad1.cpp c++-bad1-safe.sh 
+
 ・c++-bad1.cppを-fthreadsafe-staticsオプションでコンパイルすると
-(c++-bad1-safe.txt)、__cxa_guard_acuire関数呼び出しで関数内静的変数mの
+(c++-bad1-safe.sh)、__cxa_guard_acuire関数呼び出しで関数内静的変数mの
 スレッドセーフ性を保証している(c++-bad1-safe.s)
 
+・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
+ロングランテストを行うと、1000回のプログラム起動で問題は発生しなかった
 
-[remarks]
- 
-1) PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP is GNU extenstion
-so need the following directive before inlcude <pthread.h>
-	#define _GNU_SOURECE
+	./loopn 1000 ./c++-bad1-safe
 
-
-2) to see compiled code (*.o) 
-use objdump -Sr command such as
-	$ objdump -Sr needtosync-c.o
-where -r option shows symbol references to be relocated
-
-3) to se compiled code (*.o) from c++
-use objdump -CSr command such as
-	$ objdup -CSr needosync-c++-bat1.o
-where -C option makes mangled symbol demangle
- 
