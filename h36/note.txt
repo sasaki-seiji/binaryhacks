@@ -87,9 +87,6 @@ delay(NDELAY)呼び出しを挿入している。delayは、引数の値だけ�
 
 
 [C++の場合]
-ソースファイル：
- main-c++.cpp static_mutex.hpp c++-good.cpp other.cpp c++-good.sh 
-   c++-good.txt
 
 <良くない方法（１）>
 ソースファイル：
@@ -130,6 +127,12 @@ g++ 9.3.0ではフラグの競合解決のための-fthreadsafe-staticsオプシ
 この場合も、他の大域変数が属するクラスのコンストラクタがneed_to_sync()
 関数を呼び出すとmの初期化とmの使用(other.cpp)の順番が制御できずに問題
 となる
+
+<素敵な方法：C互換構造体のMutexを静的に初期化して用いる>
+
+ソースファイル：
+ c++--header.h static_mutex.hpp main-c++-pri.cpp c++-good.cpp other.cpp 
+   c++-good.sh 
 
 ・素敵な方法として、C互換構造体のstatic_mutex構造体を定義し
 (static_mutex.hpp)、プログラムのロード時に初期化する方法を採用する
