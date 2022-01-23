@@ -1,4 +1,4 @@
-// c++-good.hpp
+// static_mutex.hpp
 #include <boost/utility.hpp>
 #include <boost/thread/recursive_mutex.hpp>
 
