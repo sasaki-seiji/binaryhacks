@@ -1,0 +1,75 @@
+[シングルトンとは]
+ソースファイル：
+ singleton-nolock.h singleton-nolock.cpp main-nolock.cpp singleton-nolock.sh
+  
+・インスタンスの存在チェックを排他制御していないシングルトン実装。
+  Singleton::instance()関数の実装は単純に以下のように行っている
+
+Singleton *Singleton::instance() {
+	if(instance_ == NULL) instance_ = new Singleton ;
+	return instance_ ;
+}
+
+・このシングルトン実装を同時期に呼び出す100個のスレッドと100個の妨害
+スレッドで動作させる(singleton-nolock.sh)。また、実際にインスタンスが
+何個作成されたかをコンストラクタの中で計数している。実行させると、
+1個以上のインスタンスが作成されてしまう。またこの個数は実行するたびに
+変化する。
+
+[4種類の実装]
+
+<(1)もっとも保守的なシングルトン>
+ソースファイル：
+ ../h36/static_mutex.hpp singleton-lock.h singleton-lock.cpp main-lock.cpp
+   singleton-lock.sh
+スクリプト：
+ ../utils/loopn.sh
+ 
+・hack#36で導入したC互換構造体static_mutexを用いて、Singleton::instance()
+関数内でロックをとり、マルチスレッドに対応する
+このシングルトン実装を同時期に呼び出す100個のスレッドと100個の妨害スレッド
+で動作させる(singleton-lock.sh)。
+更に、プログラムを1000回動作させて、実際に1つのインスタンスだけが生成される
+ことを確認
+
+  ../utils/loopn.sh 1000 ./singleton-lock
+
+<(2)メモリバリアとdouble checked lockingを用いたシングルトン>
+ソースファイル：
+ ../h36/static_mutex.hpp singleton-dcl.h singleton-dcl.cpp main-dcl.cpp
+   singleton-dcl.sh
+スクリプト：
+ ../utils/loopn.sh
+
+・singleton-lock.cppの問題点を解決するため、double check locking手法を用いる
+pthread_mutex_lock関数の入り口と出口でメモリとの同期を図るので、下記実装でも
+問題は生じない
+
+Singleton *Singleton::instance() {
+	if(instance_ == NULL) {
+		static_mutex::scoped_lock lk(m_);
+		if(instance_ == NULL) instance_ = new Singleton ;
+	}
+	return instance_ ;
+}
+
+このシングルトン実装を同時期に呼び出す100個のスレッドと100個の妨害スレッド
+で動作させる(singleton-dcl.sh)
+更に、プログラムを1000回起動して、実際に1つのインスタンスだけが生成される
+ことを確認
+
+	../utiles/loopn.sh 1000 ./singleton-dcl
+
+<(3)TLSを用いたシングルトン>
+ソースファイル：
+ ../h36/static_mutex.hpp singleton-tls.h singleton-tls.cpp main-tls.cpp
+   singleton-tls.sh
+スクリプト：
+ ../utils/loopn.sh
+ 
+・TLSを利用して、各スレッドは一度だけ（１）の方法でロックし、インスタンス
+が作成済みかをチェックする
+このシングルトン実装を同時期に呼び出す100個のスレッドと100個の妨害スレッド
+で動作させる(singleton-tls.sh)
+更に、プログラムを1000回起動して、実際に1つのインスタンスだけが生成される
+ことを確認(../utils/loopn.sh 1000 ./singleton-tls)
