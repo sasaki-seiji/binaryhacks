@@ -73,3 +73,17 @@ Singleton *Singleton::instance() {
 で動作させる(singleton-tls.sh)
 更に、プログラムを1000回起動して、実際に1つのインスタンスだけが生成される
 ことを確認(../utils/loopn.sh 1000 ./singleton-tls)
+
+<(4)GCCの-fthreadsafe-staticsを用いたシングルトン>
+ソースファイル：
+ singleton-tss.h singleton-tss.cpp main-tss.cpp singleton-tss.sh
+スクリプト：
+ ../utils/loopn.sh
+
+・唯一のインスタンスを Sigleton::instance()関数内のstatic変数とし、
+GCCの-fthreadsafe-staticsオプションでマルチスレッドセーフ性を保証する
+このシングルトン実装を同時期に呼び出す100個のスレッドと100個の妨害スレッド
+で動作させる(singleton-tss.sh)
+更に、プログラムを1000回起動して、実際に1つのインスタンだけが生成される
+ことを確認(../utils/loopn.sh 1000 ./singleton-tss)
+を利用して、
