@@ -1,0 +1,27 @@
+$ time ./longrun-dcl
+instances=1
+
+real	0m1.224s
+user	0m8.287s
+sys	0m0.842s
+
+$ time ./longrun-tls
+
+real	0m0.748s
+user	0m5.592s
+sys	0m0.150s
+
+$ time ./longrun-tss
+instances=1
+
+real	0m0.887s
+user	0m6.766s
+sys	0m0.140s
+
+$ time ./longrun-nolock
+instances=1
+
+real	0m0.791s
+user	0m6.132s
+sys	0m0.065s
+

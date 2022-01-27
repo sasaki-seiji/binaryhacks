@@ -86,4 +86,22 @@ GCCの-fthreadsafe-staticsオプションでマルチスレッドセーフ性を
 で動作させる(singleton-tss.sh)
 更に、プログラムを1000回起動して、実際に1つのインスタンだけが生成される
 ことを確認(../utils/loopn.sh 1000 ./singleton-tss)
-を利用して、
+
+[ベンチマーク]
+ソースファイル：
+ const.h singleton-nolock.h singleton-nolock.cpp longrun-nolock.cpp
+   longrun-nolock.sh
+ const.h ../h36/static_mutex.hpp singleton-lock.h singleton-lock.cpp 
+   longrun-lock.cpp longrun-lock.sh
+ const.h ../h36/static_mutex.hpp singleton-dcl.h singleton-dcl.cpp 
+   longrun-dcl.cpp longrun-dcl.sh
+ const.h ../h36/static_mutex.hpp singleton-tls.h singleton-tls.cpp
+   longrun-tls.cpp longrun-tls.sh
+ const.h singleton-tss.h singleton-tss.cpp longrun-tss.cpp longrun-tss.sh
+実行結果：
+ longrun-time.txt
+
+・(1)-(4)及び排他なしのシングルトンプログラムに対して、ロングランテスト
+を実施。このテストでは、100個のスレッドがそれぞれ1000万回、シングルトン
+のインスタンスを獲得する（longrun-time.txt）。毎回ロックを獲得する(1)
+では、3分以上の時間がかかり極端に時間がかかっていることがわかる

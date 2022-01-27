@@ -1,0 +1,2 @@
+#define NUM_THREADS 100
+#define LOOP_COUNT 10000000
