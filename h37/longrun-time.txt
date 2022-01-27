@@ -1,3 +1,10 @@
+$ time ./longrun-lock
+instances=1
+
+real	3m11.435s
+user	5m25.497s
+sys	19m50.063s
+
 $ time ./longrun-dcl
 instances=1
 
