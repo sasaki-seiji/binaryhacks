@@ -1,4 +1,4 @@
-// main-c-pri.c
+// main-c++-pri.c
 #include <stdio.h>
 #include <pthread.h>
 #include <unistd.h>
@@ -16,12 +16,6 @@ volatile int entered = 0;
 int excl_errors[NUM_THREADS];
 
 volatile int stop_req = 0;
-
-void delay(int count)
-{
-	volatile int i;
-	for (i = 0; i < count; ++i) ;
-}
 
 void do_something(int no)
 {

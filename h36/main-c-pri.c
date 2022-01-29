@@ -21,12 +21,6 @@ int unlock_errors[NUM_THREADS];
 
 volatile int stop_req = 0;
 
-void delay(int count)
-{
-	volatile int i;
-	for (i = 0; i < count; ++i) ;
-}
-
 void do_something(int no)
 {
 	if (__atomic_add_fetch(&entered, 1, __ATOMIC_SEQ_CST) > 1) {

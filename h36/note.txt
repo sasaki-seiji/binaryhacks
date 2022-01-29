@@ -5,7 +5,7 @@
  c-header.h main-c-pri.c c-bad-pri.c c-bad-pri.sh 
  c-header.h main-c-pri.c c-good.c c-good-pri.sh 
 シェルスクリプト：
- loopn.sh
+ ../utils/loopn.sh
 
 ・c-good.cプログラムのneed_to_sync(int)関では、pthread_mutext_t構想体型の
 変数mはプログラムのロード時に初期化されるので、初期化の競合問題は発生しない
@@ -18,9 +18,10 @@
 3)pthread_mutex_unlockの失敗
 4)排他制御に従うスレッドに対するjoinの失敗
 としている。ただしjoinは、pthread_timedjoinを使って、最大10秒間待つように
+している。
 このプログラムの実行を100回繰り返しても、エラーは検出されない
 
-	./loopn.sh 100 ./c-good
+	../utils/loopn.sh 100 ./c-good
 
 ・c-bad-dly.cプログラムのneed_to_sync(int)関数では、以降のC++での問題点を
 明らかにするために、この関数が初めて呼び出されたときにpthread_mutex_t
@@ -75,15 +76,18 @@ delay(NDELAY)呼び出しを挿入している。delayは、引数の値だけ�
 そこで、delay関数呼び出しを挟まなくとも問題が再現するよう、main-c-pri.c
 では、100個の妨害スレッド(disturbing_thread)を挿入している。
 排他制御に従うスレッド(100個)の優先度をsetpriorityで下げ、妨害スレッドの
-優先度をそれよりも高くしている。
+優先度をそれよりも高くしている(c-bad-pri.sh)。
+
 このプログラムを200回繰り返し実行し、問題が発生するか確認すると
 
-	$ ./loopn.sh 200 ./c-bad-pri
+	../utils/loopn.sh 200 ./c-bad-pri
 
 0から6回程度、問題が観測できた
 
 ・問題を再現したmain-c-pri.cを最初の(問題のなかった)プログラムc-good.c
 とリンクし(c-good-pri.sh)、1000回繰り返し実行したが、問題は発生しなかった
+
+	../utils/loopn.sh 1000 ./c-good-pri
 
 
 [C++の場合]
@@ -102,7 +106,7 @@ g++ 9.3.0ではフラグの競合解決のための-fthreadsafe-staticsオプシ
 ・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
 ロングランテストを行うと
 
-	./loopn.sh 500 ./c++-bad1-pri
+	../utils/loopn.sh 500 ./c++-bad1-pri
 
 500回のプログラム実行に対して、0回〜6回程度のエラーが発生した
 
@@ -115,18 +119,17 @@ g++ 9.3.0ではフラグの競合解決のための-fthreadsafe-staticsオプシ
 ・良くない方法（２）では、変数mを関数内の静的変数の代わりにファイル
 グローバル（無名namespace内の変数）とする(c++-bad2.txt)
 この場合、mの初期化はmain関数の呼び出し前に終了するので、main関数内で
-マルチスレッドプログラムを開始しても問題は発生しない。
+マルチスレッドプログラムを開始しても問題は発生しない(c++-bad2-pri.sh)。
 
 ・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
-ロングランテストを行うと（c++-bad2-pri.sh）
+ロングランテストを行うと、1000回のプログラム実行に対して問題が発生しない
 
-	./loopn.sh 1000 ./c++-bad2-pri
+	../utils/loopn.sh 1000 ./c++-bad2-pri
 
-1000回のプログラム実行に対して問題が発生しない
 
 この場合も、他の大域変数が属するクラスのコンストラクタがneed_to_sync()
 関数を呼び出すとmの初期化とmの使用(other.cpp)の順番が制御できずに問題
-となる
+となる(c++-bad2-fiasco.sh)
 
 <素敵な方法：C互換構造体のMutexを静的に初期化して用いる>
 
@@ -141,7 +144,7 @@ g++ 9.3.0ではフラグの競合解決のための-fthreadsafe-staticsオプシ
 need_to_sync(int)を同時期に呼び出す100個のスレッドと、100個の妨害スレッド
 を含んだプログラムを1000回呼び出しても、問題が生じない
 
-	./loopn 1000 ./c++-good
+	../utils/loopn.sh 1000 ./c++-good
 
 アセンブリ展開形(c++-good.s)を調べると、データメンバm_の初期値は
 以下のようにテーブルとしてバイナリファイルに組み込まれている
@@ -181,5 +184,5 @@ _ZN12_GLOBAL__N_11mE:
 ・need_to_sync(int)を呼び出す100個のスレッドと、100個の妨害スレッドで
 ロングランテストを行うと、1000回のプログラム起動で問題は発生しなかった
 
-	./loopn 1000 ./c++-bad1-safe
+	../utils/loopn.sh 1000 ./c++-bad1-safe
 
