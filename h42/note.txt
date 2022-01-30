@@ -1,0 +1,37 @@
+[前提知識]
+
+<strict-aliasing rule>
+ソースファイル：
+  alias.c alias.sh
+
+・gcc 9.3.0 では-O2オプションを付けても命令の並べ替えは行われず、出力は
+65537となった
+
+
+<GCCの__attribute__((format))>
+ソースファイル：
+  my_printf.c my_printf.sh
+
+・vsyslog()関数を呼び出すところで、Segment Fault が出る。[1]によると、
+64ビットLinuxでは、va_list変数を2度使うとクラッシュするとのこと。
+ここでは、以下のように変更しした
+
+	va_list ap ;
+	assert(my_format != NULL) ;
+	va_start(ap, my_format) ;
+	vprintf(my_format, ap) ;
+	va_end(ap) ; 
+	va_start(ap, my_format) ;
+	vsyslog(LOG_ERR, my_format, ap) ;
+	va_end(ap);
+
+  
+<glibcによるHeap Consistency Checking>
+ソースファイル：
+  double_free.c double_free.sh
+
+
+(参考情報)
+[1]
+https://opensuse-programming.opensuse.narkive.com/lbFJhkLn/any-problems-with-vsyslog-on-64bit-systems
+
