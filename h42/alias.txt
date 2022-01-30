@@ -1,0 +1,14 @@
++ gcc alias.c
++ ./a.out
+65537
++ gcc -O2 alias.c
++ ./a.out
+65537
++ gcc -O2 -Wstrict-aliasing=2 alias.c
+alias.c: In function ‘main’:
+alias.c:7:11: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+    7 |  ((short*)&argc)[0] |= 1 ;
+      |           ^~~~~
+alias.c:8:11: warning: dereferencing type-punned pointer will break strict-aliasing rules [-Wstrict-aliasing]
+    8 |  ((short*)&argc)[1] |= 1 ;
+      |           ^~~~~

@@ -2,7 +2,7 @@
 
 <strict-aliasing rule>
 ソースファイル：
-  alias.c alias.sh
+  alias.c alias.sh alias.txt
 
 ・gcc 9.3.0 では-O2オプションを付けても命令の並べ替えは行われず、出力は
 65537となった
@@ -10,7 +10,7 @@
 
 <GCCの__attribute__((format))>
 ソースファイル：
-  my_printf.c my_printf.sh
+  my_printf.c my_printf.sh my_printf.txt
 
 ・vsyslog()関数を呼び出すところで、Segment Fault が出る。[1]によると、
 64ビットLinuxでは、va_list変数を2度使うとクラッシュするとのこと。
@@ -28,7 +28,7 @@
   
 <glibcによるHeap Consistency Checking>
 ソースファイル：
-  double_free.c double_free.sh
+  double_free.c double_free.sh double_free.txt
 
 
 (参考情報)

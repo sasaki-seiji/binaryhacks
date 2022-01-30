@@ -1,0 +1,19 @@
++ gcc -o my_printf -Wall -Wextra -Wformat=2 my_printf.c
+my_printf.c: In function ‘main’:
+my_printf.c:27:30: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘char *’ [-Wformat=]
+   27 |  my_printf("illegal format: %d\n", "illegal fomart");
+      |                             ~^     ~~~~~~~~~~~~~~~~
+      |                              |     |
+      |                              int   char *
+      |                             %s
++ ./my_printf
+using my_printf
+No.1 message is hello
+No.2 message is bye
+illegal format: -1369784234
++ tail -n 5 /var/log/syslog
+Jan 30 19:43:28 ubuntu my_printf: illegal format: 353456214
+Jan 30 19:43:41 ubuntu my_printf: using my_printf
+Jan 30 19:43:41 ubuntu my_printf: No.1 message is hello
+Jan 30 19:43:41 ubuntu my_printf: No.2 message is bye
+Jan 30 19:43:41 ubuntu my_printf: illegal format: -1369784234
