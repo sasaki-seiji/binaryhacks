@@ -1,0 +1,19 @@
++ gcc -o my_printf2 -Wall -Wextra -Wformat=2 my_printf2.c
+my_printf2.c: In function ‘main’:
+my_printf2.c:27:30: warning: format ‘%d’ expects argument of type ‘int’, but argument 2 has type ‘char *’ [-Wformat=]
+   27 |  my_printf("illegal format: %d\n", "illegal fomart");
+      |                             ~^     ~~~~~~~~~~~~~~~~
+      |                              |     |
+      |                              int   char *
+      |                             %s
++ ./my_printf2
+using my_printf
+No.1 message is hello
+No.2 message is bye
+illegal format: -1982787497
++ tail -n 5 /var/log/syslog
+Feb  2 19:28:14 ubuntu dbus-daemon[867]: [system] Reloaded configuration
+Feb  2 19:28:19 ubuntu my_printf2: using my_printf
+Feb  2 19:28:19 ubuntu my_printf2: No.1 message is hello
+Feb  2 19:28:19 ubuntu my_printf2: No.2 message is bye
+Feb  2 19:28:19 ubuntu my_printf2: illegal format: -1982787497

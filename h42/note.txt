@@ -11,10 +11,11 @@
 <GCCの__attribute__((format))>
 ソースファイル：
   my_printf.c my_printf.sh my_printf.txt
+  my_printf2.c my_printf2.sh my_printf2.txt
 
-・vsyslog()関数を呼び出すところで、Segment Fault が出る。[1]によると、
-64ビットLinuxでは、va_list変数を2度使うとクラッシュするとのこと。
-ここでは、以下のように変更しした
+・my_printf.cでは、vsyslog()関数を呼び出すところで、Segment Fault が出る。
+[1]によると、64ビットLinuxでは、va_list変数を2度使うとクラッシュするとの
+こと。my_printf2.cでは、以下のように変更しした
 
 	va_list ap ;
 	assert(my_format != NULL) ;

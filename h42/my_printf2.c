@@ -1,4 +1,4 @@
-// my_printf.c
+// my_printf2.c
 
 #include <stdlib.h> // for NULL
 #include <assert.h>
@@ -13,6 +13,8 @@ void my_printf(const char *my_format, ...)
 	assert(my_format != NULL) ;
 	va_start(ap, my_format) ;
 	vprintf(my_format, ap) ;
+	va_end(ap) ; 
+	va_start(ap, my_format) ;
 	vsyslog(LOG_ERR, my_format, ap) ;
 	va_end(ap);
 }
