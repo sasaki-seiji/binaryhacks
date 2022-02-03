@@ -1,0 +1,9 @@
++ gcc -o my_atoi -Wall -Wextra my_atoi.c
++ ./my_atoi 123
+my_atoi(123) is 123
++ ./my_atoi 2147483647
+my_atoi(2147483647) is 2147483647
++ ./my_atoi 2147483648
+my_atoi(2147483648) is -2147483648
++ ./my_atoi 4294967297
+my_atoi(4294967297) is 1

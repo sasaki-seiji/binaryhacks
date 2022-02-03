@@ -1,0 +1,37 @@
+[整数オーバーフローとは]
+ソースコード：
+  my_atoi.c my_atoi.sh my_atoi.txt
+
+・自作のatoi関数に対して、文字列、123, 2147483647, 2147483648, 4294967297
+を与えて実行すると(my_atoi.sh)、2147483648以上ではオーバーフローが発生する
+
+
+[GCCによる整数オーバーフローの自動検出]
+ソースコード：
+  my_atoi.c my_atoi_trapv.sh my_atoi_trapv.txt
+
+・オプション-ftrapv -g を付けてgccでコンパイルすると、オーバーフローが
+発生する状況では、プログラムがabortする(my_atoi_trapv.sh)
+
+
+[仕組み]
+ソースコード：
+  sqr.c sqr.sh
+
+・sqr関数を-ftrapv -gオプション付きでコンパイルすると、アセンブリ展開形
+は以下のようになる(sqr.sh)。__mulvsi3関数を呼び出し、オーバーフローの
+チェックを行っていることがわかる
+
+# sqr.c:2: 	return a * a;
+	.loc 1 2 11
+	movl	-4(%rbp), %esi	# a,
+	movl	-4(%rbp), %edi	# a,
+	call	__mulvsi3@PLT	#
+
+
+[使用上の注意]
+ソースコード：
+  int_min.c int_min.sh int_min.txt
+
+・INT_MAX/(-1)は-ftrapv -gオプションを付けてもチェックされず、SIGFPEが
+発生する(int_min.sh)
