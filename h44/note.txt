@@ -1,0 +1,16 @@
+[使い方]
+ソースコード：
+  testflap.c testflap.sh
+  testflap.c sanitize.sh sanitize.txt
+
+・ビルドすると-lmudflapが見つかりません、とエラーメッセージが出力される
+apt install でインストールしようとしても、libmudflapが見つかりません、
+とエラーが出る。ネットで調べると、ubuntuではlibmudflapはdeprecatedと
+なっている模様
+更に調べてみると、AddressSanitizer/LeakSanitizerというツールがあって
+代わりに使えそう
+
+・AddressSanitizerを使って、testflap.cをビルド・実行すると、onbssの
+オーバーランが検出され、その箇所でプログラムはアボートした。また、
+onbssのアクセスをコメントアウトすると、onstackのオーバーランも検出された
+(sanitize.sh)

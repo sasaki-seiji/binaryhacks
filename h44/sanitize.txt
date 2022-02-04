@@ -1,0 +1,48 @@
++ gcc -g -fsanitize=address -o sanitize -Wall -Wextra testflap.c
+testflap.c: In function ‘main’:
+testflap.c:10:6: warning: variable ‘dummy’ set but not used [-Wunused-but-set-variable]
+   10 |  int dummy ;
+      |      ^~~~~
++ ./sanitize
+=================================================================
+==18514==ERROR: AddressSanitizer: global-buffer-overflow on address 0x55fc07ea9120 at pc 0x55fc07ea62c5 bp 0x7fffde977a10 sp 0x7fffde977a00
+READ of size 1 at 0x55fc07ea9120 thread T0
+    #0 0x55fc07ea62c4 in main /home/sasaki/books/binaryhacks/h44/testflap.c:12
+    #1 0x7fa16a2b90b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+    #2 0x55fc07ea614d in _start (/home/sasaki/books/binaryhacks/h44/sanitize+0x114d)
+
+0x55fc07ea9120 is located 0 bytes to the right of global variable 'onbss' defined in 'testflap.c:5:13' (0x55fc07ea90a0) of size 128
+SUMMARY: AddressSanitizer: global-buffer-overflow /home/sasaki/books/binaryhacks/h44/testflap.c:12 in main
+Shadow bytes around the buggy address:
+  0x0ac000fcd1d0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd1e0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd1f0: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd200: 00 00 00 00 00 00 00 00 f9 f9 f9 f9 f9 f9 f9 f9
+  0x0ac000fcd210: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+=>0x0ac000fcd220: 00 00 00 00[f9]f9 f9 f9 00 00 00 00 00 00 00 00
+  0x0ac000fcd230: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd240: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd250: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd260: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+  0x0ac000fcd270: 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+Shadow byte legend (one shadow byte represents 8 application bytes):
+  Addressable:           00
+  Partially addressable: 01 02 03 04 05 06 07 
+  Heap left redzone:       fa
+  Freed heap region:       fd
+  Stack left redzone:      f1
+  Stack mid redzone:       f2
+  Stack right redzone:     f3
+  Stack after return:      f5
+  Stack use after scope:   f8
+  Global redzone:          f9
+  Global init order:       f6
+  Poisoned by user:        f7
+  Container overflow:      fc
+  Array cookie:            ac
+  Intra object redzone:    bb
+  ASan internal:           fe
+  Left alloca redzone:     ca
+  Right alloca redzone:    cb
+  Shadow gap:              cc
+==18514==ABORTING
