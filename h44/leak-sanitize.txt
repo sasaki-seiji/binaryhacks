@@ -1,0 +1,13 @@
++ gcc -g -fsanitize=leak -o leak-sanitize -Wall -Wextra main.c
++ ./leak-sanitize
+
+=================================================================
+==19843==ERROR: LeakSanitizer: detected memory leaks
+
+Direct leak of 20 byte(s) in 1 object(s) allocated from:
+    #0 0x7f7a148809c1 in __interceptor_malloc ../../../../src/libsanitizer/lsan/lsan_interceptors.cpp:54
+    #1 0x5628b0dfb17e in hoge /home/sasaki/books/binaryhacks/h44/main.c:7
+    #2 0x5628b0dfb1ac in main /home/sasaki/books/binaryhacks/h44/main.c:14
+    #3 0x7f7a146a60b2 in __libc_start_main (/lib/x86_64-linux-gnu/libc.so.6+0x270b2)
+
+SUMMARY: LeakSanitizer: 20 byte(s) leaked in 1 allocation(s).

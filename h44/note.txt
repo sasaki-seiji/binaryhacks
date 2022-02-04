@@ -8,9 +8,24 @@ apt install でインストールしようとしても、libmudflapが見つか�
 とエラーが出る。ネットで調べると、ubuntuではlibmudflapはdeprecatedと
 なっている模様
 更に調べてみると、AddressSanitizer/LeakSanitizerというツールがあって
-代わりに使えそう
+代わりに使えそう[1]
 
 ・AddressSanitizerを使って、testflap.cをビルド・実行すると、onbssの
 オーバーランが検出され、その箇所でプログラムはアボートした。また、
 onbssのアクセスをコメントアウトすると、onstackのオーバーランも検出された
 (sanitize.sh)
+
+
+(補足：AddressSanitizer/LeakSanitizer)
+ソースコード：
+  main.c no-sanitize.sh no-sanitize.txt
+  main.c addr-sanitize.sh addr-sanitize.txt
+  main.c leak-sanitize.sh leak-sanitize.txt
+
+・AddressSanitizer/LeakSanitizerのサンプルとして、参考情報[1]の例題を試す
+(no-sanitize.sh addr-sanitize.sh leak-sanitize.sh)
+
+
+(参考情報)
+[1]
+https://goyoki.hatenablog.com/entry/2016/01/27/024327
