@@ -1,0 +1,2 @@
+ソースコード：
+  tst.c tst.sh tst.txt

@@ -1,0 +1,6 @@
++ gcc -o tst -Wall -Wextra tst.c
++ gcc -o tst-O2 -O2 -Wall -Wextra tst.c
++ ./tst
+1
++ ./tst-O2
+0
