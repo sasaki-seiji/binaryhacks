@@ -1,0 +1,5 @@
++ gcc -fstack-protector -o overf-ssp -Wall -Wextra overf.c
++ ./overf-ssp 01234567
++ ./overf-ssp 012345678
+*** stack smashing detected ***: terminated
+Aborted (core dumped)

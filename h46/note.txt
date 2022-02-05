@@ -1,0 +1,45 @@
+[使い方]
+ソースコード：
+  overf.c overf.sh overf.txt
+  overf.c overf-ssp.sh overf-ssp.txt
+  overf.c overf-nossp.sh overf-nossp.txt
+
+・-fstack-protecter オプションを付けてコンパイルすると、スタック上の
+char配列のオーバーフローチェックを行うことができる(overf-ssp.sh)
+このオプションはデフォルトで設定されるようで、OFFするためには、
+-fno-stack-protecter オプションを明示しなければならない(overf.sh,
+overf-nossp.sh)
+
+
+[仕組み]
+
+<ガード値(canary)の配置とチェック>
+ソースコード：
+  foo.c foo.sh
+
+・-fstack-protector オプションを有効として、char配列をスタックに保持した
+関数をアセンブルすると以下のようなコードが生成される(foo.sh)
+ここでは、canaryに設定する値は、fsセグメントに設定されている
+
+# foo.c:4: {
+	movq	%fs:40, %rax	# MEM[(<address-space-1> long unsigned int *)40B], tmp89
+	movq	%rax, -8(%rbp)	# tmp89, D.2100
+	xorl	%eax, %eax	# tmp89
+		・・・
+	movq	-8(%rbp), %rcx	# D.2100, tmp90
+	xorq	%fs:40, %rcx	# MEM[(<address-space-1> long unsigned int *)40B], tmp90
+	je	.L3	#,
+	call	__stack_chk_fail@PLT	#
+
+
+[動作の調整]
+ソースコード：
+  bar.c bar.sh bar.txt
+
+・スタックに配置されたchar配列のサイズが8未満のときは、-fstack-protector
+オプションを指定してコンパイルしても、保護の対象とならない。
+保護対象とする最小の配列サイズは、--param ssp-buffer-size=N で指定する
+また、任意の配列サイズに適用にするには、-fstack-protector-all オプションを
+指定する(bar.sh)
+
+

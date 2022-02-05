@@ -1,0 +1,11 @@
++ gcc -fstack-protector -o bar -Wall -Wextra bar.c
++ gcc -fstack-protector --param ssp-buffer-size=4 -o bar_4 -Wall -Wextra bar.c
++ gcc -fstack-protector-all -o bar_all -Wall -Wextra bar.c
++ ./bar
+Segmentation fault (core dumped)
++ ./bar_4
+*** stack smashing detected ***: terminated
+Aborted (core dumped)
++ ./bar_all
+*** stack smashing detected ***: terminated
+Aborted (core dumped)
