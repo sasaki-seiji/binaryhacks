@@ -1,0 +1,13 @@
++ gcc -O1 -D_FORTIFY_SOURCE -D_FORTIFY_SOURCE=1 -o foo -Wall -Wextra foo.c
+<command-line>: warning: "_FORTIFY_SOURCE" redefined
+<built-in>: note: this is the location of the previous definition
+In file included from /usr/include/string.h:495,
+                 from foo.c:2:
+In function ‘strcpy’,
+    inlined from ‘main’ at foo.c:6:2:
+/usr/include/x86_64-linux-gnu/bits/string_fortified.h:90:10: warning: ‘__builtin___strcpy_chk’ writing 7 bytes into a region of size 6 overflows the destination [-Wstringop-overflow=]
+   90 |   return __builtin___strcpy_chk (__dest, __src, __bos (__dest));
+      |          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
++ ./foo
+*** buffer overflow detected ***: terminated
+Aborted (core dumped)

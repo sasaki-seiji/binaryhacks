@@ -1,0 +1,8 @@
++ gcc -O1 -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -o baz -Wall -Wextra baz.c
+baz.c: In function ‘main’:
+baz.c:11:2: warning: format not a string literal and no format arguments [-Wformat-security]
+   11 |  printf(argv[1]); // argv[1]に%nが含まれているとabortする
+      |  ^~~~~~
++ ./baz %n
+*** %n in writable segment detected ***
+Aborted (core dumped)
