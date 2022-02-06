@@ -1,0 +1,13 @@
+[スレッドアンセーフな関数]
+ソースコード：
+  broken.c broken.sh broken.txt
+
+
+[LD_PRELOADとTLSによるHack]
+ソースコード：
+  broken.c safe_localtime.c safe_localtime.sh safe_localtime.txt
+
+・本に記載の、共有オブジェクトを作成するgccコマンドには、-cオプションが
+ついているが、これは間違い
+なお、_REENTRANT の定義は、スレッドセーフなC言語ライブラリを使用する
+ようにコンパイラに指示する。

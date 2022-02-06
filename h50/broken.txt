@@ -1,0 +1,8 @@
++ gcc -o broken -Wall -Wextra -Wno-unused-parameter broken.c -lpthread
++ ./broken
+now:
+  2022/02/06 16:43:26
+Unix originated at:
+  1970/01/01 09:00:00
+display now again:
+  1970/01/01 09:00:00

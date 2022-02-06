@@ -1,0 +1,9 @@
++ gcc -o broken -Wall -Wextra -Wno-unused-parameter broken.c -lpthread
++ gcc -D_REENTRANT -O2 -fPIC -shared -o safe_localtime.so safe_localtime.c
++ LD_PRELOAD=./safe_localtime.so ./broken
+now:
+  2022/02/06 16:52:21
+Unix originated at:
+  1970/01/01 09:00:00
+display now again:
+  2022/02/06 16:52:21
