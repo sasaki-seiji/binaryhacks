@@ -1,0 +1,24 @@
++ pid=30675
++ sleep 5
++ ./async_signal_unsafe
++ ps
+    PID TTY          TIME CMD
+   3341 pts/3    00:00:01 bash
+  30674 pts/3    00:00:00 sh
+  30675 pts/3    00:00:00 async_signal_un
+  30677 pts/3    00:00:00 ps
++ kill -HUP 30675
++ sleep 10
++ ps
+    PID TTY          TIME CMD
+   3341 pts/3    00:00:01 bash
+  30674 pts/3    00:00:00 sh
+  30675 pts/3    00:00:00 async_signal_un
+  30679 pts/3    00:00:00 ps
++ kill -9 30675
++ sleep 1
++ ps
+    PID TTY          TIME CMD
+   3341 pts/3    00:00:01 bash
+  30674 pts/3    00:00:00 sh
+  30681 pts/3    00:00:00 ps

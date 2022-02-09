@@ -1,0 +1,39 @@
+[落とし穴１：シグナルハンドラから非同期シグナルセーフではない
+関数を呼び出すとまずい]
+ソースファイル：
+  async_signal_unsafe.c async_signal_unsafe.sh
+
+コマンド：
+  signal_hup.sh signal_hup.txt
+
+・プログラムをビルド後(async_signal_unsafe.sh)、バックグラウンドで
+実行しているasync_signal_unsafe にHUPシグナルを送るとデットロック
+となる(signal_hup.sh)
+
+・ltraceコマンドではライブラリ呼び出しが表示できていない
+
+
+[落とし穴2：シグナルハンドラからの非volatile変数の操作に注意]
+ソースコード：
+  non_volatile.c non_volatile.sh
+  volatile.c volatile.sh
+
+・non_volatile.cは、SIGHUPに加えてSIGINTもハンドルするように変更し、
+-O2オプションでビルドし、実行(non_volatile.sh)
+ターミナルからCtl+Cを入力しても、プログラムが終了しない
+アセンブリ展開系を見ると、sig変数を一度だけレジスタに読み込んで
+非ゼロ判定をして脱出しているが、脱出できなければ単に無限ループを
+繰り返している
+
+# non_volatile.c:22: 	while(sig == 0) ;
+	movl	sig(%rip), %eax	# sig,
+	testl	%eax, %eax	#
+	jne	.L8	#,
+.L7:
+	jmp	.L7	#
+	.p2align 4,,10
+	.p2align 3
+.L8:
+
+・sig変数の宣言にvolatileを加えると、Ctl+Cで脱出できるようになる
+(volatile.sh)
