@@ -1,0 +1,9 @@
+[シグナル処理スレッドの実装例、main 関数の実装例]
+ソースコード：
+  sigwait.c sigwait.sh
+
+・ビルド後、以下のようにして実行する
+
+./sigwait &
+kill -HUP $!
+
